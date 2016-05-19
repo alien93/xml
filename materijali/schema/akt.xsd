@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.parlament.gov.rs/propisi"
-    xmlns:p="http://www.parlament.gov.rs/propisi">
+    xmlns:p="http://www.parlament.gov.rs/propisi"
+    xmlns:ns1="http://www.parlament.gov.rs/generic_types">
+    <xs:import namespace="http://www.parlament.gov.rs/generic_types"
+        schemaLocation="generic_types.xsd"/>
     <xs:element name="Akt">
         <xs:complexType>
             <xs:sequence>
@@ -42,12 +45,48 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Deo"/>
+                <xs:element name="Glava"/>
                 <xs:element name="Odeljak"/>
-                <xs:element name="Clan"/>
-                <xs:element name="Stav"/>
-                <xs:element name="Tacka"/>
-                <xs:element name="Podtacka"/>
-                <xs:element name="Alineja"/>
+                <xs:element name="Clan">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
+                        </xs:sequence>
+                        <xs:attribute name="Oznaka"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Stav">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
+                        </xs:sequence>
+                        <xs:attribute name="Oznaka"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Tacka">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="newElement"/>
+                        </xs:sequence>
+                        <xs:attribute name="Oznaka"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Podtacka">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Sadrzaj" type="ns1:TSadrzajPodtacke"/>
+                        </xs:sequence>
+                        <xs:attribute name="Oznaka" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Alineja">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Sadrzaj" type="xs:string"/>
+                        </xs:sequence>
+                        <xs:attribute name="Oznaka" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

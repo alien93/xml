@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.parlament.gov.rs/propisi"
-    xmlns:p="http://www.parlament.gov.rs/propisi">
+    targetNamespace="http://www.parlament.gov.rs/generic_types"
+    xmlns:p="http://www.parlament.gov.rs/generic_types">
     <xs:complexType mixed="true" name="TSadrzajClana">
         <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
