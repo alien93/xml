@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.parlament.gov.rs/propisi"
+    xmlns:p="http://www.parlament.gov.rs/propisi">
+    <xs:element name="Akt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="p:Sporedni_deo"/>
+                <xs:element ref="p:Glavni_deo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sporedni_deo">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="Akt_u_proceduri">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Predlagac"/>
+                            <xs:element name="Upucuje_se"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Akt">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Donet_od_strane"/>
+                            <xs:element name="Pravni_osnov_donosenja"/>
+                            <xs:element minOccurs="0" maxOccurs="1" name="Po_postupku"/>
+                            <xs:element minOccurs="0" maxOccurs="1" name="Po_cilju"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute name="Vrsta"/>
+            <xs:attribute name="Datum"/>
+            <xs:attribute name="Mesto"/>
+            <xs:attribute name="Oznaka"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Glavni_deo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Deo"/>
+                <xs:element name="Odeljak"/>
+                <xs:element name="Clan"/>
+                <xs:element name="Stav"/>
+                <xs:element name="Tacka"/>
+                <xs:element name="Podtacka"/>
+                <xs:element name="Alineja"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

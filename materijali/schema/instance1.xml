@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Akt xmlns="http://www.parlament.gov.rs/propisi"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi file:/home/nina/Desktop/XML%20i%20Web%20servisi/xml/proj/xml/materijali/schema/akt.xsd">
+    <Sporedni_deo Vrsta="Vrsta1" Datum="Datum1" Mesto="Mesto1" Oznaka="Oznaka1">
+        <Akt_u_proceduri>
+            <Predlagac>
+            </Predlagac>
+            <Upucuje_se>
+            </Upucuje_se>
+        </Akt_u_proceduri>
+    </Sporedni_deo>
+    <Glavni_deo>
+        <Deo>
+        </Deo>
+        <Odeljak>
+        </Odeljak>
+        <Clan>
+        </Clan>
+        <Stav>
+        </Stav>
+        <Tacka>
+        </Tacka>
+        <Podtacka>
+        </Podtacka>
+        <Alineja>
+        </Alineja>
+    </Glavni_deo>
+</Akt>

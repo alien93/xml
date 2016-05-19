@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.parlament.gov.rs/propisi"
+    xmlns:p="http://www.parlament.gov.rs/propisi">
+    <xs:complexType mixed="true" name="TSadrzajClana">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Stav"/>
+            <xs:element name="Tacka"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajStava">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Tacka"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajTacke">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Podtacka"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajPodtacke">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Alineja"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="ref">
+        <xs:complexType mixed="false">
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="id_ref">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(\/[A-Za-z]*[0-9]*)+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
