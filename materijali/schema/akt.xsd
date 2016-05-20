@@ -44,50 +44,78 @@
     <xs:element name="Glavni_deo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Deo"/>
-                <xs:element name="Glava"/>
-                <xs:element name="Odeljak"/>
-                <xs:element name="Clan">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
-                        </xs:sequence>
-                        <xs:attribute name="Oznaka"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Stav">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
-                        </xs:sequence>
-                        <xs:attribute name="Oznaka"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Tacka">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="newElement"/>
-                        </xs:sequence>
-                        <xs:attribute name="Oznaka"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Podtacka">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Sadrzaj" type="ns1:TSadrzajPodtacke"/>
-                        </xs:sequence>
-                        <xs:attribute name="Oznaka" type="xs:string"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Alineja">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Sadrzaj" type="xs:string"/>
-                        </xs:sequence>
-                        <xs:attribute name="Oznaka" type="xs:string"/>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element ref="p:Deo"/>
+                <xs:element ref="p:Glava"/>
+                <xs:element ref="p:Odeljak"/>
+                <xs:element ref="p:Stav"/>
+                <xs:element ref="p:Tacka"/>
+                <xs:element ref="p:Podtacka"/>
+                <xs:element ref="p:Alineja"/>
             </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Deo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="p:Glava"/>
+                <xs:element minOccurs="0" ref="p:Clan"/>
+                <xs:element minOccurs="0" ref="p:Odeljak"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Glava">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="p:Odeljak"/>
+                <xs:element minOccurs="0" ref="p:Clan"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Odeljak">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="p:Stav"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Clan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
+            </xs:sequence>
+            <xs:attribute name="Oznaka"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Stav">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
+            </xs:sequence>
+            <xs:attribute name="Oznaka"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Tacka">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="newElement"/>
+            </xs:sequence>
+            <xs:attribute name="Oznaka"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Podtacka">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sadrzaj" type="ns1:TSadrzajPodtacke"/>
+            </xs:sequence>
+            <xs:attribute name="Oznaka" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Alineja">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sadrzaj" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="Oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>
