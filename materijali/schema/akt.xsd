@@ -12,6 +12,7 @@
                 <xs:element ref="p:Glavni_deo"/>
             </xs:sequence>
             <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Sporedni_deo">
@@ -45,39 +46,45 @@
     <xs:element name="Glavni_deo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="p:Deo" minOccurs="0"/>
-                <xs:element ref="p:Glava" minOccurs="0"/>
-                <xs:element ref="p:Odeljak" minOccurs="0"/>
-                <xs:element ref="p:Clan"/>
-                <xs:element ref="p:Stav" minOccurs="0"/>
-                <xs:element ref="p:Tacka" minOccurs="0"/>
-                <xs:element ref="p:Podtacka" minOccurs="0"/>
-                <xs:element ref="p:Alineja" minOccurs="0"/>
+                <xs:element ref="p:Deo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Glava" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Odeljak" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Clan" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element ref="p:Stav" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Tacka" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Podtacka" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="p:Alineja" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="Deo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" ref="p:Glava"/>
-                <xs:element minOccurs="0" ref="p:Clan"/>
-                <xs:element minOccurs="0" ref="p:Odeljak"/>
+                <xs:element minOccurs="0" ref="p:Glava" maxOccurs="unbounded"/>
+                <xs:element minOccurs="0" ref="p:Clan" maxOccurs="unbounded"/>
+                <xs:element minOccurs="0" ref="p:Odeljak" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="oznaka"/>
+            <xs:attribute name="naziv"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glava">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" ref="p:Odeljak"/>
-                <xs:element minOccurs="0" ref="p:Clan"/>
+                <xs:element minOccurs="0" ref="p:Odeljak" maxOccurs="unbounded"/>
+                <xs:element minOccurs="0" ref="p:Clan" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="oznaka"/>
+            <xs:attribute name="naziv"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Odeljak">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" ref="p:Stav"/>
+                <xs:element minOccurs="0" ref="p:Stav" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="oznaka"/>
+            <xs:attribute name="naziv"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">
