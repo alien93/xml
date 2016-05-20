@@ -1,29 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Akt xmlns="http://www.parlament.gov.rs/propisi"
+<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+ xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.parlament.gov.rs/propisi file:/home/nina/Desktop/XML%20i%20Web%20servisi/xml/proj/xml/materijali/schema/akt.xsd">
-    <Sporedni_deo Vrsta="Vrsta1" Datum="Datum1" Mesto="Mesto1" Oznaka="Oznaka1">
-        <Akt_u_proceduri>
-            <Predlagac>
-            </Predlagac>
-            <Upucuje_se>
-            </Upucuje_se>
-        </Akt_u_proceduri>
-    </Sporedni_deo>
-    <Glavni_deo>
-        <Deo>
-        </Deo>
-        <Odeljak>
-        </Odeljak>
-        <Clan>
-        </Clan>
-        <Stav>
-        </Stav>
-        <Tacka>
-        </Tacka>
-        <Podtacka>
-        </Podtacka>
-        <Alineja>
-        </Alineja>
-    </Glavni_deo>
-</Akt>
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi file:/home/nina/Desktop/XML%20i%20Web%20servisi/xml/proj/xml/materijali/schema/akt.xsd" status="donet">
+    <p:Sporedni_deo vrsta="vrsta0" datum="datum0" mesto="mesto0" oznaka="oznaka0">
+        <p:Donet_akt>
+            <p:Donet_od_strane>
+                something something
+            </p:Donet_od_strane>
+            <p:Pravni_osnov_donosenja>
+                neki osnov 
+            </p:Pravni_osnov_donosenja>
+            <p:Po_postupku>
+                asdfasdfafd
+            </p:Po_postupku>
+            <p:Po_cilju>
+                sjhjhfsaasdfd
+            </p:Po_cilju>
+        </p:Donet_akt>
+    </p:Sporedni_deo>
+    <p:Glavni_deo>
+        <p:Deo>
+            <p:Glava>
+                <p:Odeljak>
+                    <p:Stav oznaka="oznaka1">
+                        <p:Sadrzaj>
+                            <ns1:Tacka>
+                            </ns1:Tacka>
+                        </p:Sadrzaj>
+                    </p:Stav>
+                </p:Odeljak>
+                <p:Clan oznaka="oznaka2">
+                    <p:Sadrzaj>
+                    </p:Sadrzaj>
+                </p:Clan>
+            </p:Glava>
+            <p:Clan oznaka="oznaka3">
+                <p:Sadrzaj>
+                    <ns1:ref id_ref="/">ref0</ns1:ref>
+                    <ns1:ref id_ref="/">ref1</ns1:ref>
+                    <ns1:Tacka>
+                    </ns1:Tacka>
+                </p:Sadrzaj>
+            </p:Clan>
+            <p:Odeljak>
+                <p:Stav oznaka="oznaka4">
+                    <p:Sadrzaj>
+                    </p:Sadrzaj>
+                </p:Stav>
+            </p:Odeljak>
+        </p:Deo>
+        <p:Glava>
+            <p:Odeljak>
+                <p:Stav oznaka="oznaka5">
+                    <p:Sadrzaj>
+                        <ns1:Tacka>
+                        </ns1:Tacka>
+                        <ns1:Tacka>
+                        </ns1:Tacka>
+                    </p:Sadrzaj>
+                </p:Stav>
+            </p:Odeljak>
+            <p:Clan oznaka="oznaka6">
+                <p:Sadrzaj>
+                    <ns1:Stav>
+                    </ns1:Stav>
+                    <ns1:Stav>
+                    </ns1:Stav>
+                </p:Sadrzaj>
+            </p:Clan>
+        </p:Glava>
+        <p:Odeljak>
+            <p:Stav oznaka="oznaka7">
+                <p:Sadrzaj>
+                    <ns1:Tacka>
+                    </ns1:Tacka>
+                    <ns1:ref id_ref="/">ref2</ns1:ref>
+                    <ns1:ref id_ref="/">ref3</ns1:ref>
+                </p:Sadrzaj>
+            </p:Stav>
+        </p:Odeljak>
+        <p:Stav oznaka="oznaka8">
+            <p:Sadrzaj>
+                <ns1:ref id_ref="/">ref4</ns1:ref>
+                <ns1:ref id_ref="/">ref5</ns1:ref>
+                <ns1:Tacka>
+                </ns1:Tacka>
+            </p:Sadrzaj>
+        </p:Stav>
+        <p:Tacka oznaka="oznaka9">
+            <p:newElement>
+            </p:newElement>
+        </p:Tacka>
+        <p:Podtacka oznaka="oznaka10">
+            <p:Sadrzaj>
+                <ns1:ref id_ref="/">ref6</ns1:ref>
+                <ns1:ref id_ref="/">ref7</ns1:ref>
+                <ns1:ref id_ref="/">ref8</ns1:ref>
+                <ns1:ref id_ref="/">ref9</ns1:ref>
+            </p:Sadrzaj>
+        </p:Podtacka>
+        <p:Alineja oznaka="oznaka11">
+            <p:Sadrzaj>Sadrzaj0</p:Sadrzaj>
+        </p:Alineja>
+    </p:Glavni_deo>
+</p:Akt>

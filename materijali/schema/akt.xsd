@@ -11,6 +11,7 @@
                 <xs:element ref="p:Sporedni_deo"/>
                 <xs:element ref="p:Glavni_deo"/>
             </xs:sequence>
+            <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Sporedni_deo">
@@ -24,7 +25,7 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="Akt">
+                <xs:element name="Donet_akt">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="Donet_od_strane"/>
@@ -35,10 +36,10 @@
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
-            <xs:attribute name="Vrsta"/>
-            <xs:attribute name="Datum"/>
-            <xs:attribute name="Mesto"/>
-            <xs:attribute name="Oznaka"/>
+            <xs:attribute name="vrsta"/>
+            <xs:attribute name="datum"/>
+            <xs:attribute name="mesto"/>
+            <xs:attribute name="oznaka"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glavni_deo">
@@ -83,7 +84,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
             </xs:sequence>
-            <xs:attribute name="Oznaka"/>
+            <xs:attribute name="oznaka"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Stav">
@@ -91,7 +92,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
             </xs:sequence>
-            <xs:attribute name="Oznaka"/>
+            <xs:attribute name="oznaka"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Tacka">
@@ -99,7 +100,7 @@
             <xs:sequence>
                 <xs:element name="newElement"/>
             </xs:sequence>
-            <xs:attribute name="Oznaka"/>
+            <xs:attribute name="oznaka"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Podtacka">
@@ -107,7 +108,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajPodtacke"/>
             </xs:sequence>
-            <xs:attribute name="Oznaka" type="xs:string"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Alineja">
@@ -115,7 +116,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="xs:string"/>
             </xs:sequence>
-            <xs:attribute name="Oznaka" type="xs:string"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

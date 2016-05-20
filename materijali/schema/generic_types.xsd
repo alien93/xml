@@ -42,4 +42,10 @@
             </xs:simpleContent>
         </xs:complexType>
     </xs:element>
+    <xs:simpleType name="TStatusAkta">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="donet"/>
+            <xs:enumeration value="u_proceduri"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>
