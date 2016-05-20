@@ -45,13 +45,14 @@
     <xs:element name="Glavni_deo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="p:Deo"/>
-                <xs:element ref="p:Glava"/>
-                <xs:element ref="p:Odeljak"/>
-                <xs:element ref="p:Stav"/>
-                <xs:element ref="p:Tacka"/>
-                <xs:element ref="p:Podtacka"/>
-                <xs:element ref="p:Alineja"/>
+                <xs:element ref="p:Deo" minOccurs="0"/>
+                <xs:element ref="p:Glava" minOccurs="0"/>
+                <xs:element ref="p:Odeljak" minOccurs="0"/>
+                <xs:element ref="p:Clan"/>
+                <xs:element ref="p:Stav" minOccurs="0"/>
+                <xs:element ref="p:Tacka" minOccurs="0"/>
+                <xs:element ref="p:Podtacka" minOccurs="0"/>
+                <xs:element ref="p:Alineja" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
