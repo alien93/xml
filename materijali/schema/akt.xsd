@@ -36,10 +36,10 @@
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
-            <xs:attribute name="vrsta"/>
-            <xs:attribute name="datum"/>
-            <xs:attribute name="mesto"/>
-            <xs:attribute name="oznaka"/>
+            <xs:attribute name="vrsta" type="xs:string"/>
+            <xs:attribute name="datum" type="xs:date"/>
+            <xs:attribute name="mesto" type="xs:string"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glavni_deo">
@@ -85,7 +85,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Stav">
@@ -93,7 +93,7 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Tacka">
@@ -101,7 +101,7 @@
             <xs:sequence>
                 <xs:element name="newElement"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Podtacka">
