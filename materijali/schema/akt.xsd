@@ -31,8 +31,7 @@
                         <xs:sequence>
                             <xs:element name="Donet_od_strane" type="xs:string"/>
                             <xs:element name="Pravni_osnov_donosenja" type="xs:string"/>
-                            <xs:element minOccurs="0" maxOccurs="1" name="Po_postupku"
-                                type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" name="Po_postupku" type="xs:string"/>
                             <xs:element minOccurs="0" maxOccurs="1" name="Po_cilju" type="xs:string"
                             />
                         </xs:sequence>
@@ -64,8 +63,8 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajDela"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glava">
@@ -73,8 +72,8 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajGlave"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Odeljak">
@@ -82,8 +81,8 @@
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajOdeljka"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">

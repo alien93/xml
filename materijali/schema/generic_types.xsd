@@ -115,4 +115,11 @@
             <xs:enumeration value="u_proceduri"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:complexType name="TAmandmanStatus">
+        <xs:all>
+            <xs:element ref="p:ref"/>
+            <xs:element ref="p:status_izmene"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="status_izmene" type="p:TStatusAkta"> </xs:element>
 </xs:schema>

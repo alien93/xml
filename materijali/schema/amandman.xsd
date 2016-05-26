@@ -29,6 +29,7 @@
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
     </xs:element>
+    <xs:element name="Status" type="ns1:TAmandmanStatus"/>
     <xs:element name="Glavni_deo">
         <xs:complexType>
             <xs:sequence>
@@ -47,33 +48,37 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajDela"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glava">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajGlave"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Odeljak">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajOdeljka"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
-            <xs:attribute name="oznaka"/>
-            <xs:attribute name="naziv"/>
+            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajClana"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
@@ -82,6 +87,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajStava"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
@@ -90,6 +96,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajTacke"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
@@ -98,6 +105,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="ns1:TSadrzajPodtacke"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
@@ -106,6 +114,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Sadrzaj" type="xs:string"/>
+                <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
         </xs:complexType>
