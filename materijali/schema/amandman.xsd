@@ -5,7 +5,7 @@
     xmlns:ns1="http://www.parlament.gov.rs/generic_types">
     <xs:import namespace="http://www.parlament.gov.rs/generic_types"
         schemaLocation="generic_types.xsd"/>
-    <xs:element name="Akt">
+    <xs:element name="Amandman">
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="p:Sporedni_deo"/>
@@ -18,26 +18,10 @@
     <xs:element name="Sporedni_deo">
         <xs:complexType>
             <xs:choice>
-                <xs:element name="Akt_u_proceduri">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Predlagac" type="xs:string"/>
-                            <xs:element name="Upucuje_se" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="Donet_akt">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="Donet_od_strane" type="xs:string"/>
-                            <xs:element name="Pravni_osnov_donosenja" type="xs:string"/>
-                            <xs:element minOccurs="0" maxOccurs="1" name="Po_postupku"
-                                type="xs:string"/>
-                            <xs:element minOccurs="0" maxOccurs="1" name="Po_cilju" type="xs:string"
-                            />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element minOccurs="0" name="Pravni_osnov_donosenja" type="xs:string"/>
+                <xs:element minOccurs="0" name="Donet_od_strane" type="xs:string"/>
+                <xs:element minOccurs="0" name="Postupak_donosenja" type="xs:string"/>
+                <xs:element minOccurs="0" name="Cilj_donosenja" type="xs:string"/>
             </xs:choice>
             <xs:attribute name="vrsta" type="xs:string"/>
             <xs:attribute name="datum" type="xs:date"/>
