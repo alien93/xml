@@ -73,9 +73,7 @@ public class XMLUpdate {
 		DocumentPatchHandle patchHandle = patchBuilder.build();
 
 		//inserting
-		System.out.println("[INFO] Inserting nodes to \"" + docId + "\".");
 		xmlManager.patch(docId, patchHandle);
-		System.out.println("[INFO] Verify the content at: http://" + props.host + ":8000/v1/documents?database=" + props.database + "&uri=" + docId);
 
 		// Release the client
 		client.release();
