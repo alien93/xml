@@ -24,7 +24,6 @@ public class ConnPropertiesReader {
 		Properties props = new Properties();
 		props.load(propsStream);
 		cp = new ConnectionProperties(props);
-		
 		return cp;
 	}
 	
