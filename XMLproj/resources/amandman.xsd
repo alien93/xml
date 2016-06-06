@@ -13,6 +13,7 @@
             </xs:sequence>
             <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
             <xs:attribute name="naziv" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Sporedni_deo">
@@ -27,6 +28,7 @@
             <xs:attribute name="datum" type="xs:date"/>
             <xs:attribute name="mesto" type="xs:string"/>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Status" type="ns1:TAmandmanStatus"/>
@@ -52,6 +54,7 @@
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
             <xs:attribute name="naziv" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Glava">
@@ -62,6 +65,7 @@
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
             <xs:attribute name="naziv" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Odeljak">
@@ -72,6 +76,7 @@
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
             <xs:attribute name="naziv" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Clan">
@@ -81,6 +86,7 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Stav">
@@ -90,6 +96,7 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Tacka">
@@ -99,6 +106,7 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Podtacka">
@@ -108,6 +116,7 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Alineja">
@@ -117,6 +126,7 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

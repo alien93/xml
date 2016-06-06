@@ -13,6 +13,7 @@
                     </xs:sequence>
                     <xs:attribute name="oznaka"/>
                     <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="Odeljak">
@@ -22,6 +23,7 @@
                     </xs:sequence>
                     <xs:attribute name="oznaka"/>
                     <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan">
@@ -30,6 +32,7 @@
                         <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
                     </xs:sequence>
                     <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
@@ -44,6 +47,7 @@
                     </xs:sequence>
                     <xs:attribute name="oznaka"/>
                     <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan">
@@ -52,6 +56,7 @@
                         <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
                     </xs:sequence>
                     <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
@@ -65,6 +70,7 @@
                         <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
                     </xs:sequence>
                     <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
@@ -75,6 +81,7 @@
             <xs:element name="Stav" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="Tacka" maxOccurs="unbounded" minOccurs="0"/>
         </xs:choice>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
     </xs:complexType>
     <xs:complexType mixed="true" name="TSadrzajStava">
         <xs:choice maxOccurs="unbounded" minOccurs="0">
@@ -105,6 +112,7 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
                 </xs:extension>
             </xs:simpleContent>
         </xs:complexType>

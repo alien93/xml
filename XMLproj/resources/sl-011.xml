@@ -2,7 +2,7 @@
 <p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.parlament.gov.rs/propisi file:/home/nina/Desktop/XML%20i%20Web%20servisi/xml/proj/xml/materijali/schema/akt.xsd" 
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  naziv="ПРАВИЛНИК
  О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
  СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
@@ -38,7 +38,7 @@
                      зацијом годишњих и посебних програма.
                  </ns1:Sadrzaj>
              </ns1:Clan>
-             <ns1:Clan oznaka="cl2">
+             <ns1:Clan oznaka="cl2" asdf="asdfasfd" testest="asdfafsd">
                  <ns1:Sadrzaj>
                      Спортском удружењу могу да се доделе средства из
                      буџета Града, на основу поднетог предлога годишњег одно-

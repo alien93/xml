@@ -102,7 +102,7 @@
                 </ns1:Clan>
             </p:Sadrzaj>
         </p:Odeljak>
-        <p:Clan oznaka="oznaka21">
+        <p:Clan oznaka="oznaka21" llala="">
             <p:Sadrzaj>
                 <ns1:ref id_ref="/">ref10</ns1:ref>
                 <ns1:ref id_ref="/">ref11</ns1:ref>

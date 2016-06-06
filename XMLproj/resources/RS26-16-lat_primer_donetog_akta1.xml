@@ -2,7 +2,7 @@
 <p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.parlament.gov.rs/propisi file:/home/nina/Desktop/XML%20i%20Web%20servisi/xml/proj/xml/materijali/schema/akt.xsd" 
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="donet" naziv="O D L U K A
  O PRESTANKU FUNKCIJE ČLANA
  KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI">
