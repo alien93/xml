@@ -3,7 +3,7 @@ package rest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-@Path("/citizen")
+@Path("/test")
 public class CitizenREST {
 
 	@GET
