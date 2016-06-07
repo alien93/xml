@@ -39,6 +39,12 @@ xmlApp.config(function($routeProvider){
 									templateUrl: "views/acts.html"
 							}
 						)
+						.when(
+							"/amandmani",
+							{
+									templateUrl: "views/amandments.html"
+							}
+						)
 						.otherwise(
 							{
 							redirectTo: "/gradjanin"

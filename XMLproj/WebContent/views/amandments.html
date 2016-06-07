@@ -1,0 +1,18 @@
+<!--Predlog amandmana na akt-->
+<div ng-include="'views/navBarAlderman.html'"></div>
+<br><br><br><br>
+<div>
+    <form class="formAddAmandment" data-ng-controller="amandmentsController" ng-submit="addAmandment()">        
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<select>
+					<option ng-repeat="act in acts" value="{{act}}" ng-click="showAmandments()">{{act.name}}</option>
+				</select>
+				
+				
+				
+			</div>
+			<div class="col-md-2"> &nbsp; </div>
+		</div>
+    </form>
+</div>
