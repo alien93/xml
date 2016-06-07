@@ -1,4 +1,6 @@
+/entities/
+/rest/
 /services/
 /session/
 /util/
-/entities/
+/xmldb/
