@@ -2,7 +2,7 @@
 <div ng-include="'views/navBarCitizen.html'"></div>
 <br><br><br><br>
 <div>
-    <form class="formUserLogin" data-ng-controller="authUserController" ng-submit="login()">
+    <form class="formUserLogin" data-ng-controller="userController" ng-submit="login()">
         <p><b> Prijava korisnika  </b></p> <br>
         <div class="alert alert-danger" role="alert" ng-show="error">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -22,13 +22,13 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
-				<label><input type="radio" ng-model="user.role" name="role" class="active">Odbornik skupstine</label>
+				<label><input type="radio" ng-model="user.role" name="role" class="active"> &nbsp; Odbornik skupstine</label>
 			</div>
 			<div class="col-md-4"> &nbsp; </div>
 		</div>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
-				<label><input type="radio" ng-model="user.role" name="role">Predsednik skupstine</label>
+				<label><input type="radio" ng-model="user.role" name="role"> &nbsp; Predsednik skupstine</label>
 			</div>
 			<div class="col-md-4"> &nbsp; </div>
 		</div>

@@ -1,0 +1,15 @@
+<!--Predlog novog akta-->
+<div ng-include="'views/navBarCitizen.html'"></div>
+<br><br><br><br>
+<div>
+    <form class="formAddAct" data-ng-controller="actsController" ng-submit="addAct()">
+        <p><b> Novi akt  </b></p> <br>
+        
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<textarea class="form-control" rows="10" ng-model="newAct"></textarea>
+			</div>
+			<div class="col-md-2"> &nbsp; </div>
+		</div>
+    </form>
+</div>
