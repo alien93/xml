@@ -15,9 +15,24 @@ angular.module('xmlApp')
 								date: "6. jun 2016.",
 								type: "Odluka"
 								}
-					$scope.acts = {"active" : [act, act2]};
+					
+					$scope.acts = {
+									"active" : [act, act2],
+								  	"nonActive" : [act2, act]
+					    		  };
 
 					//-------------------------/test data----------------------
 
-					
+					//row click
+					$scope.getSelected = function(docName){
+						console.log(docName);
+					}
+					/*
+					$http
+				    .get(generatePdfUrl)
+				    .then(function(data){
+				        //data is link to pdf
+				        $window.open(data);
+				    }); 
+				    */
 	}]);
