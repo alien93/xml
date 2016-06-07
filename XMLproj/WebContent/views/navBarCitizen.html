@@ -1,14 +1,14 @@
 <meta charset="UTF-8">
-<nav ng-controller="navBarCitizen" class="navbar-fluid navbar-inverse navbar-fixed-top navbar">
+<nav class="navbar-fluid navbar-inverse navbar-fixed-top navbar">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/admin">Skupstina grada Novog Sada</a>
+            <a class="navbar-brand" href="#/gradjanin">Skupstina grada Novog Sada</a>
         </div>
 
         <div id="navbar">
             <ul class="nav navbar-nav">
-                <li><a href="/donetaAkta">Doneta akta</a></li>
-                <li><a href="/aktaUProceduri" >Akta u proceduri</a></li>
+                <li><a href="#/donetaAkta">Doneta akta</a></li>
+                <li><a href ng-click="act()" >Akta u proceduri</a></li>
             </ul>
             <p class="navbar-text navbar-right"><a ui-sref = "login">Prijavi se</a></p>
         </div>

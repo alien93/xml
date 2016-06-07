@@ -21,6 +21,12 @@ xmlApp.config(function($routeProvider){
 									templateUrl: "views/president.html"
 							}
 						)
+						.when(
+							"/prijava",
+							{
+									templateUrl: "views/login.html"
+							}
+						)
 						.otherwise(
 							{
 							redirectTo: "/gradjanin"
