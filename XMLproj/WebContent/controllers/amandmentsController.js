@@ -1,17 +1,22 @@
 angular.module('xmlApp')
-		.controller('amandmentsController', ['$scope', '$http',
-			function($scope, $http){
-					$scope.addAmandment = function(){
-						$http({
-							method : "POST",
-							url : "http://localhost:8080/rest/addAct",
-							data : $scope.newAct
-						}).then(function(resp){
-							alert(JSON.stringify(resp));
-						}, 
-						function(err){
-							alert(JSON.stringify(err));
-						});
+		.controller('amandmentsController', ['$scope',
+			function($scope){
+					$scope.amandmentsForAct = [];
+					$scope.acts = [ 
+							{ name: "Akt1", date: "", type: "", 
+								amandments: ["Am1", "Am2", "Am3"] }, 
+							{ name: "Akt2", date: "", type: "",
+								amandments: ["Am1", "Am2", "Am3"] 	}, 
+							{ name: "Akt3", date: "", type: "",
+								amandments: ["Am1", "Am2", "Am3"] }, 
+							];
+					$scope.addAmandment = function(index){
+						
+					}
+					
+					$scope.showAmandments = function(index){
+						console.log(index);
+						$scope.amandmentsForAct = acts[0].amandments;
 					}
 				}
 		]);

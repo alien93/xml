@@ -4,15 +4,28 @@
 <div>
     <form class="formAddAmandment" data-ng-controller="amandmentsController" ng-submit="addAmandment()">        
 		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
-				<select>
-					<option ng-repeat="act in acts" value="{{act}}" ng-click="showAmandments()">{{act.name}}</option>
+			<div class="col-md-offset-2 col-md-4">
+				<select class="form-control">
+					<option ng-repeat="act in acts" value="{{act}}" ng-click="showAmandments($index)">{{act.name}}</option>
 				</select>
-				
-				
-				
 			</div>
-			<div class="col-md-2"> &nbsp; </div>
+			<div class="col-md-6"> &nbsp; </div>	
 		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">		
+				<input type="button" value="Novi amandman na akt" class="btn btn-primary btn-block" 
+					ng-click="newAmandment($index); $event.stopPropagation();"> </td>
+			</div>
+			<div class="col-md-6"> &nbsp; </div>	
+		</div>
+				
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">		
+				<label ng-repeat="ams in amandmentsForAct">{{ams}} </label>
+			</div>
+			<div class="col-md-2"> &nbsp; </div>	
+		</div>		
+				
     </form>
 </div>
