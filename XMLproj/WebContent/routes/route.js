@@ -4,32 +4,26 @@ xmlApp.config(function($routeProvider){
 				
 				$routeProvider
 						.when(
-							"/",
-							{
-									templateUrl : "index.html"
-							}
-						)
-						.when(
 							"/gradjanin",
 							{
-									templateUrl : "citizen.html"
+									templateUrl : "views/citizen.html"
 							}
 						)
 						.when(
 							"/odbornik",
 							{
-									templateUrl : "alderman.html"
+									templateUrl : "views/alderman.html"
 							}
 						)
 						.when(
 							"/predsednik",
 							{
-									templateUrl: "president.html"
+									templateUrl: "views/president.html"
 							}
 						)
 						.otherwise(
 							{
-							redirectTo: "/"
+							redirectTo: "/gradjanin"
 							}	
 						);
 	}
