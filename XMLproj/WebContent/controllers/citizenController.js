@@ -18,7 +18,7 @@ angular.module('xmlApp')
 					
 					$scope.acts = {
 									"active" : [act, act2],
-								  	"nonActive" : [act2, act]
+								  	"nonActive" : [act2]
 					    		  };
 
 					//-------------------------/test data----------------------

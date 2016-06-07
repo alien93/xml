@@ -10,6 +10,12 @@ xmlApp.config(function($routeProvider){
 							}
 						)
 						.when(
+							"/gradjanin/aktaUProceduri",
+							{
+									templateUrl : "views/nonActiveActs.html"
+							}
+						)
+						.when(
 							"/odbornik",
 							{
 									templateUrl : "views/alderman.html"
