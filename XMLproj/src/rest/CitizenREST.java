@@ -5,7 +5,10 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
+import util.ActXmlToPdf;
+import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
+import util.TransformersAutobot;
 import util.XMLToPDF;
 import util.XQueryInvoker;
 
@@ -27,8 +30,12 @@ public class CitizenREST {
 
 		String confPath = path+"fop.xconf";
 		try {
-			XMLToPDF xml = new XMLToPDF(confPath);
-			xml.test();
+			TransformersAutobot act1 = new ActXmlToPdf(confPath);
+			TransformersAutobot aman1 = new AmandmanXmlToPdf(confPath);
+			
+			act1.test();
+			aman1.test();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

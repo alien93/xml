@@ -26,7 +26,9 @@ import net.sf.saxon.TransformerFactoryImpl;
 public class XMLToPDF {
 	
 	public static final String PDF_FILE_TEST = "C:/Users/Nina/Desktop/akt.pdf";
-
+	public static final String ACT_RESOURCE = "/resources/akt_fo.xsl";
+	public static final String AMANDMAN_RESOURCE = "/resources/amandman_fo.xsl";
+	
 	private FopFactory fopFactory;
 
 	private TransformerFactory transformerFactory;
@@ -41,6 +43,12 @@ public class XMLToPDF {
 	}
 
 	public void transformAkt(InputStream actStream, OutputStream pdfStream) throws Exception {
+		
+		InputStream confStream = loadConfiguration(ACT_RESOURCE);
+
+		transform(confStream, actStream, pdfStream);
+		
+		////
 		InputStream xslStream = getClass().getResourceAsStream("/resources/akt_fo.xsl");
 
 		if (xslStream == null) {
@@ -71,7 +79,50 @@ public class XMLToPDF {
 		pdfStream.write(result.toByteArray());
 	}
 	
-	public void test(){
+	public void transformAmandman(InputStream amandmanStream,OutputStream pdfStream) throws Exception{
+		InputStream xslStream = getClass().getResourceAsStream("/resources/amandman_fo.xsl");
+
+		if (xslStream == null) {
+			System.out.println("NIJE UCITAN akt_fo.xsl");
+			return;
+		}
+
+		StreamSource xslSource = new StreamSource(xslStream);
+		StreamSource amandmanSource = new StreamSource(amandmanStream);
+
+		FOUserAgent userAgent = fopFactory.newFOUserAgent();
+
+		ByteArrayOutputStream result = new ByteArrayOutputStream();
+
+		Transformer xslFoTransformer = transformerFactory.newTransformer(xslSource);
+		xslFoTransformer.setParameter("encoding", "UTF-8");
+		xslFoTransformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+
+		// Construct FOP instance with desired output format
+		Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, result);
+
+		// Resulting SAX events
+		Result res = new SAXResult(fop.getDefaultHandler());
+
+		// Start XSLT transformation and FOP processing
+		xslFoTransformer.transform(amandmanSource, res);
+		
+		pdfStream.write(result.toByteArray());
+	}
+	
+	private InputStream loadConfiguration(String path){
+		return getClass().getResourceAsStream(path);
+	}
+	
+	private void transform(InputStream configuration,InputStream xmlStream,OutputStream bytePdfStream){
+		
+	}
+	
+	public void testAmandman(){
+		
+	}
+	
+	public void testAkt(){
 		
 		InputStream is = getClass().getResourceAsStream("/resources/akt_1.xml");
 		
@@ -106,7 +157,7 @@ public class XMLToPDF {
 	public static void main(String[] args){
 		try {
 			XMLToPDF xmlToPDF = new XMLToPDF("src/fop.xconf");
-			xmlToPDF.test();
+			xmlToPDF.testAkt();
 		} catch (SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

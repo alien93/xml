@@ -18,12 +18,12 @@
     </xs:element>
     <xs:element name="Sporedni_deo">
         <xs:complexType>
-            <xs:choice>
+            <xs:sequence>
                 <xs:element minOccurs="0" name="Pravni_osnov_donosenja" type="xs:string"/>
                 <xs:element minOccurs="0" name="Donet_od_strane" type="xs:string"/>
                 <xs:element minOccurs="0" name="Postupak_donosenja" type="xs:string"/>
                 <xs:element minOccurs="0" name="Cilj_donosenja" type="xs:string"/>
-            </xs:choice>
+            </xs:sequence>
             <xs:attribute name="vrsta" type="xs:string"/>
             <xs:attribute name="datum" type="xs:date"/>
             <xs:attribute name="mesto" type="xs:string"/>

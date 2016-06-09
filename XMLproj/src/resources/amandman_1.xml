@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:Amandman xmlns:p="http://www.parlament.gov.rs/propisi"
+	xmlns:ns1="http://www.parlament.gov.rs/generic_types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.parlament.gov.rs/propisi amandman.xsd"
+	status="donet" naziv="Amandman NAZIV">
+	<p:Sporedni_deo datum="2016-03-31" mesto="Beograd"
+		oznaka="119-05-60/2016-01" vrsta="odluka" br_pozitivnih_glasova="50"
+		br_ukupnih_glasova="100">
+		<p:Pravni_osnov_donosenja>Pravni osnov</p:Pravni_osnov_donosenja>
+		<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
+		<p:Postupak_donosenja>Postupak</p:Postupak_donosenja>
+		<p:Cilj_donosenja>Cilj</p:Cilj_donosenja>
+	</p:Sporedni_deo>
+	<p:Glavni_deo>
+		<p:Deo oznaka="oz1" naziv="DEO 1">
+			<p:Sadrzaj>
+				Sadrzaj dela 1
+				<ns1:Glava oznaka="gl1" naziv="Deo 1 - Glava 1">
+					<ns1:Sadrzaj>
+						Deo 1 glava 1 sadrzi članove:
+						<ns1:Clan oznaka="oz1/gl1/cl1" naziv="Član 1">
+							<ns1:Sadrzaj>Neki sadrzaj clana 1</ns1:Sadrzaj>
+						</ns1:Clan>
+						<ns1:Clan oznaka="oz1/gl1/cl2" naziv="Član 2">
+							<ns1:Sadrzaj>Neki sadrzaj clana 2</ns1:Sadrzaj>
+						</ns1:Clan>
+					</ns1:Sadrzaj>
+				</ns1:Glava>
+				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
+			</p:Sadrzaj>
+			<p:Status>
+				<ns1:ref id_ref="/oz1/gl1">Glava 1</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</p:Status>
+		</p:Deo>
+		<p:Deo oznaka="oz2" naziv="DEO 2">
+			<p:Sadrzaj>
+				Sadrzaj dela 2 - sadrzi odeljak
+				<ns1:Odeljak oznaka="od1" naziv="Deo 2 - Odeljak 1">
+					<ns1:Sadrzaj>Sadrzaj odeljka</ns1:Sadrzaj>
+				</ns1:Odeljak>
+			</p:Sadrzaj>
+			<p:Status>
+				<ns1:ref id_ref="/oz2/">Deo 2 referenca</ns1:ref>
+				<ns1:status_izmene>u_proceduri</ns1:status_izmene>
+			</p:Status>
+		</p:Deo>
+		<p:Clan oznaka="cl1sam" naziv="Član van delova">
+			<p:Sadrzaj>
+				Sadrzaj clana van delova
+			</p:Sadrzaj>
+			<p:Status>
+				<ns1:ref id_ref="/neka/ref">Referenca</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</p:Status>
+		</p:Clan>
+		<p:Alineja oznaka="ali1" naziv="Alineja bez dela">
+			<p:Sadrzaj>Sadrzaj</p:Sadrzaj>
+			<p:Status>
+				<ns1:ref id_ref="/alineja/">Alineja ref</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</p:Status>
+		</p:Alineja>
+	</p:Glavni_deo>
+</p:Amandman>
