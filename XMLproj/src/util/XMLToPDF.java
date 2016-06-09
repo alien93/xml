@@ -24,6 +24,8 @@ import org.xml.sax.SAXException;
 import net.sf.saxon.TransformerFactoryImpl;
 
 public class XMLToPDF {
+	
+	public static final String PDF_FILE_TEST = "E:/TEST_FILES/akt.pdf";
 
 	private FopFactory fopFactory;
 
@@ -87,8 +89,8 @@ public class XMLToPDF {
 		}
 		
 		// WRITE TO PDF
-		/*
-		File pdfFile = new File("E:/TEST_FILES/akt.pdf");
+		
+		File pdfFile = new File(PDF_FILE_TEST);
 		
 		try {
 			OutputStream out = new BufferedOutputStream(new FileOutputStream(pdfFile));
@@ -97,7 +99,7 @@ public class XMLToPDF {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 	}
 
 	public static void main(String[] args){

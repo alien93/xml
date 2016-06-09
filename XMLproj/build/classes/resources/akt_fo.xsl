@@ -38,8 +38,8 @@
 	<xsl:template match="p:Akt/p:Sporedni_deo">
 		<fo:block text-align="right" font-size="10px" padding-top="20px">
 			<fo:block>
-				<xsl:apply-templates select="./Akt_u_proceduri" />
-				<xsl:apply-templates select="./Donet_akt" />
+				<xsl:apply-templates select="./p:Akt_u_proceduri" />
+				<xsl:apply-templates select="./p:Donet_akt" />
 			</fo:block>
 			<fo:block>
 				Vrsta:
@@ -56,33 +56,33 @@
 		</fo:block>
 	</xsl:template>
 
-	<xsl:template match="Donet_akt">
+	<xsl:template match="p:Donet_akt">
 		<fo:block>
 			Donet od strane:
-			<xsl:value-of select="./Donet_od_strane" />
+			<xsl:value-of select="./p:Donet_od_strane" />
 		</fo:block>
 		<fo:block>
 			Pravni osnov donosenja:
-			<xsl:value-of select="./Pravni_osnov_donosenja" />
+			<xsl:value-of select="./p:Pravni_osnov_donosenja" />
 		</fo:block>
 		<fo:block>
 			Po postupku:
-			<xsl:value-of select="./Po_postupku" />
+			<xsl:value-of select="./p:Po_postupku" />
 		</fo:block>
 		<fo:block>
 			Po cilju:
-			<xsl:value-of select="./Po_cilju" />
+			<xsl:value-of select="./p:Po_cilju" />
 		</fo:block>
 	</xsl:template>
 
-	<xsl:template match="Akt_u_proceduri">
+	<xsl:template match="p:Akt_u_proceduri">
 		<fo:block>
 			Pregledač:
-			<xsl:value-of select="./Pregledac" />
+			<xsl:value-of select="./p:Pregledac" />
 		</fo:block>
 		<fo:block>
 			Upućuje se:
-			<xsl:value-of select="./Upucuje_se" />
+			<xsl:value-of select="./p:Upucuje_se" />
 		</fo:block>
 	</xsl:template>
 
