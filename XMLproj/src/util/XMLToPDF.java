@@ -23,6 +23,7 @@ import org.xml.sax.SAXException;
 
 import net.sf.saxon.TransformerFactoryImpl;
 
+@Deprecated()
 public class XMLToPDF {
 	
 	public static final String PDF_FILE_TEST = "C:/Users/Nina/Desktop/akt.pdf";
