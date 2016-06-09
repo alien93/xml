@@ -19,16 +19,16 @@
         </p:Donet_akt>
     </p:Sporedni_deo>
     <p:Glavni_deo>
-        <p:Clan oznaka="cl1">
-            <p:Sadrzaj>
+        <ns1:Clan oznaka="cl1">
+            <ns1:Sadrzaj>
                 Prestaje funkcija člana Republičke komisije za zaštitu prava u
                 postupcima javnih nabavki Ristivoju Đokiću, zbog podnošenja ostavke.
-            </p:Sadrzaj>
-        </p:Clan>
-        <p:Clan oznaka="cl2">
-            <p:Sadrzaj>
+            </ns1:Sadrzaj>
+        </ns1:Clan>
+        <ns1:Clan oznaka="cl2">
+            <ns1:Sadrzaj>
                 Ovu odluku objaviti u „Službenom glasniku Republike Srbije“.
-            </p:Sadrzaj>
-        </p:Clan>
+            </ns1:Sadrzaj>
+        </ns1:Clan>
     </p:Glavni_deo>
 </p:Akt>

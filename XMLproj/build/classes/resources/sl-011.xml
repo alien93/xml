@@ -23,8 +23,8 @@
         </p:Donet_akt>
     </p:Sporedni_deo>
     <p:Glavni_deo>
-        <p:Glava oznaka="g1" naziv="Opsta odredba">
-            <p:Sadrzaj>
+        <ns1:Glava oznaka="g1" naziv="Opsta odredba">
+            <ns1:Sadrzaj>
              <ns1:Clan oznaka="cl1">
                  <ns1:Sadrzaj>
                      Овим правилником ближе се уређују начин и поступак
@@ -51,7 +51,7 @@
                      </ns1:Tacka>
                  </ns1:Sadrzaj>
              </ns1:Clan>
-            </p:Sadrzaj>
-        </p:Glava>
+            </ns1:Sadrzaj>
+        </ns1:Glava>
     </p:Glavni_deo>
 </p:Akt>

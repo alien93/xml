@@ -37,6 +37,3 @@ public class CitizenREST {
 	}
 
 }
-// C:\Users\Nina\Documents\nina\XML i Web servisi\XML i Web
-// servisi\apache-tomcat-8.0.35\wtpwebapps\XMLproj\WEB-INF\classes\resources
-// C:\Users\Nina\Documents\nina\XML%20i%20Web%20servisi\XML%20i%20Web%20servisi\apache-tomcat-8.0.35\wtpwebapps\XMLproj\WEB-INF\classes\resources\xquery\getNonActiveActs.xqy
