@@ -28,6 +28,8 @@
             <xs:attribute name="datum" type="xs:date"/>
             <xs:attribute name="mesto" type="xs:string"/>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute default="0" name="br_pozitivnih_glasova" type="xs:int"/>
+            <xs:attribute default="0" name="br_ukupnih_glasova" type="xs:int"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -86,6 +88,8 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="opis" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -96,6 +100,8 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="opis" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -106,6 +112,8 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="opis" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -116,6 +124,8 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="opis" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -126,6 +136,8 @@
                 <xs:element ref="p:Status"/>
             </xs:sequence>
             <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="opis" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>

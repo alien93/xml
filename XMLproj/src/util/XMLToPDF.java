@@ -25,7 +25,7 @@ import net.sf.saxon.TransformerFactoryImpl;
 
 public class XMLToPDF {
 	
-	public static final String PDF_FILE_TEST = "E:/TEST_FILES/akt.pdf";
+	public static final String PDF_FILE_TEST = "C:/Users/Nina/Desktop/akt.pdf";
 
 	private FopFactory fopFactory;
 

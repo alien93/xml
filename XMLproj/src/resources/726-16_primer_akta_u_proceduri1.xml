@@ -3,7 +3,7 @@
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
- status="u_proceduri">
+ status="u_proceduri" naziv="Predlog o izboru sudija" >
     <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01">
         <p:Akt_u_proceduri>
             <p:Predlagac>
