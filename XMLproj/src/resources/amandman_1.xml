@@ -12,8 +12,8 @@
 		<p:Cilj_donosenja>Cilj</p:Cilj_donosenja>
 	</p:Sporedni_deo>
 	<p:Glavni_deo>
-		<p:Deo oznaka="oz1" naziv="DEO 1">
-			<p:Sadrzaj>
+		<ns1:Deo oznaka="oz1" naziv="DEO 1">
+			<ns1:Sadrzaj>
 				Sadrzaj dela 1
 				<ns1:Glava oznaka="gl1" naziv="Deo 1 - Glava 1">
 					<ns1:Sadrzaj>
@@ -27,39 +27,39 @@
 					</ns1:Sadrzaj>
 				</ns1:Glava>
 				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
-			</p:Sadrzaj>
-			<p:Status>
+			</ns1:Sadrzaj>
+			<ns1:Status>
 				<ns1:ref id_ref="/oz1/gl1">Glava 1</ns1:ref>
 				<ns1:status_izmene>donet</ns1:status_izmene>
-			</p:Status>
-		</p:Deo>
-		<p:Deo oznaka="oz2" naziv="DEO 2">
-			<p:Sadrzaj>
+			</ns1:Status>
+		</ns1:Deo>
+		<ns1:Deo oznaka="oz2" naziv="DEO 2">
+			<ns1:Sadrzaj>
 				Sadrzaj dela 2 - sadrzi odeljak
 				<ns1:Odeljak oznaka="od1" naziv="Deo 2 - Odeljak 1">
 					<ns1:Sadrzaj>Sadrzaj odeljka</ns1:Sadrzaj>
 				</ns1:Odeljak>
-			</p:Sadrzaj>
-			<p:Status>
+			</ns1:Sadrzaj>
+			<ns1:Status>
 				<ns1:ref id_ref="/oz2/">Deo 2 referenca</ns1:ref>
 				<ns1:status_izmene>u_proceduri</ns1:status_izmene>
-			</p:Status>
-		</p:Deo>
-		<p:Clan oznaka="cl1sam" naziv="Član van delova">
-			<p:Sadrzaj>
+			</ns1:Status>
+		</ns1:Deo>
+		<ns1:Clan oznaka="cl1sam" naziv="Član van delova">
+			<ns1:Sadrzaj>
 				Sadrzaj clana van delova
-			</p:Sadrzaj>
-			<p:Status>
+			</ns1:Sadrzaj>
+			<ns1:Status>
 				<ns1:ref id_ref="/neka/ref">Referenca</ns1:ref>
 				<ns1:status_izmene>donet</ns1:status_izmene>
-			</p:Status>
-		</p:Clan>
-		<p:Alineja oznaka="ali1" naziv="Alineja bez dela">
-			<p:Sadrzaj>Sadrzaj</p:Sadrzaj>
-			<p:Status>
+			</ns1:Status>
+		</ns1:Clan>
+		<ns1:Alineja oznaka="ali1" naziv="Alineja bez dela">
+			<ns1:Sadrzaj>Sadrzaj</ns1:Sadrzaj>
+			<ns1:Status>
 				<ns1:ref id_ref="/alineja/">Alineja ref</ns1:ref>
 				<ns1:status_izmene>donet</ns1:status_izmene>
-			</p:Status>
-		</p:Alineja>
+			</ns1:Status>
+		</ns1:Alineja>
 	</p:Glavni_deo>
 </p:Amandman>
