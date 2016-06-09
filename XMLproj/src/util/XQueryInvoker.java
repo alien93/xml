@@ -1,10 +1,13 @@
 package util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import javax.servlet.ServletContext;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
@@ -16,11 +19,11 @@ import util.ConnPropertiesReader.ConnectionProperties;
 
 public class XQueryInvoker {
 
-	private static DatabaseClient client;
-	private static final String prefix = "resources/xquery";
+	private static DatabaseClient client;	
 
 	public static void invokeQuery(ConnectionProperties props, String queryDoc) throws IOException{
 		// Initialize the database client
+		
 		if (props.database.equals("")) {
 			client = DatabaseClientFactory.newClient(props.host, props.port, props.user, props.pass, props.authType);
 		} else {
@@ -28,8 +31,9 @@ public class XQueryInvoker {
 		}
 
 		// Script file which is to be invoked
-		String filePath = prefix + queryDoc;
+		String filePath = queryDoc;
 
+		
 		System.out.println("[INFO] Invoking: " + filePath);
 
 		// Initialize XQuery invoker object
@@ -67,7 +71,7 @@ public class XQueryInvoker {
 	}
 
 	public static void main(String[] args) throws IOException{
-		String document = "";
+		String document = "/getNonActiveActs.xqy";
 		invokeQuery(ConnPropertiesReader.loadProperties(), document);
 	}
 

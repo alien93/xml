@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.parlament.gov.rs/generic_types"
+    xmlns:p="http://www.parlament.gov.rs/generic_types"
+    xmlns:ns1="http://www.parlament.gov.rs/propisi">
+    <xs:complexType name="TSadrzajDela" mixed="true">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Glava">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajGlave"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka"/>
+                    <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Odeljak">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajOdeljka"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka"/>
+                    <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="TSadrzajGlave" mixed="true">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Odeljak">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajOdeljka"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka"/>
+                    <xs:attribute name="naziv"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Clan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajOdeljka">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="p:ref"/>
+            <xs:element name="Clan" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Sadrzaj" type="p:TSadrzajClana"/>
+                    </xs:sequence>
+                    <xs:attribute name="oznaka" type="xs:string"/>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajClana">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Stav" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Tacka" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajStava">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Tacka" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajTacke">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Podtacka" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="TSadrzajPodtacke">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="p:ref" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="Alineja" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="ref">
+        <xs:complexType mixed="false">
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="id_ref">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:pattern value="(\/[A-Za-z]*[0-9]*)+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="TStatusAkta">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="donet"/>
+            <xs:enumeration value="u_proceduri"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TAmandmanStatus">
+        <xs:all>
+            <xs:element ref="p:ref"/>
+            <xs:element ref="p:status_izmene"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="status_izmene" type="p:TStatusAkta"> </xs:element>
+</xs:schema>
