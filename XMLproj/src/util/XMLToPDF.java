@@ -31,9 +31,10 @@ public class XMLToPDF {
 
 	private TransformerFactory transformerFactory;
 
-	public XMLToPDF() throws SAXException, IOException {
+	public XMLToPDF(String path) throws SAXException, IOException {
 		// Initialize FOP factory object
-		fopFactory = FopFactory.newInstance(new File("src/fop.xconf"));
+		fopFactory = FopFactory.newInstance(new File(path));
+		
 
 		// Setup the XSLT transformer factory
 		transformerFactory = new TransformerFactoryImpl();
@@ -104,7 +105,7 @@ public class XMLToPDF {
 
 	public static void main(String[] args){
 		try {
-			XMLToPDF xmlToPDF = new XMLToPDF();
+			XMLToPDF xmlToPDF = new XMLToPDF("src/fop.xconf");
 			xmlToPDF.test();
 		} catch (SAXException | IOException e) {
 			// TODO Auto-generated catch block
