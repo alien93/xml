@@ -10,7 +10,7 @@
  УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
  НОВОГ САДА"
  status="donet">
-    <p:Sporedni_deo datum="2015-12-31" mesto="Novi Sad" vrsta="Pravilnik">
+    <p:Sporedni_deo datum="2015-12-31" mesto="Novi Sad" vrsta="Pravilnik" oznaka="/oz1">
         <p:Donet_akt>
             <p:Donet_od_strane> 
                 Gradsko vece Grada Novog Sada

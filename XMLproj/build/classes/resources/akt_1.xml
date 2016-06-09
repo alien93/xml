@@ -5,7 +5,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="u_proceduri" naziv="Neki naziv">
-    <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01">
+    <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01" vrsta="Odluka">
         <p:Donet_akt>
         	<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
         	<p:Pravni_osnov_donosenja>tralalla</p:Pravni_osnov_donosenja>

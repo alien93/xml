@@ -43,10 +43,10 @@
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
-            <xs:attribute name="vrsta" type="xs:string"/>
-            <xs:attribute name="datum" type="xs:date"/>
-            <xs:attribute name="mesto" type="xs:string"/>
-            <xs:attribute name="oznaka" type="xs:string"/>
+            <xs:attribute name="vrsta" type="xs:string" use="required"/>
+            <xs:attribute name="datum" type="xs:date" use="required"/>
+            <xs:attribute name="mesto" type="xs:string" use="required"/>
+            <xs:attribute name="oznaka" type="xs:string" use="required"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
