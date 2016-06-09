@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+ xmlns:ns1="http://www.parlament.gov.rs/generic_types"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
+ status="u_proceduri" naziv="Neki naziv">
+    <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01">
+        <p:Donet_akt>
+        	<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
+        	<p:Pravni_osnov_donosenja>tralalla</p:Pravni_osnov_donosenja>
+        	<p:Po_postupku>dsfsdsdgsd</p:Po_postupku> 
+        	<p:Po_cilju>dfdsgdsg</p:Po_cilju>
+       </p:Donet_akt>
+    </p:Sporedni_deo>
+    <p:Glavni_deo>
+        <p:Deo oznaka="oz1" naziv="DEO 1">
+        	<p:Sadrzaj>asfsaf
+        		<ns1:Glava oznaka="gl1" naziv="Glava 1">
+        			<ns1:Sadrzaj>GLAVA <ns1:ref id_ref="/ref/ref/ref">Referenca</ns1:ref>
+        				<ns1:Odeljak oznaka="od1" naziv="Odeljak 1">
+        					<ns1:Sadrzaj>SADRZAJ ODELJKA</ns1:Sadrzaj>
+        				</ns1:Odeljak>
+        				<ns1:Odeljak oznaka="od2" naziv="Odeljak 2">
+        					<ns1:Sadrzaj>Odeljak 2 Sadrzaj</ns1:Sadrzaj>
+        				</ns1:Odeljak>
+        				<ns1:Clan oznaka="gl1/cl1" naziv="Clan 1">
+        					<ns1:Sadrzaj>CLAN U GLAVI</ns1:Sadrzaj>
+        				</ns1:Clan>
+        			</ns1:Sadrzaj>
+        		</ns1:Glava>
+        		<ns1:Clan oznaka="cl1" naziv="Clan 2">
+        			<ns1:Sadrzaj>ČŠĐŽČĆĆĆ</ns1:Sadrzaj>
+        		</ns1:Clan>
+        	</p:Sadrzaj>
+        </p:Deo>
+        <p:Deo oznaka="oz2" naziv="DEO 2">
+        	<p:Sadrzaj>SADRZAJ 2
+        	</p:Sadrzaj>
+        </p:Deo>
+    </p:Glavni_deo>
+</p:Akt>

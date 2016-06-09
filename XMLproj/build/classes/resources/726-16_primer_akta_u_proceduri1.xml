@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+ xmlns:ns1="http://www.parlament.gov.rs/generic_types"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
+ status="u_proceduri">
+    <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01">
+        <p:Akt_u_proceduri>
+            <p:Predlagac>
+                PREDSEDNIK VISOKOG SAVETA SUDSTVA Dragomir Milojevic
+            </p:Predlagac>
+            <p:Upucuje_se>
+                VISOKI SAVET SUDSTVA Republika Srbija
+            </p:Upucuje_se>
+        </p:Akt_u_proceduri>
+    </p:Sporedni_deo>
+    <p:Glavni_deo>
+        <p:Deo>
+            <p:Sadrzaj>
+                Na osnovu <ns1:ref id_ref="/zvss/cl13/al3">clana 13. alineja 3. Zakona o Visokom savetu sudstva</ns1:ref>asdfah
+                
+                ....
+            </p:Sadrzaj>
+        </p:Deo>
+        <p:Deo>
+            <p:Sadrzaj>
+                U prilogu dopisa dostavljamo Vam Predlog...
+            </p:Sadrzaj>
+        </p:Deo>
+        <p:Deo>
+            <p:Sadrzaj>
+                Visoki savet sudstva predlaze da Narodna skupstina Republike Srbije,
+                po hitnom postupku na osnovu <ns1:ref id_ref="/urs/cl147/st1">clana 147.
+                stav 1. Ustava Republike Srbije i </ns1:ref> <ns1:ref id_ref="/zos/cl51/st1">
+                clana 51. stav 1. Zakona o sudijama
+                </ns1:ref>, izabere osamnaest (18)....
+            </p:Sadrzaj>
+        </p:Deo>
+    </p:Glavni_deo>
+</p:Akt>
