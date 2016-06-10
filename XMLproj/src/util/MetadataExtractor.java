@@ -74,7 +74,7 @@ public class MetadataExtractor {
 		
 		String filePath = "gen/grddl_metadata.rdf";
 		
-		InputStream in = new FileInputStream(new File("data/rdfa/RS26-16-lat_primer_donetog_akta1.xml")); 
+		InputStream in = new FileInputStream(new File("./src/resources/RS26-16-lat_primer_donetog_akta1.xml")); 
 
 		OutputStream out = new FileOutputStream(filePath);
 		
