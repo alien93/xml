@@ -1,6 +1,16 @@
 angular.module('xmlApp')
 		.controller('actsController', ['$scope', '$http',
 			function($scope, $http){
+				
+					$scope.insertTextVisible = false;
+					$scope.showTextPart = function() {
+						$scope.insertTextVisible = !$scope.insertTextVisible;
+					};
+				
+					$scope.addFileAct = function() {
+						
+					};
+					
 					$scope.addAct = function(){
 						$http({
 							method : "POST",
@@ -12,6 +22,6 @@ angular.module('xmlApp')
 						function(err){
 							alert(JSON.stringify(err));
 						});
-					}
+					};
 				}
 		]);
