@@ -17,7 +17,7 @@ import net.sf.saxon.TransformerFactoryImpl;
 
 public class ActXmlToPdf extends TransformersXMLToPDF {
 
-	public static final String PDF_FILE_TEST = "E:/TEST_FILES/akt.pdf";
+	public static final String PDF_FILE_TEST = "C:/Users/Nina/Desktop/akt.pdf";
 	public static final String ACT_RESOURCE = "/resources/akt_fo.xsl";
 	public static final String TEST_ACT = "/resources/akt_1.xml";
 
