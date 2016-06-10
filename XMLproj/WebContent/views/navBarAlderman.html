@@ -1,18 +1,18 @@
 <meta charset="UTF-8">
-<nav ng-controller="navBarAlderman" class="navbar-fluid navbar-inverse navbar-fixed-top navbar">
+<nav ng-controller="navBarAldermanController" class="navbar-fluid navbar-inverse navbar-fixed-top navbar">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/admin">Skupstina grada Novog Sada</a>
+            <a class="navbar-brand" href="#/odbornik">Skupstina grada Novog Sada</a>
         </div>
 
         <div id="navbar">
             <ul class="nav navbar-nav">
-                <li><a href="/donetaAkta">Doneta akta</a></li>
-                <li><a href="/aktaUProceduri" >Akta u proceduri</a></li>
-                <li><a href="/akti">Predlozi akt</a></li>
-                <li><a href="/amandmani" >Predlozi amandman</a></li>
+                <li><a href ng-click="activeAct()">Doneta akta</a></li>
+                <li><a href ng-click="nonActiveAct()" >Akta u proceduri</a></li>
+                <li><a href ng-click="suggestAct()">Predlozi akt</a></li>
+                <li><a href ng-click="suggestAmendment()">Predlozi amandman</a></li>
             </ul>
-            <p class="navbar-text navbar-right"><a ui-sref = "login">Odjavi se</a></p>
+            <p class="navbar-text navbar-right"><a href ng-click="logout()">Odjavi se</a></p>
         </div>
     </div>
 </nav>

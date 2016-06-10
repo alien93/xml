@@ -1,1 +1,18 @@
 <div ng-include="'views/navBarPresident.html'"></div>
+<br><br><br><br><br><br>
+<div ng-controller="citizenController">
+	
+	<table class="table table-hover" width="100">
+		<tr>
+			<th>Naziv</th>
+			<th>Datum</th>
+			<th>Vrsta</th>
+		</tr>
+		<tr ng-repeat="act in acts.active" ng-click="getSelected(act.name)">
+			<td>{{act.name}}</td>
+			<td>{{act.date}}</td>
+			<td>{{act.type}}</td>
+		</tr>
+	</table>
+	
+</div>

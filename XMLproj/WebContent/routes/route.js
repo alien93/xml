@@ -22,27 +22,57 @@ xmlApp.config(function($routeProvider){
 							}
 						)
 						.when(
+							"/odbornik/aktaUProceduri",
+							{
+									templateUrl : "views/nonActiveActsAlderman.html"
+							}
+						)
+						.when(
+							"/odbornik/predlogAkta",
+							{
+									templateUrl : "views/acts.html"
+							}
+						)
+						.when(
+							"/odbornik/predlogAmandmana",
+							{
+									templateUrl : "views/amandments.html"
+							}
+						)
+						.when(
 							"/predsednik",
 							{
 									templateUrl: "views/president.html"
 							}
 						)
 						.when(
+							"/predsednik/aktaUProceduri",
+							{
+									templateUrl: "views/nonActiveActsPresident.html"
+							}
+						)
+						.when(
+							"/predsednik/predlogAkta",
+							{
+									templateUrl: "views/actsPresident.html"
+							}
+						)
+						.when(
+							"/predsednik/predlogAmandmana",
+							{
+									templateUrl: "views/amandmentsPresident.html"
+							}
+						)
+						.when(
+							"/predsednik/sednica",
+							{
+									templateUrl: "views/session.html"
+							}
+						)
+						.when(
 							"/prijava",
 							{
 									templateUrl: "views/login.html"
-							}
-						)
-						.when(
-							"/akti",
-							{
-									templateUrl: "views/acts.html"
-							}
-						)
-						.when(
-							"/amandmani",
-							{
-									templateUrl: "views/amandments.html"
 							}
 						)
 						.otherwise(

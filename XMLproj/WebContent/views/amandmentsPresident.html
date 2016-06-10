@@ -1,0 +1,67 @@
+<!--Predlog amandmana na akt-->
+<div ng-include="'views/navBarPresident.html'"></div>
+<br><br><br><br>
+<div>
+    <form class="formAddAmandment" data-ng-controller="amandmentsController" ng-submit="addAmandment()">        
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+			<select class="form-control" ng-model="selectedAct" ng-change="showAmandments()"
+					ng-options="act.name for act in acts">
+			</select>
+			</div>
+			<div class="col-md-6"> &nbsp; </div>	
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">		
+				<input type="button" value="Novi amandman na izabrani akt" class="btn btn-primary btn-block" 
+					ng-click="showTextPart()"> </td>
+			</div>
+			<div class="col-md-6"> &nbsp; </div>	
+		</div>
+		
+		<div ng-show="insertTextVisible">
+			<br/>
+			<div class="row"> 
+				<div class="col-md-offset-2 col-md-8"> 
+					<label for="amContent"> Sadrzaj </label>
+				</div> 
+				<div class="col-md-2"> &nbsp; </div>
+			</div> 
+		
+			<div class="row"> 
+				<div class="col-md-offset-2 col-md-8"> 
+					<textarea class="form-control" rows="10" ng-model="amForAct.content" id="amContent"></textarea>
+				</div> 
+				<div class="col-md-2"> &nbsp; </div>
+			</div> 
+			
+			<div class="row"> 
+				<div class="col-md-offset-2 col-md-2"> 
+					<button class="btn btn-info btn-block" ng-click="saveAmandment()">Sacuvaj</button>
+				</div> 
+				<div class="col-md-8"> &nbsp; </div>
+			</div>
+			
+		</div>
+		
+		<br/> <br/>
+		<div class="row"> 
+			<div class="col-md-offset-2 col-md-8"> Amandmani na akt <b>{{selectedAct.name}}:</b></div> 
+			<div class="col-md-2"> &nbsp; </div>
+		</div> <br/>
+		
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">		
+			<ul>
+				<li ng-repeat="ams in amandmentsForAct" >
+					<a ng-click="openAmandment(amandment)">Otvori {{ams.name}}</a> &nbsp; | &nbsp;
+					<a ng-click="deleteAmandment(amandment)"> <b> Obrisi {{ams.name}} </b> </a>
+				</li> 
+			</ul>
+			</div>
+			<div class="col-md-2"> &nbsp; </div>	
+		</div>		
+				
+    </form>
+</div>
