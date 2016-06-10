@@ -47,5 +47,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="Status" type="ns1:TAmandmanStatus"/>
 </xs:schema>
