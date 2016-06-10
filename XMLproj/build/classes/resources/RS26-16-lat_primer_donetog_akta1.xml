@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+<p:Akt 
+ xmlns="http://www.w3.org/ns/rdfa#"
+ xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="donet" naziv="O D L U K A
  O PRESTANKU FUNKCIJE ČLANA
@@ -16,10 +19,19 @@
                 („Službeni glasnik RS“, br. 124/12, 14/15 i 68/15) i člana 8. stav 1. Zakona o
                 Narodnoj skupštini („Službeni glasnik RS“, broj 9/10),
             </p:Pravni_osnov_donosenja>
+            <p:Meta_podaci>
+                <ns1:Oznaka>doc1</ns1:Oznaka>
+                <ns1:Naziv>O D L U K A
+                    O PRESTANKU FUNKCIJE ČLANA
+                    KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
+                <ns1:Vrsta>Odluka</ns1:Vrsta>
+                <ns1:Datum>2016-03-03</ns1:Datum>
+                <ns1:Mesto>Beograd</ns1:Mesto>
+            </p:Meta_podaci>
         </p:Donet_akt>
     </p:Sporedni_deo>
     <p:Glavni_deo>
-        <ns1:Clan oznaka="cl1">
+        <ns1:Clan oznaka="cl1" property="pred:clan" datatype="xs:string" content="cl1">
             <ns1:Sadrzaj>
                 Prestaje funkcija člana Republičke komisije za zaštitu prava u
                 postupcima javnih nabavki Ristivoju Đokiću, zbog podnošenja ostavke.

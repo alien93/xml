@@ -224,4 +224,67 @@
         </xs:complexType>
     </xs:element>
     <xs:element name="Status" type="p:TAmandmanStatus"/>
+    <xs:element name="Vrsta">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Datum">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:date">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Mesto">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Oznaka">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element default="0" name="BrUkupnihGlasova">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:int">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element default="0" name="BrPozitivnihGlasova">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:int">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Naziv">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:anyAttribute namespace="##any" processContents="lax"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

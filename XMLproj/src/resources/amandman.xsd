@@ -12,7 +12,6 @@
                 <xs:element ref="p:Glavni_deo"/>
             </xs:sequence>
             <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
-            <xs:attribute name="naziv" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -23,13 +22,20 @@
                 <xs:element minOccurs="0" name="Donet_od_strane" type="xs:string"/>
                 <xs:element minOccurs="0" name="Postupak_donosenja" type="xs:string"/>
                 <xs:element minOccurs="0" name="Cilj_donosenja" type="xs:string"/>
+                <xs:element name="Meta_podaci">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element ref="ns1:Oznaka"/>
+                            <xs:element ref="ns1:Naziv"/>
+                            <xs:element ref="ns1:Vrsta"/>
+                            <xs:element ref="ns1:Datum"/>
+                            <xs:element ref="ns1:Mesto"/>
+                            <xs:element ref="ns1:BrPozitivnihGlasova"/>
+                            <xs:element ref="ns1:BrUkupnihGlasova"/>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
-            <xs:attribute name="vrsta" type="xs:string"/>
-            <xs:attribute name="datum" type="xs:date"/>
-            <xs:attribute name="mesto" type="xs:string"/>
-            <xs:attribute name="oznaka" type="xs:string"/>
-            <xs:attribute default="0" name="br_pozitivnih_glasova" type="xs:int"/>
-            <xs:attribute default="0" name="br_ukupnih_glasova" type="xs:int"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>

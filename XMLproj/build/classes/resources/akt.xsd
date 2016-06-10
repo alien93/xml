@@ -13,7 +13,6 @@
                 <xs:element ref="p:Glavni_deo"/>
             </xs:sequence>
             <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
-            <xs:attribute name="naziv" type="xs:string" use="required"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -25,9 +24,20 @@
                         <xs:sequence>
                             <xs:element name="Predlagac" type="xs:string"/>
                             <xs:element name="Upucuje_se" type="xs:string"/>
+                            <xs:element name="Meta_podaci">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element ref="ns1:Oznaka"/>
+                                        <xs:element ref="ns1:Naziv"/>
+                                        <xs:element ref="ns1:Vrsta"/>
+                                        <xs:element ref="ns1:Datum"/>
+                                        <xs:element ref="ns1:Mesto"/>
+                                        <xs:element ref="ns1:BrPozitivnihGlasova"/>
+                                        <xs:element ref="ns1:BrUkupnihGlasova"/>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
                         </xs:sequence>
-                        <xs:attribute default="0" name="br_pozitivnih_glasova" type="xs:int"/>
-                        <xs:attribute default="0" name="br_ukupnih_glasova" type="xs:int"/>
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="Donet_akt">
@@ -37,16 +47,22 @@
                             <xs:element name="Pravni_osnov_donosenja" type="xs:string"/>
                             <xs:element minOccurs="0" maxOccurs="1" name="Po_postupku"
                                 type="xs:string"/>
-                            <xs:element minOccurs="0" maxOccurs="1" name="Po_cilju" type="xs:string"
-                            />
+                            <xs:element minOccurs="0" maxOccurs="1" name="Po_cilju" type="xs:string"/>
+                            <xs:element name="Meta_podaci">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element ref="ns1:Oznaka"/>
+                                        <xs:element ref="ns1:Naziv"/>
+                                        <xs:element ref="ns1:Vrsta"/>
+                                        <xs:element ref="ns1:Datum"/>
+                                        <xs:element ref="ns1:Mesto"/>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
-            <xs:attribute name="vrsta" type="xs:string" use="required"/>
-            <xs:attribute name="datum" type="xs:date" use="required"/>
-            <xs:attribute name="mesto" type="xs:string" use="required"/>
-            <xs:attribute name="oznaka" type="xs:string" use="required"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>
