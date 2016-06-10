@@ -22,7 +22,7 @@
 					<fo:block font-family="Arial">
 						<fo:block text-align="center" font-size="32px"
 							font-weight="bold" padding="30px">
-							<xsl:value-of select="p:Amandman/@naziv" />
+							<xsl:value-of select="p:Amandman//p:Meta_podaci/ns1:Naziv" />
 						</fo:block>
 						<xsl:apply-templates select="p:Amandman/p:Glavni_deo" />
 						<xsl:apply-templates select="p:Amandman/p:Sporedni_deo" />
@@ -46,24 +46,24 @@
 			</fo:block>
 			<fo:block>
 				Vrsta:
-				<xsl:value-of select="./@vrsta" />
+				<xsl:value-of select="./p:Meta_podaci/ns1:Vrsta" />
 			</fo:block>
 			<fo:block>
 				Datum:
-				<xsl:value-of select="./@datum" />
+				<xsl:value-of select="./p:Meta_podaci/ns1:Datum" />
 			</fo:block>
 			<fo:block>
 				Mesto:
-				<xsl:value-of select="./@mesto" />
+				<xsl:value-of select="./p:Meta_podaci/ns1:Mesto" />
 			</fo:block>
 
 			<fo:block>
 				Broj pozitivnih glasova:
-				<xsl:value-of select="./@br_pozitivnih_glasova" />
+				<xsl:value-of select="./p:Meta_podaci/ns1:BrPozitivnihGlasova" />
 			</fo:block>
 			<fo:block>
 				Broj ukupnih glasova:
-				<xsl:value-of select="./@br_ukupnih_glasova" />
+				<xsl:value-of select="./p:Meta_podaci/ns1:BrUkupnihGlasova" />
 			</fo:block>
 		</fo:block>
 	</xsl:template>

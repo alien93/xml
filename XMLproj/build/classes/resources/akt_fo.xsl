@@ -22,11 +22,12 @@
 					<fo:block font-family="Arial">
 						<fo:block text-align="center" font-size="32px"
 							font-weight="bold" padding="30px">
-							<xsl:value-of select="p:Akt/@naziv" />
+							<xsl:value-of select=".//p:Meta_podaci/ns1:Naziv" />
 						</fo:block>
 						<xsl:apply-templates select="p:Akt/p:Glavni_deo" />
 						<xsl:apply-templates select="p:Akt/p:Sporedni_deo" />
-						<fo:block text-align="right" font-size="10px" padding-top="20px">
+						<fo:block text-align="right" font-size="10px"
+							padding-top="20px">
 							Status:
 							<xsl:value-of select="p:Akt/@status" />
 						</fo:block>
@@ -40,18 +41,6 @@
 			<fo:block>
 				<xsl:apply-templates select="./p:Akt_u_proceduri" />
 				<xsl:apply-templates select="./p:Donet_akt" />
-			</fo:block>
-			<fo:block>
-				Vrsta:
-				<xsl:value-of select="./@vrsta" />
-			</fo:block>
-			<fo:block>
-				Datum:
-				<xsl:value-of select="./@datum" />
-			</fo:block>
-			<fo:block>
-				Mesto:
-				<xsl:value-of select="./@mesto" />
 			</fo:block>
 		</fo:block>
 	</xsl:template>
@@ -73,6 +62,18 @@
 			Po cilju:
 			<xsl:value-of select="./p:Po_cilju" />
 		</fo:block>
+		<fo:block>
+			Vrsta:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Vrsta" />
+		</fo:block>
+		<fo:block>
+			Datum:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Datum" />
+		</fo:block>
+		<fo:block>
+			Mesto:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Mesto" />
+		</fo:block>
 	</xsl:template>
 
 	<xsl:template match="p:Akt_u_proceduri">
@@ -86,11 +87,23 @@
 		</fo:block>
 		<fo:block>
 			Broj pozitivnih glasova:
-			<xsl:value-of select="/@br_pozitivnih_glasova"/>
+			<xsl:value-of select="./p:Meta_podaci/ns1:BrPozitivnihGlasova" />
 		</fo:block>
 		<fo:block>
 			Broj ukupnih glasova:
-			<xsl:value-of select="/@br_ukupnih_glasova"/>
+			<xsl:value-of select="./p:Meta_podaci/ns1:BrUkupnihGlasova" />
+		</fo:block>
+		<fo:block>
+			Vrsta:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Vrsta" />
+		</fo:block>
+		<fo:block>
+			Datum:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Datum" />
+		</fo:block>
+		<fo:block>
+			Mesto:
+			<xsl:value-of select="./p:Meta_podaci/ns1:Mesto" />
 		</fo:block>
 	</xsl:template>
 
@@ -106,7 +119,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Deo">
-		<fo:block text-align="center" font-size="22" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="22" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -115,7 +129,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Glava">
-		<fo:block text-align="center" font-size="20" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="20" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -124,7 +139,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Odeljak">
-		<fo:block text-align="center" font-size="18" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="18" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -133,7 +149,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Clan">
-		<fo:block text-align="center" font-size="16" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="16" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -142,7 +159,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Stav">
-		<fo:block text-align="center" font-size="15" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="15" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -151,7 +169,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Tacka">
-		<fo:block text-align="center" font-size="14" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="14" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -160,7 +179,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Podtacka">
-		<fo:block text-align="center" font-size="13" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="13" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -169,7 +189,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Alineja">
-		<fo:block text-align="center" font-size="13" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="13" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -186,7 +207,8 @@
 
 	<!-- GLAVA -->
 	<xsl:template match="ns1:Sadrzaj/ns1:Glava">
-		<fo:block text-align="center" font-size="16" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="16" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -225,7 +247,8 @@
 	<!-- NS1 TAGOVI -->
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Odeljak">
-		<fo:block text-align="center" font-size="15" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="15" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -234,7 +257,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Clan">
-		<fo:block text-align="center" font-size="14" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="14" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -243,7 +267,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Stav">
-		<fo:block text-align="center" font-size="13" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="13" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -252,7 +277,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Tacka">
-		<fo:block text-align="center" font-size="12" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="12" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -261,7 +287,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Podtacka">
-		<fo:block text-align="center" font-size="11" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="11" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
@@ -270,7 +297,8 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:Alineja">
-		<fo:block text-align="center" font-size="10" font-weight="bold" padding="10px">
+		<fo:block text-align="center" font-size="10" font-weight="bold"
+			padding="10px">
 			<xsl:value-of select="./@naziv" />
 		</fo:block>
 		<fo:block>
