@@ -287,4 +287,10 @@
             </xs:simpleContent>
         </xs:complexType>
     </xs:element>
+    <xs:simpleType name="TStatusAmandmana">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="odbijen"/>
+            <xs:enumeration value="prihvacen"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

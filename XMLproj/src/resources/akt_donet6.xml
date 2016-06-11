@@ -9,7 +9,7 @@
  xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="donet">
-    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
         <p:Donet_akt>
             <p:Donet_od_strane> 
                 Gradsko vece Grada Novog Sada
@@ -20,13 +20,8 @@
                 Сада („Службени лист Града Новог Сада“, број 33/15)
             </p:Pravni_osnov_donosenja>
             <p:Meta_podaci>
-                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">oz1</ns1:Oznaka>
-                <ns1:Naziv property="pred:naziv" datatype="xs:string">ПРАВИЛНИК
-                    О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
-                    СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
-                    САДА ЗА ПРОГРАМЕ СПОРТСКИХ
-                    УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
-                    НОВОГ САДА</ns1:Naziv>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">oz2</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">Pravilnik o zdravstvenoj zaštiti građana</ns1:Naziv>
                 <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Pravilnik</ns1:Vrsta>
                 <ns1:Datum property="pred:datum" datatype="xs:date">2015-12-31</ns1:Datum>
                 <ns1:Mesto property="pred:mesto" datatype="xs:string">Novi Sad</ns1:Mesto>

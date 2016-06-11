@@ -56,7 +56,7 @@ public class RDFtoTriples {
 		FileHandle rdfFileHandle =
 				new FileHandle(new File(rdfFilePath))
 				.withMimetype(RDFMimeTypes.RDFXML);
-
+		
 		// Writing the named graph
 		//graphManager.write(sparqlNamedGraph, rdfFileHandle);
 		graphManager.merge(sparqlNamedGraph, rdfFileHandle);
@@ -85,11 +85,11 @@ public class RDFtoTriples {
 
 	public static void main(String[] args) throws Exception {
 		// Referencing XML file with RDF data in attributes
-		String xmlFilePath = "./src/resources/amandman_1.xml";
+		String xmlFilePath = "./src/resources/amandman_prihvacen3.xml";
 
-		String rdfFilePath = "gen/amandman_1.rdf";
+		String rdfFilePath = "gen/amandman_prihvacen3.rdf";
 
-		String sparqlNamedGraph = "sparql/metadata";
+		String sparqlNamedGraph = "/propisi/amandmani/prihvaceni/metadata";
 
 		convert(ConnPropertiesReader.loadProperties(), xmlFilePath, rdfFilePath, sparqlNamedGraph);
 	}

@@ -1,5 +1,7 @@
 package queries;
-
+/**
+ * @author Stanko Kuveljic
+ */
 import java.io.IOException;
 
 import com.marklogic.client.DatabaseClient;
@@ -16,12 +18,11 @@ import util.ConnPropertiesReader.ConnectionProperties;
 
 public class MySparqlQuery {
 	public static final String AMANDMAN = "amandmani";
-	public static final String AKT_U_PROCEDURI = "akti/u_proceduri";
+	public static final String AKT_U_PROCEDURI = "/propisi/akti/u_proceduri";
 	public static final String SVE_AAAAA = "";
 	public static final String AKTI = "akti";
-	public static final String AKT_DONET = "akti/doneti";
+	public static final String AKT_DONET = "/propisi/akti/doneti";
 
-	private static final String METADATA = "sparql/metadata";
 	private static final String PROPERTY = "http://www.parlament.gov.rs/propisi/predicate/";
 
 	private String type;
@@ -31,8 +32,15 @@ public class MySparqlQuery {
 	private String datum;
 	private String vrsta;
 
-	public String execute(ConnectionProperties props) {
-		String query = makeQuery();
+	/**
+	 * Executes query
+	 * @param props - connection properties
+	 * @param metadataCollection - metadata collection
+	 * @param useFilter - true if you want to filter your results
+	 * @return
+	 */
+	public String execute(ConnectionProperties props, String metadataCollection, boolean useFilter) {
+		String query = makeQuery(metadataCollection, useFilter);
 
 		//System.out.println(query);
 		
@@ -42,9 +50,6 @@ public class MySparqlQuery {
 		
 		// Create a SPARQL query manager to query RDF datasets
 		SPARQLQueryManager sparqlQueryManager = client.newSPARQLQueryManager();
-
-		// Initialize DOM results handle
-		DOMHandle domResultsHandle = new DOMHandle();
 		
 		JacksonHandle resultsHandle = new JacksonHandle();
 		resultsHandle.setMimetype(SPARQLMimeTypes.SPARQL_JSON);
@@ -52,17 +57,22 @@ public class MySparqlQuery {
 		SPARQLQueryDefinition queryDef = sparqlQueryManager.newQueryDefinition(query);
 		
 		resultsHandle = sparqlQueryManager.executeSelect(queryDef, resultsHandle);
-		
-		
+
 		client.release();
 		
 		return resultsHandle.get().toString();
 	}
 
-	private String makeQuery() {
+	/**
+	 * Creates query
+	 * @param metadataCollection - metadata collection
+	 * @param useFilter - true if you want to filter your results
+	 * @return query
+	 */
+	private String makeQuery(String metadataCollection, boolean useFilter) {
 		StringBuilder query = new StringBuilder();
 
-		query.append("SELECT * FROM <" + METADATA + ">\n");
+		query.append("SELECT * FROM <" + metadataCollection + ">\n");
 		query.append("WHERE{\n");
 		query.append(selectTemplate("oznaka"));
 		query.append(selectTemplate("naziv"));
@@ -70,25 +80,42 @@ public class MySparqlQuery {
 		query.append(selectTemplate("vrsta"));
 		query.append(selectTemplate("mesto"));
 
-		query.append("FILTER (" + regexTemplate("?akt", type) + " && "
-				+ regexTemplate("?oznaka", oznaka) + " && "
-				+ regexTemplate("?naziv", naziv) + " && "
-				+ regexTemplate("?datum", datum) + " && "
-				+ regexTemplate("?vrsta", vrsta) + " && "
-				+ regexTemplate("?mesto", mesto) + ")\n}");
-
+		if(useFilter){
+			query.append("FILTER (" + regexTemplate("?akt", type) + " && "
+					+ regexTemplate("?oznaka", oznaka) + " && "
+					+ regexTemplate("?naziv", naziv) + " && "
+					+ regexTemplate("?datum", datum) + " && "
+					+ regexTemplate("?vrsta", vrsta) + " && "
+					+ regexTemplate("?mesto", mesto) + ")\n}");
+		}
+		else
+			query.append("\n}");
 		return query.toString();
-
 	}
 
+	/**
+	 * 
+	 * @param what
+	 * @return
+	 */
 	private String selectTemplate(String what) {
 		return "?akt <" + PROPERTY + what + ">?" + what + " .\n";
 	}
 
+	/**
+	 * 
+	 * @param onWhat
+	 * @param value
+	 * @return
+	 */
 	private String regexTemplate(String onWhat, String value) {
 		return "regex(" + onWhat + ",\".*" + value + ".*\",\"i\")";
 	}
 
+	/**
+	 * 
+	 * @param type
+	 */
 	public MySparqlQuery(String type) {
 		super();
 		this.type = type;
@@ -99,6 +126,15 @@ public class MySparqlQuery {
 		this.vrsta = "";
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @param oznaka
+	 * @param naziv
+	 * @param mesto
+	 * @param datum
+	 * @param vrsta
+	 */
 	public MySparqlQuery(String type, String oznaka, String naziv, String mesto,
 			String datum, String vrsta) {
 		super();
@@ -155,10 +191,14 @@ public class MySparqlQuery {
 	}
 
 	public static void main(String[] args) {
+		String metadataCollection = "/propisi/akti/doneti/metadata";
+		boolean useFilter = false;
+
+		
 		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "",
 				"");
 		try {
-			System.out.println(msq.execute(ConnPropertiesReader.loadProperties()));
+			System.out.println(msq.execute(ConnPropertiesReader.loadProperties(), metadataCollection, useFilter));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

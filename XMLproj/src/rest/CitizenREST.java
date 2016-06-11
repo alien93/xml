@@ -137,9 +137,10 @@ public class CitizenREST {
 	public Response getAll(){
 		
 		MySparqlQuery q = new MySparqlQuery(MySparqlQuery.AKT_DONET);
+		String metadataCollection = "/propisi/akti/doneti/metadata";
 		ResponseBuilder response = Response.ok();
 		try {
-			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties())).build();
+			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties(), metadataCollection, false)).build();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

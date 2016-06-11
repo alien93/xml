@@ -9,7 +9,7 @@
  xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="donet">
-    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/doc1">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/doc4">
         <p:Donet_akt>
             <p:Donet_od_strane>
                 Narodna skupština Republike Srbije
@@ -20,8 +20,8 @@
                 Narodnoj skupštini („Službeni glasnik RS“, broj 9/10),
             </p:Pravni_osnov_donosenja>
             <p:Meta_podaci>
-                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">doc1</ns1:Oznaka>
-                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A O PRESTANKU FUNKCIJE ČLANA KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">doc4</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A O IZBORU SUDIJA</ns1:Naziv>
                 <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Odluka</ns1:Vrsta>
                 <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-03</ns1:Datum>
                 <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
