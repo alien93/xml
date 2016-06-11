@@ -4,8 +4,6 @@ package rest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,17 +18,15 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 
 import entities.act.Akt;
+import queries.MySparqlQuery;
 import util.ActXmlToPdf;
 import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
@@ -132,6 +128,23 @@ public class CitizenREST {
 				"attachment; filename="+id+".pdf");
 		
 		return builder.build();
+		
+	}
+	
+	@GET
+	@Path("/test/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAll(){
+		
+		MySparqlQuery q = new MySparqlQuery(MySparqlQuery.AKT_DONET);
+		ResponseBuilder response = Response.ok();
+		try {
+			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties())).build();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return response.status(400).build();
+		}
 		
 	}
 
