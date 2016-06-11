@@ -58,7 +58,8 @@ public class RDFtoTriples {
 				.withMimetype(RDFMimeTypes.RDFXML);
 
 		// Writing the named graph
-		graphManager.write(sparqlNamedGraph, rdfFileHandle);
+		//graphManager.write(sparqlNamedGraph, rdfFileHandle);
+		graphManager.merge(sparqlNamedGraph, rdfFileHandle);
 
 
 		// Read the triples from the named graph
@@ -84,9 +85,9 @@ public class RDFtoTriples {
 
 	public static void main(String[] args) throws Exception {
 		// Referencing XML file with RDF data in attributes
-		String xmlFilePath = "./src/resources/RS26-16-lat_primer_donetog_akta1.xml";
+		String xmlFilePath = "./src/resources/amandman_1.xml";
 
-		String rdfFilePath = "gen/RS26-16-lat_primer_donetog_akta1.rdf";
+		String rdfFilePath = "gen/amandman_1.rdf";
 
 		String sparqlNamedGraph = "sparql/metadata";
 
