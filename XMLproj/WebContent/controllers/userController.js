@@ -5,28 +5,47 @@ angular.module('xmlApp')
 				$rootScope.isRoleCitizen = true;
 				$rootScope.isRoleAlderman = false;
 				$rootScope.isRolePresident = false;
-				$rootScope.user = {username: "", password: "", role: "citizen"};
-								
+				$rootScope.user = {username: "admin", password: "admin", role: "CITIZEN"};
+				
+				$scope.changeRole = function(role){
+					$scope.user.role = role;
+				}
+				$scope.user = $rootScope.user;
+				$scope.errorMessage = "";
+				
 				$scope.login = function(){
 					var username = $scope.user.username;
 					var password = $scope.user.password;
 					var role = $scope.user.role;
 					
-					$rootScope.user.username = username;
-					$rootScope.user.password = password;
-					
-					if (role == "alderman") {	
-						$rootScope.user.role = role;
-						$scope.showAldermanMenu();
-					}
-					else if (role == "president") {
-						$rootScope.user.role = role;
-						$scope.showPresidentMenu();
-					}
-					else {
-						$rootScope.user.role = "citizen";
-						$scope.showCitizenMenu();
-					}	
+					$http({
+						method: "POST", 
+						url : "http://localhost:8080/XMLproj/rest/user/login",
+						data : JSON.stringify($scope.user)
+					}).then(function(value) {
+						if(value.data == "OK"){
+							$rootScope.user.username = username;
+							$rootScope.user.password = password;
+							
+							if (role == "ALDERMAN") {	
+								$rootScope.user.role = role;
+								$scope.showAldermanMenu();
+							}
+							else if (role == "PRESIDENT") {
+								$rootScope.user.role = role;
+								$scope.showPresidentMenu();
+							}
+							else {
+								$rootScope.user.role = "CITIZEN";
+								$scope.showCitizenMenu();
+							}	
+						}else{
+							$scope.errorMessage = value.data;
+							alert(value.data);
+						}
+					}, function(reason) {
+						console.log(JSON.stringify(reason));
+					});
 				};
 				
 				$scope.showCitizenMenu = function() {

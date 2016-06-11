@@ -1,36 +1,36 @@
 package entities;
 
-
-public class President extends Alderman{
-
-	String username;
-	String password;
+public class User {
+	private String username;
+	private String password;
+	private UserRole role;
 	
-	public President(){}
+	public User() {
+	}
 	
-	public President(String username, String password){
+	public User(String username, String password, UserRole role) {
+		super();
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Override
-	public String toString() {
-		return "President [username=" + username + ", password=" + password + "]";
+	public UserRole getRole() {
+		return role;
 	}
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
 }
