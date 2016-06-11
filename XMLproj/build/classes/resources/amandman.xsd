@@ -11,7 +11,7 @@
                 <xs:element ref="p:Sporedni_deo"/>
                 <xs:element ref="p:Glavni_deo"/>
             </xs:sequence>
-            <xs:attribute name="status" type="ns1:TStatusAkta" use="required"/>
+            <xs:attribute name="status" type="ns1:TStatusAmandmana" use="required"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>

@@ -7,19 +7,19 @@
 	xmlns:ns1="http://www.parlament.gov.rs/generic_types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
 	xsi:schemaLocation="http://www.parlament.gov.rs/propisi amandman.xsd"
-	status="prihvacen">
-	<p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/amandmani/doneti/119-05-60-2016-01">
+	status="odbijen">
+	<p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/amandmani/prihvaceni/12-05-60-2016-01">
 		<p:Pravni_osnov_donosenja>Pravni osnov</p:Pravni_osnov_donosenja>
 		<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
 		<p:Postupak_donosenja>Postupak</p:Postupak_donosenja>
 		<p:Cilj_donosenja>Cilj</p:Cilj_donosenja>
 		<p:Meta_podaci>
-			<ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-05-60-2016-01</ns1:Oznaka>
-			<ns1:Naziv property="pred:naziv" datatype="xs:string">Amandman NAZIV</ns1:Naziv>
-			<ns1:Vrsta property="pred:vrsta" datatype="xs:string">odluka</ns1:Vrsta>
-			<ns1:Datum property="pred:datum" datatype="xs:date">2016-03-31</ns1:Datum>
-			<ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
-			<ns1:BrPozitivnihGlasova property="pred:brPozitivnihGlasova" datatype="xs:int">50</ns1:BrPozitivnihGlasova>
+			<ns1:Oznaka property="pred:oznaka" datatype="xs:string">12-05-60-2016-01</ns1:Oznaka>
+			<ns1:Naziv property="pred:naziv" datatype="xs:string">Amandman 2</ns1:Naziv>
+			<ns1:Vrsta property="pred:vrsta" datatype="xs:string">Predlog</ns1:Vrsta>
+			<ns1:Datum property="pred:datum" datatype="xs:date">2016-03-05</ns1:Datum>
+			<ns1:Mesto property="pred:mesto" datatype="xs:string">Novi Sad</ns1:Mesto>
+			<ns1:BrPozitivnihGlasova property="pred:brPozitivnihGlasova" datatype="xs:int">25</ns1:BrPozitivnihGlasova>
 			<ns1:BrUkupnihGlasova property="pred:brUkupnihGlasova" datatype="xs:int">100</ns1:BrUkupnihGlasova>
 		</p:Meta_podaci>
 	</p:Sporedni_deo>

@@ -4,8 +4,16 @@
 /queries/
 /resources/
 /rest/
+<<<<<<< .mine
+/services/
+/session/
+/util/
+/xmldb/
+
+=======
 /services/
 /session/
 /util/
 /xmldb/
 /users/
+>>>>>>> .theirs

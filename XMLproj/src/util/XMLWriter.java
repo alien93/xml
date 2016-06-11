@@ -71,9 +71,10 @@ public class XMLWriter {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Starting...");
 		// Define a URI value for a document.
-		String inputFile = "data/rdfa/RS26-16-lat_primer_donetog_akta1.xml";
-		String docId = "/test.xml";	//document id
-		String collId = "test";			//collection
+		String inputFile = "./src/resources/amandman_prihvacen1.xml";
+		//String inputFile = "data/rdfa/RS26-16-lat_primer_donetog_akta1.xml";
+		String docId = "amandman_prihvacen1.xml";	//document id
+		String collId = "/propisi/amandmani/odbijeni";			//collection
 		writeXML(ConnPropertiesReader.loadProperties(), inputFile, docId, collId, false);
 	}
 }

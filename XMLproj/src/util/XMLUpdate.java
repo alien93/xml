@@ -154,7 +154,7 @@ public class XMLUpdate {
 	//test
 	public static void main(String[] args) throws IOException {
 		// Define a URI value for a document.
-		String docId = "/test/sl-011.xml";
+		String docId = "/triplestore/748157eb1b3dcf62.xml";
 		// Defining namespace mappings
 		EditableNamespaceContext namespaces = new EditableNamespaceContext();
 		
@@ -171,9 +171,10 @@ public class XMLUpdate {
 					"</p:Clan>";
 
 		// Defining XPath context
-		String contextXPath = "/p:Akt/p:Glavni_deo/p:Glava";
+		String contextXPath = "/sem:triples";
 
-		updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.LAST_CHILD);
+		//updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.LAST_CHILD);
+		updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 	}
 }
 

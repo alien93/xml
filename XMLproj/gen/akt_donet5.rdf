@@ -3,12 +3,11 @@
     <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">oz1</pred:oznaka>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
-    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">ПРАВИЛНИК
-                    О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
-                    СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
-                    САДА ЗА ПРОГРАМЕ СПОРТСКИХ
-                    УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
-                    НОВОГ САДА</pred:naziv>
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">
+                	Pravilnik o načinu i postupku dodele sredstava iz 
+                	budžeta Grada Novog Sada za programe sportskih 
+                	udruženja na teritoriji Grada Novog Sada
+                </pred:naziv>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
     <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Pravilnik</pred:vrsta>

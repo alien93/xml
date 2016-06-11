@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
+
+<p:Akt 
+ xmlns="http://www.w3.org/ns/rdfa#"
+ xmlns:p="http://www.parlament.gov.rs/propisi"
+ xmlns:ns1="http://www.parlament.gov.rs/generic_types"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
+ status="donet">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/oz3">
+        <p:Donet_akt>
+            <p:Donet_od_strane> 
+                Gradsko vece Grada Novog Sada
+            </p:Donet_od_strane>
+            <p:Pravni_osnov_donosenja>
+                На основу члана 12. Одлуке о обезбеђивању средстава
+                за програме спортских удружења на територији Града Новог
+                Сада („Службени лист Града Новог Сада“, број 33/15)
+            </p:Pravni_osnov_donosenja>
+            <p:Meta_podaci>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">oz3</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">Pravilnik o pisanju propisa</ns1:Naziv>
+                <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Pravilnik</ns1:Vrsta>
+                <ns1:Datum property="pred:datum" datatype="xs:date">2015-10-31</ns1:Datum>
+                <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
+            </p:Meta_podaci>
+        </p:Donet_akt>
+    </p:Sporedni_deo>
+    <p:Glavni_deo>
+        <ns1:Glava oznaka="g1" naziv="Opsta odredba">
+            <ns1:Sadrzaj>
+             <ns1:Clan oznaka="cl1">
+                 <ns1:Sadrzaj>
+                     Овим правилником ближе се уређују начин и поступак
+                     доделе средстава из буџета Града Новог Сада (у даљем
+                     тексту: буџет Града) за одобрење годишњих и посебних
+                     програма спортских удружења на територији Града Новог
+                     Сада, закључење уговора, извештавање, начин јавног
+                     објављивања података о предложеним годишњим и посеб-
+                     ним програмима за доделу средстава, одобреним програ-
+                     мима и реализацији програма, као и надзор над реали-
+                     зацијом годишњих и посебних програма.
+                 </ns1:Sadrzaj>
+             </ns1:Clan>
+             <ns1:Clan oznaka="cl2" asdf="asdfasfd" testest="asdfafsd">
+                 <ns1:Sadrzaj>
+                     Спортском удружењу могу да се доделе средства из
+                     буџета Града, на основу поднетог предлога годишњег одно-
+                     сно посебног програма, под условом да:
+                     <ns1:Tacka>
+                         - је уписано у регистар код надлежног органа,
+                     </ns1:Tacka>
+                     <ns1:Tacka>
+                         - послује на недобитној основи,
+                     </ns1:Tacka>
+                 </ns1:Sadrzaj>
+             </ns1:Clan>
+            </ns1:Sadrzaj>
+        </ns1:Glava>
+    </p:Glavni_deo>
+</p:Akt>

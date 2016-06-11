@@ -7,7 +7,7 @@
 	xmlns:ns1="http://www.parlament.gov.rs/generic_types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
 	xsi:schemaLocation="http://www.parlament.gov.rs/propisi amandman.xsd"
-	status="donet">
+	status="prihvacen">
 	<p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/amandmani/doneti/119-05-60-2016-01">
 		<p:Pravni_osnov_donosenja>Pravni osnov</p:Pravni_osnov_donosenja>
 		<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
