@@ -30,13 +30,13 @@
 		</div>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
-				<label><input type="radio" ng-model="user.role" name="role" value="alderman"> &nbsp; Odbornik skupstine</label>
+				<label><input type="radio" ng-click="changeRole('ALDERMAN')" name="role" value="alderman"> &nbsp; Odbornik skupstine</label>
 			</div>
 			<div class="col-md-4"> &nbsp; </div>
 		</div>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
-				<label><input type="radio" ng-model="user.role" name="role" value="president"> &nbsp; Predsednik skupstine</label>
+				<label><input type="radio" ng-click="changeRole('PRESIDENT')" name="role" value="president"> &nbsp; Predsednik skupstine</label>
 			</div>
 			<div class="col-md-4"> &nbsp; </div>
 		</div>

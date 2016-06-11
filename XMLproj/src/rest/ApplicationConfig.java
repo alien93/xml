@@ -10,6 +10,6 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/rest")
 public class ApplicationConfig extends Application{
 	 public Set<Class<?>> getClasses() {
-	        return new HashSet<Class<?>>(Arrays.asList(CitizenREST.class));
+	        return new HashSet<Class<?>>(Arrays.asList(CitizenREST.class, UserLoginREST.class));
 	    }
 }
