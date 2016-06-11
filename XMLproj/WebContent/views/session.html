@@ -1,5 +1,44 @@
 <div ng-include="'views/navBarPresident.html'"></div>
 <br><br><br><br>
-<div>
-	#under construction#
+<div data-ng-controller="sessionController">
+	<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<table class='table table-bordered' ng-repeat = "act in acts.nonActive">
+					<tr ng-model="act" class="success"> 
+						<td> {{ act.name }} </td>
+						<td> Usvaja se u nacelu: </td>
+						<td> 
+							<label class="radio-inline"><input type="radio" name="uNacelu">DA</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu">NE</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu">Kasnije</label>
+						</td>
+					</tr> 
+					
+					<tr>
+						<td> Glasanje o amandmanima pojedinacno: </td>
+						<td> &nbsp; </td>
+						<td> Za &nbsp; / &nbsp; Ukupno </td>
+					</tr>
+					
+					<tr ng-repeat="ams in act.amandments">
+						<td> {{ams.name}} </td>
+						<td> &nbsp; </td>
+						<td> 
+							<input type="number" min="0" max="1000"> &nbsp; / &nbsp; 
+							<input type="number" min="0" max="1000">
+						</td>
+					</tr>
+					
+					<tr ng-model="act"> 
+						<td> {{ act.name }} </td>
+						<td> Usvaja se u celini: </td>
+						<td> 
+							<label class="radio-inline"><input type="radio" name="uCelini">DA</label>
+							<label class="radio-inline"><input type="radio" name="uCelini">NE</label>
+						</td>
+					</tr>
+				</table>				
+			</div>
+			<div class="col-md-1"> &nbsp; </div>
+	</div> <br/> 
 </div>
