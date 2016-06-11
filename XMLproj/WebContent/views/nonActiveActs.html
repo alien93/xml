@@ -1,6 +1,6 @@
 <div ng-include="'views/searchNonActiveActs.html'"></div>
 <br><br><br>
-<div ng-controller="activeActsController">
+<div ng-controller="nonActiveActsController">
 	
 	<table class="table table-hover" width="100">
 		<tr>
@@ -8,10 +8,10 @@
 			<th>Datum</th>
 			<th>Vrsta</th>
 		</tr>
-		<tr ng-repeat="act in acts.nonActive">
-			<td>{{act.name}}</td>
-			<td>{{act.date}}</td>
-			<td>{{act.type}}</td>
+		<tr ng-repeat="act in acts">
+			<td>{{act.naziv.value}}</td>
+			<td>{{act.datum.value}}</td>
+			<td>{{act.vrsta.value}}</td>
 		</tr>
 	</table>
 	

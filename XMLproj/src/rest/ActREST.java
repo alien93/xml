@@ -31,4 +31,20 @@ public class ActREST {
 		}
 	}
 	
+	@GET
+	@Path("/nonActive")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNonActiveActs(){
+		MySparqlQuery q = new MySparqlQuery(MySparqlQuery.AKT_DONET);
+		String metadataCollection = "/propisi/akti/u_proceduri/metadata";
+		ResponseBuilder response = Response.ok();
+		try {
+			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties(), metadataCollection, false)).build();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return response.status(400).build();
+		}
+	}
+	
 }
