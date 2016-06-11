@@ -12,6 +12,7 @@ angular.module('xmlApp')
 				}
 				$scope.user = $rootScope.user;
 				$scope.errorMessage = "";
+				$scope.error = false;
 				
 				$scope.login = function(){
 					var username = $scope.user.username;
@@ -42,7 +43,8 @@ angular.module('xmlApp')
 							}
 						}else{
 							$scope.errorMessage = value.data;
-							alert(value.data);
+							$scope.errorMessage = value.data;
+							$scope.error = true;
 						}
 					}, function(reason) {
 						console.log(JSON.stringify(reason));
