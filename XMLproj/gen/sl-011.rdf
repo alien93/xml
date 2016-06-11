@@ -1,12 +1,22 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <!--Could not produce the triple for: http://www.parlament.gov.rs/propisi/akti/doneti/oz1 - pred:oznaka - oz1-->
-  <!--Could not produce the triple for: http://www.parlament.gov.rs/propisi/akti/doneti/oz1 - pred:naziv - ПРАВИЛНИК
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">oz1</pred:oznaka>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">ПРАВИЛНИК
                     О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
                     СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
                     САДА ЗА ПРОГРАМЕ СПОРТСКИХ
                     УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
-                    НОВОГ САДА-->
-  <!--Could not produce the triple for: http://www.parlament.gov.rs/propisi/akti/doneti/oz1 - pred:vrsta - Pravilnik-->
-  <!--Could not produce the triple for: http://www.parlament.gov.rs/propisi/akti/doneti/oz1 - pred:datum - 2015-12-31-->
-  <!--Could not produce the triple for: http://www.parlament.gov.rs/propisi/akti/doneti/oz1 - pred:mesto - Novi Sad-->
+                    НОВОГ САДА</pred:naziv>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Pravilnik</pred:vrsta>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="date">2015-12-31</pred:datum>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz1">
+    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Novi Sad</pred:mesto>
+  </rdf:Description>
 </rdf:RDF>

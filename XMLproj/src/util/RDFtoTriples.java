@@ -84,9 +84,9 @@ public class RDFtoTriples {
 
 	public static void main(String[] args) throws Exception {
 		// Referencing XML file with RDF data in attributes
-		String xmlFilePath = "./src/resources/726-16_primer_akta_u_proceduri1.xml";
+		String xmlFilePath = "./src/resources/RS26-16-lat_primer_donetog_akta1.xml";
 
-		String rdfFilePath = "gen/726-16_primer_akta_u_proceduri1.rdf";
+		String rdfFilePath = "gen/RS26-16-lat_primer_donetog_akta1.rdf";
 
 		String sparqlNamedGraph = "sparql/metadata";
 

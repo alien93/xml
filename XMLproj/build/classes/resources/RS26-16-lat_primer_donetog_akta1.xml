@@ -21,9 +21,7 @@
             </p:Pravni_osnov_donosenja>
             <p:Meta_podaci>
                 <ns1:Oznaka property="pred:oznaka" datatype="xs:string">doc1</ns1:Oznaka>
-                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A
-                    O PRESTANKU FUNKCIJE ČLANA
-                    KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A O PRESTANKU FUNKCIJE ČLANA KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
                 <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Odluka</ns1:Vrsta>
                 <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-03</ns1:Datum>
                 <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
@@ -31,7 +29,7 @@
         </p:Donet_akt>
     </p:Sporedni_deo>
     <p:Glavni_deo>
-        <ns1:Clan oznaka="cl1" property="pred:clan" datatype="xs:string" content="cl1">
+        <ns1:Clan oznaka="cl1">
             <ns1:Sadrzaj>
                 Prestaje funkcija člana Republičke komisije za zaštitu prava u
                 postupcima javnih nabavki Ristivoju Đokiću, zbog podnošenja ostavke.
