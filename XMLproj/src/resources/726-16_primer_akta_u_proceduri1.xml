@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
+
+<p:Akt 
+ xmlns="http://www.w3.org/ns/rdfa#"
+ xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="u_proceduri">
-    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/119-05-60-2016-01">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-60-2016-01">
         <p:Akt_u_proceduri>
             <p:Predlagac>
                 PREDSEDNIK VISOKOG SAVETA SUDSTVA Dragomir Milojevic

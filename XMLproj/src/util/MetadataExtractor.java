@@ -72,7 +72,7 @@ public class MetadataExtractor {
 
 		System.out.println("[INFO] " + MetadataExtractor.class.getSimpleName());
 		
-		String filePath = "gen/grddl_metadata.rdf";
+		String filePath = "gen/RS26-16-lat_primer_donetog_akta1.rdf";
 		
 		InputStream in = new FileInputStream(new File("./src/resources/RS26-16-lat_primer_donetog_akta1.xml")); 
 

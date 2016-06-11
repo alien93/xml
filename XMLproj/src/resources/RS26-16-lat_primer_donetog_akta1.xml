@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
+
 <p:Akt 
  xmlns="http://www.w3.org/ns/rdfa#"
  xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
+ xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="donet">
-    <p:Sporedni_deo>
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/doc1">
         <p:Donet_akt>
             <p:Donet_od_strane>
                 Narodna skupština Republike Srbije

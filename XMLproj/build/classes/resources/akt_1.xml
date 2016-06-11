@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
 
-<p:Akt xmlns:p="http://www.parlament.gov.rs/propisi"
+<p:Akt 
+ xmlns="http://www.w3.org/ns/rdfa#"
+ xmlns:p="http://www.parlament.gov.rs/propisi"
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="u_proceduri">
-    <p:Sporedni_deo>
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-61-2016-01">
         <p:Donet_akt>
         	<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
         	<p:Pravni_osnov_donosenja>tralalla</p:Pravni_osnov_donosenja>
         	<p:Po_postupku>dsfsdsdgsd</p:Po_postupku> 
         	<p:Po_cilju>dfdsgdsg</p:Po_cilju>
         	<p:Meta_podaci>
-        		<ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-05-60/2016-01</ns1:Oznaka>
+        		<ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-05-61-2016-01</ns1:Oznaka>
         		<ns1:Naziv property="pred:naziv" datatype="xs:string">Neki naziv</ns1:Naziv>
         		<ns1:Vrsta property="pred:vrsta" datatype="xs:string">Odluka</ns1:Vrsta>
         		<ns1:Datum property="pred:datum" datatype="xs:date">2016-03-31</ns1:Datum>
