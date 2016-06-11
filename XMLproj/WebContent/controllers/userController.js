@@ -18,6 +18,11 @@ angular.module('xmlApp')
 					var password = $scope.user.password;
 					var role = $scope.user.role;
 					
+					if(role == "CITIZEN"){
+						$scope.showCitizenMenu();
+						return;
+					}
+					
 					$http({
 						method: "POST", 
 						url : "http://localhost:8080/XMLproj/rest/user/login",
@@ -35,10 +40,6 @@ angular.module('xmlApp')
 								$rootScope.user.role = role;
 								$scope.showPresidentMenu();
 							}
-							else {
-								$rootScope.user.role = "CITIZEN";
-								$scope.showCitizenMenu();
-							}	
 						}else{
 							$scope.errorMessage = value.data;
 							alert(value.data);

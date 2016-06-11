@@ -1,4 +1,0 @@
-a=b
-c=d
-admin=admin
-d=d

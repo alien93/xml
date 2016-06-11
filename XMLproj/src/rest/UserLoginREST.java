@@ -18,7 +18,6 @@ public class UserLoginREST {
 	
 	private static final String aPath = "/users/alderman.txt";
 	private static final String pPath = "/users/president.txt";
-	private static final String cPath = "/users/citizen.txt";
 	
 	@Path("/login")
 	@POST
@@ -37,7 +36,7 @@ public class UserLoginREST {
 		String path = null;
 		if(user.getRole().equals(UserRole.ALDERMAN)) path = aPath;
 		else if(user.getRole().equals(UserRole.PRESIDENT)) path = pPath;
-		else path = cPath;
+		else return "OK";
 		
 		File f = new File(getClass().getResource(path).getPath());
 		
