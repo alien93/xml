@@ -36,7 +36,6 @@ public class UserLoginREST {
 		String path = null;
 		if(user.getRole().equals(UserRole.ALDERMAN)) path = aPath;
 		else if(user.getRole().equals(UserRole.PRESIDENT)) path = pPath;
-		else return "OK";
 		
 		File f = new File(getClass().getResource(path).getPath());
 		
