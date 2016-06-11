@@ -73,6 +73,7 @@ public class MySparqlQuery {
 	private String makeQuery(String metadataCollection, boolean useFilter) {
 		StringBuilder query = new StringBuilder();
 
+		query.append("PREFIX xs:     <http://www.w3.org/2001/XMLSchema#>\n");
 		query.append("SELECT * FROM <" + metadataCollection + ">\n");
 		query.append("WHERE{\n");
 		query.append(selectTemplate("oznaka"));
@@ -85,14 +86,13 @@ public class MySparqlQuery {
 			query.append("FILTER (" + regexTemplate("?akt", type) + " && "
 					+ regexTemplate("?oznaka", oznaka) + " && "
 					+ regexTemplate("?naziv", naziv) + " && "
-					+ "?datum >= " + datumMin
-					//FILTER ( ?date >= "1982-01-31"^^xs:date && ?date < "1990-01-31"^^xs:date)
-					//+ regexTemplate("?datum", datum) + " && "
+					+ "?datum >= \"" + datumMin + "\"^^xs:date && ?datum < \"" + datumMax + "\"^^xs:date" + " &&"
 					+ regexTemplate("?vrsta", vrsta) + " && "
 					+ regexTemplate("?mesto", mesto) + ")\n}");
 		}
 		else
 			query.append("\n}");
+		System.out.println(query.toString());
 		return query.toString();
 	}
 
@@ -205,10 +205,10 @@ public class MySparqlQuery {
 
 	public static void main(String[] args) {
 		String metadataCollection = "/propisi/akti/doneti/metadata";
-		boolean useFilter = false;
+		boolean useFilter = true;
 
 		
-		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "", "", "");
+		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "1", "Naziv", "Beograd", "1990-05-25", "1990-06-25", "Odluka");
 		try {
 			System.out.println(msq.execute(ConnPropertiesReader.loadProperties(), metadataCollection, useFilter));
 		} catch (IOException e) {
