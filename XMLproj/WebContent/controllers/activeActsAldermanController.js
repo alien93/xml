@@ -1,6 +1,6 @@
 angular.module('xmlApp')
 
-	.controller('aldermanController', ['$scope',
+	.controller('activeActsAldermanController', ['$scope',
 	         function($scope){
 					
 		

@@ -17,18 +17,36 @@
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
       <script type="text/javascript" src="routes/route.js"></script>
-      <script type="text/javascript" src="controllers/citizenController.js"></script>
+      <script type="text/javascript" src="controllers/userController.js"></script>
+      <script type="text/javascript" src="controllers/activeActsController.js"></script>
       <script type="text/javascript" src="controllers/navBarCitizenController.js"></script>
       <script type="text/javascript" src="controllers/actsController.js"></script>
       <script type="text/javascript" src="controllers/amandmentsController.js"></script>
       <script type="text/javascript" src="controllers/navBarAldermanController.js"></script>
-      <script type="text/javascript" src="controllers/aldermanController.js"></script>
+      <script type="text/javascript" src="controllers/activeActsAldermanController.js"></script>
       <script type="text/javascript" src="controllers/navBarPresidentController.js"></script>
       <script type="text/javascript" src="controllers/sessionController.js"></script>
+      <script type="text/javascript" src="controllers/searchActiveActsController.js"></script>
+      <script type="text/javascript" src="controllers/searchNonActiveActsController.js"></script>
       <!--link rel="stylesheet" href="stylesheets/loginStyle.css"-->
       <title>Skupstina grada Novog Sada</title>
     </head>
-    <body ng-app="xmlApp">
-      <div ng-view></div>
+    <body ng-app="xmlApp"> 
+        <div ng-controller="userController">
+		<div ng-if="isRoleCitizen">
+  			<div ng-include="'views/navBarCitizen.html'"></div>
+			<br><br><br><br><br><br>
+		</div>
+		<div ng-if="isRoleAlderman">
+			<div ng-include="'views/navBarAlderman.html'"></div>
+			<br><br><br><br><br><br>
+		</div>
+		<div ng-if="isRolePresident">
+   			<div ng-include="'views/navBarPresident.html'"></div>
+			<br><br><br><br><br><br>
+		</div> 
+	</div> 
+	<div ng-view>     
+    </div>
   </body>
 </html>

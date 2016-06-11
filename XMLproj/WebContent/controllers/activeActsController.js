@@ -1,6 +1,6 @@
 angular.module('xmlApp')
 
-	.controller('citizenController', ['$scope',
+	.controller('activeActsController', ['$scope',
 	         function($scope){
 					
 		

@@ -2,11 +2,11 @@ var xmlApp = angular.module('xmlApp', ['ngCookies', 'ngRoute','ngResource', 'ui.
 
 xmlApp.config(function($routeProvider){
 				
-				$routeProvider
+				$routeProvider	
 						.when(
 							"/gradjanin",
 							{
-									templateUrl : "views/citizen.html"
+									templateUrl : "views/activeActs.html"
 							}
 						)
 						.when(
@@ -18,7 +18,7 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/odbornik",
 							{
-									templateUrl : "views/alderman.html"
+									templateUrl : "views/activeActsAlderman.html"
 							}
 						)
 						.when(
@@ -42,25 +42,25 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/predsednik",
 							{
-									templateUrl: "views/president.html"
+									templateUrl: "views/activeActsAlderman.html"
 							}
 						)
 						.when(
 							"/predsednik/aktaUProceduri",
 							{
-									templateUrl: "views/nonActiveActsPresident.html"
+									templateUrl: "views/nonActiveActsAlderman.html"
 							}
 						)
 						.when(
 							"/predsednik/predlogAkta",
 							{
-									templateUrl: "views/actsPresident.html"
+									templateUrl: "views/acts.html"
 							}
 						)
 						.when(
 							"/predsednik/predlogAmandmana",
 							{
-									templateUrl: "views/amandmentsPresident.html"
+									templateUrl: "views/amandments.html"
 							}
 						)
 						.when(
