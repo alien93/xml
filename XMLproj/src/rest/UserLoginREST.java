@@ -40,6 +40,7 @@ public class UserLoginREST {
 		else path = cPath;
 		
 		File f = new File(getClass().getResource(path).getPath());
+		
 		try {
 			Scanner scanner = new Scanner(f);
 			while(scanner.hasNext()){
