@@ -3,14 +3,8 @@
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
- naziv="ПРАВИЛНИК
- О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
- СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
- САДА ЗА ПРОГРАМЕ СПОРТСКИХ
- УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
- НОВОГ САДА"
  status="donet">
-    <p:Sporedni_deo datum="2015-12-31" mesto="Novi Sad" vrsta="Pravilnik" oznaka="/oz1">
+    <p:Sporedni_deo>
         <p:Donet_akt>
             <p:Donet_od_strane> 
                 Gradsko vece Grada Novog Sada
@@ -21,16 +15,16 @@
                 Сада („Службени лист Града Новог Сада“, број 33/15)
             </p:Pravni_osnov_donosenja>
             <p:Meta_podaci>
-                <ns1:Oznaka>/oz1</ns1:Oznaka>
-                <ns1:Naziv>ПРАВИЛНИК
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">/oz1</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">ПРАВИЛНИК
                     О НАЧИНУ И ПОСТУПКУ ДОДЕЛЕ
                     СРЕДСТАВА ИЗ БУЏЕТА ГРАДА НОВОГ
                     САДА ЗА ПРОГРАМЕ СПОРТСКИХ
                     УДРУЖЕЊА НА ТЕРИТОРИЈИ ГРАДА
                     НОВОГ САДА</ns1:Naziv>
-                <ns1:Vrsta>Pravilnik</ns1:Vrsta>
-                <ns1:Datum>2015-12-31</ns1:Datum>
-                <ns1:Mesto>Novi Sad</ns1:Mesto>
+                <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Pravilnik</ns1:Vrsta>
+                <ns1:Datum property="pred:datum" datatype="xs:date">2015-12-31</ns1:Datum>
+                <ns1:Mesto property="pred:mesto" datatype="xs:string">Novi Sad</ns1:Mesto>
             </p:Meta_podaci>
         </p:Donet_akt>
     </p:Sporedni_deo>

@@ -3,8 +3,8 @@
  xmlns:ns1="http://www.parlament.gov.rs/generic_types"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
- status="u_proceduri" naziv="Predlog o izboru sudija" >
-    <p:Sporedni_deo datum="2016-03-31" mesto="Beograd" oznaka="119-05-60/2016-01" vrsta="Predlog">
+ status="u_proceduri">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/119-05-60-2016-01">
         <p:Akt_u_proceduri>
             <p:Predlagac>
                 PREDSEDNIK VISOKOG SAVETA SUDSTVA Dragomir Milojevic
@@ -13,13 +13,13 @@
                 VISOKI SAVET SUDSTVA Republika Srbija
             </p:Upucuje_se>
             <p:Meta_podaci>
-                <ns1:Oznaka>119-05-60/2016-01</ns1:Oznaka>
-                <ns1:Naziv>Predlog o izboru sudija</ns1:Naziv>
-                <ns1:Vrsta>Predlog</ns1:Vrsta>
-                <ns1:Datum>2016-03-31</ns1:Datum>
-                <ns1:Mesto>Beograd</ns1:Mesto>
-                <ns1:BrPozitivnihGlasova></ns1:BrPozitivnihGlasova>
-                <ns1:BrUkupnihGlasova></ns1:BrUkupnihGlasova>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-05-60-2016-01</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">Predlog o izboru sudija</ns1:Naziv>
+                <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Predlog</ns1:Vrsta>
+                <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-31</ns1:Datum>
+                <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
+                <ns1:BrPozitivnihGlasova property="pred:brPozitivnihGlasova" datatype="xs:int"></ns1:BrPozitivnihGlasova>
+                <ns1:BrUkupnihGlasova property="pred:brUkupnihGlasova" datatype="xs:int"></ns1:BrUkupnihGlasova>
             </p:Meta_podaci>
         </p:Akt_u_proceduri>
     </p:Sporedni_deo>

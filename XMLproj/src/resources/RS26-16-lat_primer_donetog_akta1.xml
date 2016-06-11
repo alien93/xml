@@ -6,10 +6,8 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:pred="http://www.ftn.uns.ac.rs/rdf/examples/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
- status="donet" naziv="O D L U K A
- O PRESTANKU FUNKCIJE ČLANA
- KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI">
-    <p:Sporedni_deo vrsta="Odluka" datum="2016-03-03" mesto="Beograd" oznaka="doc1">
+ status="donet">
+    <p:Sporedni_deo>
         <p:Donet_akt>
             <p:Donet_od_strane>
                 Narodna skupština Republike Srbije
@@ -20,13 +18,13 @@
                 Narodnoj skupštini („Službeni glasnik RS“, broj 9/10),
             </p:Pravni_osnov_donosenja>
             <p:Meta_podaci>
-                <ns1:Oznaka>doc1</ns1:Oznaka>
-                <ns1:Naziv>O D L U K A
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">doc1</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A
                     O PRESTANKU FUNKCIJE ČLANA
                     KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
-                <ns1:Vrsta>Odluka</ns1:Vrsta>
-                <ns1:Datum>2016-03-03</ns1:Datum>
-                <ns1:Mesto>Beograd</ns1:Mesto>
+                <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Odluka</ns1:Vrsta>
+                <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-03</ns1:Datum>
+                <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
             </p:Meta_podaci>
         </p:Donet_akt>
     </p:Sporedni_deo>
