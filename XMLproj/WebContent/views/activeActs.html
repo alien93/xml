@@ -8,10 +8,10 @@
 			<th>Datum</th>
 			<th>Vrsta</th>
 		</tr>
-		<tr ng-repeat="act in acts.active" ng-click="getSelected(act.name)">
-			<td>{{act.name}}</td>
-			<td>{{act.date}}</td>
-			<td>{{act.type}}</td>
+		<tr ng-repeat="act in acts" ng-click="getSelected(act.name)">
+			<td width="60%">{{act.naziv.value}}</td>
+			<td>{{act.datum.value}}</td>
+			<td>{{act.vrsta.value}}</td>
 		</tr>
 	</table>
 	

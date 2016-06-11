@@ -1,7 +1,7 @@
 angular.module('xmlApp')
 
-	.controller('activeActsController', ['$scope',
-	         function($scope){
+	.controller('activeActsController', ['$scope', '$http',
+	         function($scope, $http){
 					
 		
 					//-------------------------test data----------------------
@@ -22,7 +22,16 @@ angular.module('xmlApp')
 					    		  };
 
 					//-------------------------/test data----------------------
-
+					
+					$http({
+						method: "GET", 
+						url : "http://localhost:8080/XMLproj/rest/act/active",
+					}).then(function(value) {
+						console.log(value.data.results.bindings);
+						$scope.acts = value.data.results.bindings;
+					});
+					
+					
 					//row click
 					$scope.getSelected = function(docName){
 						console.log(docName);

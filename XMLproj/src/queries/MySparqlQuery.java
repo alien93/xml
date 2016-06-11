@@ -29,7 +29,8 @@ public class MySparqlQuery {
 	private String oznaka;
 	private String naziv;
 	private String mesto;
-	private String datum;
+	private String datumMin;
+	private String datumMax;
 	private String vrsta;
 
 	/**
@@ -84,7 +85,9 @@ public class MySparqlQuery {
 			query.append("FILTER (" + regexTemplate("?akt", type) + " && "
 					+ regexTemplate("?oznaka", oznaka) + " && "
 					+ regexTemplate("?naziv", naziv) + " && "
-					+ regexTemplate("?datum", datum) + " && "
+					+ "?datum >= " + datumMin
+					//FILTER ( ?date >= "1982-01-31"^^xs:date && ?date < "1990-01-31"^^xs:date)
+					//+ regexTemplate("?datum", datum) + " && "
 					+ regexTemplate("?vrsta", vrsta) + " && "
 					+ regexTemplate("?mesto", mesto) + ")\n}");
 		}
@@ -122,7 +125,8 @@ public class MySparqlQuery {
 		this.oznaka = "";
 		this.naziv = "";
 		this.mesto = "";
-		this.datum = "";
+		this.datumMin = "";
+		this.datumMax = "";
 		this.vrsta = "";
 	}
 
@@ -136,13 +140,14 @@ public class MySparqlQuery {
 	 * @param vrsta
 	 */
 	public MySparqlQuery(String type, String oznaka, String naziv, String mesto,
-			String datum, String vrsta) {
+			String datumMin, String datumMax, String vrsta) {
 		super();
 		this.type = type;
 		this.oznaka = oznaka;
 		this.naziv = naziv;
 		this.mesto = mesto;
-		this.datum = datum;
+		this.datumMin = datumMin;
+		this.datumMax = datumMax;
 		this.vrsta = vrsta;
 	}
 
@@ -170,12 +175,20 @@ public class MySparqlQuery {
 		this.mesto = mesto;
 	}
 
-	public String getDatum() {
-		return datum;
+	public String getDatumMin() {
+		return datumMin;
 	}
 
-	public void setDatum(String datum) {
-		this.datum = datum;
+	public void setDatumMin(String datumMin) {
+		this.datumMin = datumMin;
+	}
+	
+	public String getDatumMax() {
+		return datumMax;
+	}
+
+	public void setDatumMax(String datumMax) {
+		this.datumMax = datumMax;
 	}
 
 	public String getVrsta() {
@@ -195,8 +208,7 @@ public class MySparqlQuery {
 		boolean useFilter = false;
 
 		
-		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "",
-				"");
+		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "", "", "");
 		try {
 			System.out.println(msq.execute(ConnPropertiesReader.loadProperties(), metadataCollection, useFilter));
 		} catch (IOException e) {
