@@ -1,17 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
-    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">oz2</pred:oznaka>
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oz2</pred:oznaka>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
-    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Pravilnik o zdravstvenoj zaštiti građana</pred:naziv>
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pravilnik o zdravstvenoj zaštiti građana</pred:naziv>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
-    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Pravilnik</pred:vrsta>
+    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pravilnik</pred:vrsta>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
-    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="date">2015-12-31</pred:datum>
+    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-12-31</pred:datum>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz2">
-    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Novi Sad</pred:mesto>
+    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Novi Sad</pred:mesto>
   </rdf:Description>
 </rdf:RDF>

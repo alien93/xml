@@ -86,7 +86,7 @@ public class MySparqlQuery {
 			query.append("FILTER (" + regexTemplate("?akt", type) + " && "
 					+ regexTemplate("?oznaka", oznaka) + " && "
 					+ regexTemplate("?naziv", naziv) + " && "
-					+ "?datum >= \"" + datumMin + "\"^^xs:date && ?datum < \"" + datumMax + "\"^^xs:date" + " &&"
+					+ "?datum >= \"" + datumMin + "\"^^xs:date && ?datum <= \"" + datumMax + "\"^^xs:date" + " &&"
 					+ regexTemplate("?vrsta", vrsta) + " && "
 					+ regexTemplate("?mesto", mesto) + ")\n}");
 		}
@@ -208,7 +208,7 @@ public class MySparqlQuery {
 		boolean useFilter = true;
 
 		
-		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "1", "Naziv", "Beograd", "1990-05-25", "1990-06-25", "Odluka");
+		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "2016-03-03", "2016-03-03", "");
 		try {
 			System.out.println(msq.execute(ConnPropertiesReader.loadProperties(), metadataCollection, useFilter));
 		} catch (IOException e) {

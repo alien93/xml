@@ -1,17 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/doc2">
-    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">doc2</pred:oznaka>
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">doc2</pred:oznaka>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/doc2">
-    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">O D L U K A  O PRESTANKU FUNKCIJE ČLANA KOMISIJE ZA ZAŠTITU PRAVA GRADJANA</pred:naziv>
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O D L U K A  O PRESTANKU FUNKCIJE ČLANA KOMISIJE ZA ZAŠTITU PRAVA GRADJANA</pred:naziv>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/doc2">
-    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Odluka</pred:vrsta>
+    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Odluka</pred:vrsta>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/doc2">
-    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="date">2016-04-03</pred:datum>
+    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2016-04-03</pred:datum>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/doc2">
-    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Beograd</pred:mesto>
+    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beograd</pred:mesto>
   </rdf:Description>
 </rdf:RDF>

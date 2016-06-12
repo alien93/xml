@@ -1,19 +1,19 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz4">
-    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">oz4</pred:oznaka>
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oz4</pred:oznaka>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz4">
-    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
                 		Pravilnik o ...
                 </pred:naziv>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz4">
-    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Pravilnik</pred:vrsta>
+    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pravilnik</pred:vrsta>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz4">
-    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="date">2015-12-25</pred:datum>
+    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-12-25</pred:datum>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/doneti/oz4">
-    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="string">Beograd</pred:mesto>
+    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beograd</pred:mesto>
   </rdf:Description>
 </rdf:RDF>
