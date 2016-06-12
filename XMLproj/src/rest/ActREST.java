@@ -34,6 +34,7 @@ public class ActREST {
 		MySparqlQuery q = new MySparqlQuery(MySparqlQuery.AKT_DONET);
 		String metadataCollection = "/propisi/akti/doneti/metadata";
 		ResponseBuilder response = Response.ok();
+		System.out.println(response);
 		try {
 			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties(), metadataCollection, false)).build();
 		} catch (IOException e) {
