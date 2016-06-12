@@ -61,7 +61,34 @@ public class XQueryInvoker {
 
 		client.release();
 	}
-
+	
+	/**
+	 * 
+	 * @param props 
+	 * @param query - kao String
+	 * @return - XML dokument kao String
+	 */
+	public static String invoke(ConnectionProperties props, String query){
+		if (props.database.equals("")) {
+			client = DatabaseClientFactory.newClient(props.host, props.port, props.user, props.pass, props.authType);
+		} else {
+			client = DatabaseClientFactory.newClient(props.host, props.port, props.database, props.user, props.pass, props.authType);
+		}
+		ServerEvaluationCall invoker = client.newServerEval();
+		invoker.xquery(query);
+		EvalResultIterator response = invoker.eval();
+		String retVal = "";
+		if (response.hasNext()) {
+			for (EvalResult result : response) {
+				retVal += "\n" + result.getString();
+			}
+		} else { 		
+			System.out.println("your query returned an empty sequence.");
+		}
+		client.release();
+		return retVal;
+	}
+	
 	/**
 	 * Reading file contents into a string.
 	 */

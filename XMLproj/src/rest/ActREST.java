@@ -1,16 +1,28 @@
 package rest;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
+
 import queries.MySparqlQuery;
+import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
+import util.TransformersAutobot;
+import util.XQueryInvoker;
 
 @Path("/act")
 public class ActREST {
@@ -47,4 +59,34 @@ public class ActREST {
 		}
 	}
 	
+	@GET
+	@Path("/activeId/{id}")
+	@Produces("application/pdf")
+	public Response getActiveActById(@PathParam("id") String id){
+		String query = "declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
+					   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
+					   "for $doc in fn:collection(\"/propisi/akti/doneti\")\n" +
+					   "where $doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
+					   "\nreturn ($doc)//p:Akt;";
+		return helpQuery(query, id);
+	}
+	
+	private Response helpQuery(String query, String id){
+		try {
+			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+			path = path.substring(1, path.length()); 
+			new ActXmlToPdf(path+"fop.xconf").transform(is, os);
+			ResponseBuilder builder = Response.ok(os.toByteArray());
+			builder.header("Content-Disposition",
+					"attachment; filename="+id+".pdf");
+			
+			return builder.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(400).build();
+		}
+	}
 }
