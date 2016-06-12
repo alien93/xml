@@ -14,13 +14,13 @@ angular.module('xmlApp')
 					$scope.addAct = function(){
 						$http({
 							method : "POST",
-							url : "http://localhost:8080/rest/addAct",
+							url : "http://localhost:8080/XMLproj/rest/act/addAct",
 							data : $scope.newAct
 						}).then(function(resp){
-							alert(JSON.stringify(resp));
+							//alert(JSON.stringify(resp));
 						}, 
 						function(err){
-							alert(JSON.stringify(err));
+							//alert(JSON.stringify(err));
 						});
 					};
 				}

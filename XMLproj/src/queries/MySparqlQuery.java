@@ -9,7 +9,6 @@ import java.util.Date;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
-import com.marklogic.client.io.DOMHandle;
 import com.marklogic.client.io.JacksonHandle;
 import com.marklogic.client.semantics.SPARQLMimeTypes;
 import com.marklogic.client.semantics.SPARQLQueryDefinition;
