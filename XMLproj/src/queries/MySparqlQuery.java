@@ -3,6 +3,9 @@ package queries;
  * @author Stanko Kuveljic
  */
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
@@ -125,8 +128,10 @@ public class MySparqlQuery {
 		this.oznaka = "";
 		this.naziv = "";
 		this.mesto = "";
-		this.datumMin = "";
-		this.datumMax = "";
+		this.datumMin = "1970-01-01";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		this.datumMax = datumMax.equals("")?dateFormat.format(date):datumMax;
 		this.vrsta = "";
 	}
 
@@ -146,8 +151,10 @@ public class MySparqlQuery {
 		this.oznaka = oznaka;
 		this.naziv = naziv;
 		this.mesto = mesto;
-		this.datumMin = datumMin;
-		this.datumMax = datumMax;
+		this.datumMin = datumMin.equals("")?"1970-01-01":datumMin;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		this.datumMax = datumMax.equals("")?dateFormat.format(date):datumMax;
 		this.vrsta = vrsta;
 	}
 
@@ -180,7 +187,7 @@ public class MySparqlQuery {
 	}
 
 	public void setDatumMin(String datumMin) {
-		this.datumMin = datumMin;
+		this.datumMin = datumMin.equals("")?"1970-01-01":datumMin;
 	}
 	
 	public String getDatumMax() {
@@ -188,7 +195,9 @@ public class MySparqlQuery {
 	}
 
 	public void setDatumMax(String datumMax) {
-		this.datumMax = datumMax;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		this.datumMax = datumMax.equals("")?dateFormat.format(date):datumMax;
 	}
 
 	public String getVrsta() {
@@ -208,7 +217,7 @@ public class MySparqlQuery {
 		boolean useFilter = true;
 
 		
-		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "2016-03-03", "2016-03-03", "");
+		MySparqlQuery msq = new MySparqlQuery(SVE_AAAAA, "", "", "", "", "", "");
 		try {
 			System.out.println(msq.execute(ConnPropertiesReader.loadProperties(), metadataCollection, useFilter));
 		} catch (IOException e) {
