@@ -90,11 +90,11 @@ public class MySparqlQuery {
 		String brFilter = "";
 		if(brPozitivnihGlasova != -1){
 			query.append(selectTemplate("brPozitivnihGlasova"));
-			brFilter += " ?brPozitivnihGlasova=\"" + brPozitivnihGlasova + "\" " + operator;
+			brFilter += " ?brPozitivnihGlasova=" + brPozitivnihGlasova + operator; 
 		}
 		if(brUkupnihGlasova != -1){
 			query.append(selectTemplate("brUkupnihGlasova"));
-			brFilter += " ?brUkupnihGlasova=\"" + brUkupnihGlasova + "\" " + operator;
+			brFilter += " ?brUkupnihGlasova=" + brUkupnihGlasova + operator;
 		}
 		 
 		
