@@ -4,9 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,13 +15,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.xml.transform.TransformerException;
 
-import com.fasterxml.jackson.databind.deser.impl.ExternalTypeHandler.Builder;
+import org.xml.sax.SAXException;
 
+import entities.act.Akt;
 import queries.MySparqlQuery;
 import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
-import util.TransformersAutobot;
+import util.RDFtoTriples;
+import util.XMLValidator;
+import util.XMLWriter;
 import util.XQueryInvoker;
 
 @Path("/act")
@@ -34,7 +38,6 @@ public class ActREST {
 		MySparqlQuery q = new MySparqlQuery(MySparqlQuery.AKT_DONET);
 		String metadataCollection = "/propisi/akti/doneti/metadata";
 		ResponseBuilder response = Response.ok();
-		System.out.println(response);
 		try {
 			return response.status(200).entity(q.execute(ConnPropertiesReader.loadProperties(), metadataCollection, false)).build();
 		} catch (IOException e) {
@@ -82,6 +85,43 @@ public class ActREST {
 				   "where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
 				   "\nreturn ($doc)//p:Akt;";
 		return helpQuery(query, id);
+	}
+	
+	@POST
+	@Path("/addAct")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response addAct(Akt akt){
+		
+		//create temp file
+		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.substring(1, path.length());
+		path += "temp.xml";
+		
+		//check validity
+		Response r  = XMLValidator.getInstance().validateAct(akt, path);
+		
+		//write if valid		
+		if(r.getStatus() == 200){
+			try {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), path, "", "/propisi/akti/u_proceduri", true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//create metadata
+		String sparqlNamedGraph = "/propisi/akti_u_proceduri/metadata";
+		System.out.println(path);
+		String rdfFilePath = path.substring(0, path.length()-3);
+		System.out.println(rdfFilePath);
+		rdfFilePath += "rdf";
+		System.out.println(rdfFilePath);
+		/*try {
+			RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), path, rdfFilePath, sparqlNamedGraph);
+		} catch (IOException | SAXException | TransformerException e) {
+			e.printStackTrace();
+		}*/
+		return r;
 	}
 	
 	private Response helpQuery(String query, String id){

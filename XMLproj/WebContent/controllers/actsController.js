@@ -6,21 +6,31 @@ angular.module('xmlApp')
 					$scope.showTextPart = function() {
 						$scope.insertTextVisible = !$scope.insertTextVisible;
 					};
+					$scope.status = "";
 				
 					$scope.addFileAct = function() {
 						
 					};
 					
 					$scope.addAct = function(){
+						
 						$http({
 							method : "POST",
-							url : "http://localhost:8080/rest/addAct",
+							url : "http://localhost:8080/XMLproj/rest/act/addAct",
+							headers : {
+								"Content-Type": "application/xml"
+							},
 							data : $scope.newAct
 						}).then(function(resp){
-							alert(JSON.stringify(resp));
+							if(resp.statusText == "OK"){
+								console.log("It's ok");
+								$scope.status = "Dokument je sačuvan."
+							}
 						}, 
 						function(err){
-							alert(JSON.stringify(err));
+							if(err.statusText == "Bad Request"){
+								$scope.status = "Dokument nije validan."
+							}
 						});
 					};
 				}
