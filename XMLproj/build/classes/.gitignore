@@ -1,12 +1,2 @@
-/connection.properties
 /entities/
-/fop.xconf
-/queries/
-/resources/
 /rest/
-/services/
-/session/
-/users/
-/util/
-/xmldb/
-/snippet/

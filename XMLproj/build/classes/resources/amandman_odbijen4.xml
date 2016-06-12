@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
+
+<p:Amandman 
+	xmlns="http://www.w3.org/ns/rdfa#"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+	xmlns:p="http://www.parlament.gov.rs/propisi"
+	xmlns:ns1="http://www.parlament.gov.rs/generic_types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
+	xsi:schemaLocation="http://www.parlament.gov.rs/propisi amandman.xsd"
+	status="odbijen">
+	<p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/amandmani/odbijeni/119-04-60-2016-01">
+		<p:Pravni_osnov_donosenja>Pravni osnov</p:Pravni_osnov_donosenja>
+		<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
+		<p:Postupak_donosenja>Postupak</p:Postupak_donosenja>
+		<p:Cilj_donosenja>Cilj</p:Cilj_donosenja>
+		<p:Meta_podaci>
+			<ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-04-60-2016-01</ns1:Oznaka>
+			<ns1:Naziv property="pred:naziv" datatype="xs:string">Amandman 40</ns1:Naziv>
+			<ns1:Vrsta property="pred:vrsta" datatype="xs:string">Predlog</ns1:Vrsta>
+			<ns1:Datum property="pred:datum" datatype="xs:date">2016-03-31</ns1:Datum>
+			<ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
+			<ns1:BrPozitivnihGlasova property="pred:brPozitivnihGlasova" datatype="xs:int"></ns1:BrPozitivnihGlasova>
+			<ns1:BrUkupnihGlasova property="pred:brUkupnihGlasova" datatype="xs:int"></ns1:BrUkupnihGlasova>
+		</p:Meta_podaci>
+	</p:Sporedni_deo>
+	<p:Glavni_deo>
+		<ns1:Deo oznaka="oz1" naziv="DEO 1">
+			<ns1:Sadrzaj>
+				Sadrzaj dela 1
+				<ns1:Glava oznaka="gl1" naziv="Deo 1 - Glava 1">
+					<ns1:Sadrzaj>
+						Deo 1 glava 1 sadrzi članove:
+						<ns1:Clan oznaka="oz1/gl1/cl1" naziv="Član 1">
+							<ns1:Sadrzaj>Neki sadrzaj clana 1</ns1:Sadrzaj>
+						</ns1:Clan>
+						<ns1:Clan oznaka="oz1/gl1/cl2" naziv="Član 2">
+							<ns1:Sadrzaj>Neki sadrzaj clana 2</ns1:Sadrzaj>
+						</ns1:Clan>
+					</ns1:Sadrzaj>
+				</ns1:Glava>
+				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
+			</ns1:Sadrzaj>
+			<ns1:Status>
+				<ns1:ref id_ref="/oz1/gl1">Glava 1</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</ns1:Status>
+		</ns1:Deo>
+		<ns1:Deo oznaka="oz2" naziv="DEO 2">
+			<ns1:Sadrzaj>
+				Sadrzaj dela 2 - sadrzi odeljak
+				<ns1:Odeljak oznaka="od1" naziv="Deo 2 - Odeljak 1">
+					<ns1:Sadrzaj>Sadrzaj odeljka</ns1:Sadrzaj>
+				</ns1:Odeljak>
+			</ns1:Sadrzaj>
+			<ns1:Status>
+				<ns1:ref id_ref="/oz2/">Deo 2 referenca</ns1:ref>
+				<ns1:status_izmene>u_proceduri</ns1:status_izmene>
+			</ns1:Status>
+		</ns1:Deo>
+		<ns1:Clan oznaka="cl1sam" naziv="Član van delova">
+			<ns1:Sadrzaj>
+				Sadrzaj clana van delova
+			</ns1:Sadrzaj>
+			<ns1:Status>
+				<ns1:ref id_ref="/neka/ref">Referenca</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</ns1:Status>
+		</ns1:Clan>
+		<ns1:Alineja oznaka="ali1" naziv="Alineja bez dela">
+			<ns1:Sadrzaj>Sadrzaj</ns1:Sadrzaj>
+			<ns1:Status>
+				<ns1:ref id_ref="/alineja/">Alineja ref</ns1:ref>
+				<ns1:status_izmene>donet</ns1:status_izmene>
+			</ns1:Status>
+		</ns1:Alineja>
+	</p:Glavni_deo>
+</p:Amandman>

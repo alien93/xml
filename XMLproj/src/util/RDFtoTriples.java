@@ -31,7 +31,7 @@ public class RDFtoTriples {
 
 	private static DatabaseClient client;
 
-	public static void convert(ConnectionProperties props, String xmlFilePath, String rdfFilePath, String sparqlNamedGraph) throws IOException, SAXException, TransformerException {
+	public static void convert(ConnectionProperties props, String xmlFilePath, String rdfFilePath, String sparqlNamedGraph, String grddlPath) throws IOException, SAXException, TransformerException {
 
 		if (props.database.equals("")) {
 			client = DatabaseClientFactory.newClient(props.host, props.port, props.user, props.pass, props.authType);
@@ -50,7 +50,8 @@ public class RDFtoTriples {
 
 		metadataExtractor.extractMetadata(
 				new FileInputStream(new File(xmlFilePath)), 
-				new FileOutputStream(new File(rdfFilePath)));
+				new FileOutputStream(new File(rdfFilePath)),
+				grddlPath);
 
 		// A handle to hold the RDF content.
 		FileHandle rdfFileHandle =
@@ -85,13 +86,15 @@ public class RDFtoTriples {
 
 	public static void main(String[] args) throws Exception {
 		// Referencing XML file with RDF data in attributes
-		String xmlFilePath = "./src/resources/amandman_prihvacen3.xml";
+		String xmlFilePath = "./src/resources/akt_u_proceduri5.xml";
 
-		String rdfFilePath = "gen/amandman_prihvacen3.rdf";
+		String rdfFilePath = "gen/akt_u_proceduri5.rdf";
 
-		String sparqlNamedGraph = "/propisi/amandmani/prihvaceni/metadata";
+		String sparqlNamedGraph = "/propisi/akti/u_proceduri/metadata";
+		
+		String grddlPath = "data/xsl/grddl.xsl";
 
-		convert(ConnPropertiesReader.loadProperties(), xmlFilePath, rdfFilePath, sparqlNamedGraph);
+		convert(ConnPropertiesReader.loadProperties(), xmlFilePath, rdfFilePath, sparqlNamedGraph, grddlPath);
 	}
 
 }

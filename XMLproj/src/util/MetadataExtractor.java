@@ -29,7 +29,6 @@ public class MetadataExtractor {
 	
 	private TransformerFactory transformerFactory;
 
-	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
 	
 	public MetadataExtractor() throws SAXException, IOException {
 		
@@ -44,10 +43,10 @@ public class MetadataExtractor {
 	 * @param in XML containing input stream
 	 * @param out RDF/XML containing output stream
 	 */
-	public void extractMetadata(InputStream in, OutputStream out) throws FileNotFoundException, TransformerException {
+	public void extractMetadata(InputStream in, OutputStream out, String grddlPath) throws FileNotFoundException, TransformerException {
 		
 		// Create transformation source
-		StreamSource transformSource = new StreamSource(new File(XSLT_FILE));
+		StreamSource transformSource = new StreamSource(new File(grddlPath));
 		
 		// Initialize GRDDL transformer object
 		Transformer grddlTransformer = transformerFactory.newTransformer(transformSource);
@@ -77,8 +76,9 @@ public class MetadataExtractor {
 		InputStream in = new FileInputStream(new File("./src/resources/RS26-16-lat_primer_donetog_akta1.xml")); 
 
 		OutputStream out = new FileOutputStream(filePath);
-		
-		extractMetadata(in, out);
+		String grddlPath = "data/xsl/grddl.xsl";
+
+		extractMetadata(in, out, grddlPath);
 		
 		System.out.println("[INFO] File \"" + filePath + "\" generated successfully.");
 		

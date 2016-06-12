@@ -95,32 +95,27 @@ public class ActREST {
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
-		path += "temp.xml";
+		String xmlPath = path + "temp.xml";
 		
 		//check validity
-		Response r  = XMLValidator.getInstance().validateAct(akt, path);
+		Response r  = XMLValidator.getInstance().validateAct(akt, xmlPath);
 		
 		//write if valid		
 		if(r.getStatus() == 200){
 			try {
-				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), path, "", "/propisi/akti/u_proceduri", true);
-			} catch (IOException e) {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/u_proceduri", true);
+			
+				//create metadata
+				String grddlPath = path + "grddl.xsl";
+				String sparqlNamedGraph = "/propisi/akti/u_proceduri/metadata";
+				String rdfFilePath = path + "temp.rdf";
+				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
+				
+			} catch (IOException | SAXException | TransformerException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		//create metadata
-		String sparqlNamedGraph = "/propisi/akti_u_proceduri/metadata";
-		System.out.println(path);
-		String rdfFilePath = path.substring(0, path.length()-3);
-		System.out.println(rdfFilePath);
-		rdfFilePath += "rdf";
-		System.out.println(rdfFilePath);
-		/*try {
-			RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), path, rdfFilePath, sparqlNamedGraph);
-		} catch (IOException | SAXException | TransformerException e) {
-			e.printStackTrace();
-		}*/
 		return r;
 	}
 	

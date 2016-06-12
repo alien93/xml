@@ -3,7 +3,9 @@
     targetNamespace="http://www.parlament.gov.rs/propisi"
     xmlns:p="http://www.parlament.gov.rs/propisi"
     xmlns:ns1="http://www.parlament.gov.rs/generic_types" attributeFormDefault="unqualified"
-    finalDefault="#all">
+    finalDefault="#all" xmlns="http://www.w3.org/ns/rdfa#"
+    xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xs:import namespace="http://www.parlament.gov.rs/generic_types"
         schemaLocation="generic_types.xsd"/>
     <xs:element name="Akt">

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
+
+<p:Akt 
+ xmlns="http://www.w3.org/ns/rdfa#"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema#"
+ xmlns:p="http://www.parlament.gov.rs/propisi"
+ xmlns:ns1="http://www.parlament.gov.rs/generic_types"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
+ xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
+ status="donet">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/doneti/doc1">
+        <p:Donet_akt>
+            <p:Donet_od_strane>
+                Narodna skupština Republike Srbije
+            </p:Donet_od_strane>
+            <p:Pravni_osnov_donosenja>
+                Na osnovu člana 140. stav 2. Zakona o javnim nabavkama
+                („Službeni glasnik RS“, br. 124/12, 14/15 i 68/15) i člana 8. stav 1. Zakona o
+                Narodnoj skupštini („Službeni glasnik RS“, broj 9/10),
+            </p:Pravni_osnov_donosenja>
+            <p:Meta_podaci>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">doc1</ns1:Oznaka>
+                <ns1:Naziv property="pred:naziv" datatype="xs:string">O D L U K A O PRESTANKU FUNKCIJE ČLANA KOMISIJE ZA ZAŠTITU PRAVA U POSTUPCIMA JAVNIH NABAVKI</ns1:Naziv>
+                <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Odluka</ns1:Vrsta>
+                <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-03</ns1:Datum>
+                <ns1:Mesto property="pred:mesto" datatype="xs:string">Beograd</ns1:Mesto>
+            </p:Meta_podaci>
+        </p:Donet_akt>
+    </p:Sporedni_deo>
+    <p:Glavni_deo>
+        <ns1:Clan oznaka="cl1">
+            <ns1:Sadrzaj>
+                Prestaje funkcija člana Republičke komisije za zaštitu prava u
+                postupcima javnih nabavki Ristivoju Đokiću, zbog podnošenja ostavke.
+            </ns1:Sadrzaj>
+        </ns1:Clan>
+        <ns1:Clan oznaka="cl2">
+            <ns1:Sadrzaj>
+                Ovu odluku objaviti u „Službenom glasniku Republike Srbije“.
+            </ns1:Sadrzaj>
+        </ns1:Clan>
+    </p:Glavni_deo>
+</p:Akt>
