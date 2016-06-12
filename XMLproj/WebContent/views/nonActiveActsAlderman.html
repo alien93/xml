@@ -8,7 +8,7 @@
 			<th>Datum</th>
 			<th>Vrsta</th>
 		</tr>
-		<tr ng-repeat="act in acts">
+		<tr ng-repeat="act in acts" style='cursor: pointer;' ng-click="getSelected(act.oznaka.value)">
 			<td>{{act.naziv.value}}</td>
 			<td>{{act.datum.value}}</td>
 			<td>{{act.vrsta.value}}</td>

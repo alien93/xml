@@ -49,6 +49,17 @@ angular.module('xmlApp')
 					//row click
 					$scope.getSelected = function(docName){
 						console.log(docName);
+						$http({
+							method : "GET",
+							url : "http://localhost:8080/XMLproj/rest/act/nonActiveId/" + docName,
+							responseType: 'arraybuffer'
+						}).then(function(result){
+							var file = new Blob([result.data], {type: 'application/pdf'});
+						    var fileURL = URL.createObjectURL(file);
+						    window.open(fileURL);
+						}, function(reason){
+							console.log(JSON.stringify(reason));
+						});
 					}
 					/*
 					$http

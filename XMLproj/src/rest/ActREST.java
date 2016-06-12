@@ -71,6 +71,18 @@ public class ActREST {
 		return helpQuery(query, id);
 	}
 	
+	@GET
+	@Path("/nonActiveId/{id}")
+	@Produces("application/pdf")
+	public Response getNonActiveActById(@PathParam("id") String id){
+		String query = "declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
+				   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
+				   "for $doc in fn:collection(\"/propisi/akti/u_proceduri\")\n" +
+				   "where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
+				   "\nreturn ($doc)//p:Akt;";
+		return helpQuery(query, id);
+	}
+	
 	private Response helpQuery(String query, String id){
 		try {
 			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
