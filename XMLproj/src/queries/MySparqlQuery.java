@@ -131,7 +131,7 @@ public class MySparqlQuery {
 		this.datumMin = "1970-01-01";
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		this.datumMax = datumMax.equals("")?dateFormat.format(date):datumMax;
+		this.datumMax = dateFormat.format(date);
 		this.vrsta = "";
 	}
 

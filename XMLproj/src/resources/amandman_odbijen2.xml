@@ -3,6 +3,7 @@
 
 <p:Amandman 
 	xmlns="http://www.w3.org/ns/rdfa#"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema#"
 	xmlns:p="http://www.parlament.gov.rs/propisi"
 	xmlns:ns1="http://www.parlament.gov.rs/generic_types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
