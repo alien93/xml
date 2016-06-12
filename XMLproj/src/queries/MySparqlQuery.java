@@ -9,7 +9,6 @@ import java.util.Date;
 
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
-import com.marklogic.client.io.DOMHandle;
 import com.marklogic.client.io.JacksonHandle;
 import com.marklogic.client.semantics.SPARQLMimeTypes;
 import com.marklogic.client.semantics.SPARQLQueryDefinition;
@@ -35,7 +34,10 @@ public class MySparqlQuery {
 	private String datumMin;
 	private String datumMax;
 	private String vrsta;
-
+	private int brPozitivnihGlasova = -1;
+	private int brUkupnihGlasova = -1;
+	private String operator = " && ";
+	
 	/**
 	 * Executes query
 	 * @param props - connection properties
@@ -84,14 +86,25 @@ public class MySparqlQuery {
 		query.append(selectTemplate("datum"));
 		query.append(selectTemplate("vrsta"));
 		query.append(selectTemplate("mesto"));
-
+		
+		String brFilter = "";
+		if(brPozitivnihGlasova != -1){
+			query.append(selectTemplate("brPozitivnihGlasova"));
+			brFilter += " ?brPozitivnihGlasova=\"" + brPozitivnihGlasova + "\" " + operator;
+		}
+		if(brUkupnihGlasova != -1){
+			query.append(selectTemplate("brUkupnihGlasova"));
+			brFilter += " ?brUkupnihGlasova=\"" + brUkupnihGlasova + "\" " + operator;
+		}
+		 
+		
 		if(useFilter){
-			query.append("FILTER (" + regexTemplate("?akt", type) + " && "
-					+ regexTemplate("?oznaka", oznaka) + " && "
-					+ regexTemplate("?naziv", naziv) + " && "
-					+ "?datum >= \"" + datumMin + "\"^^xs:date && ?datum <= \"" + datumMax + "\"^^xs:date" + " &&"
-					+ regexTemplate("?vrsta", vrsta) + " && "
-					+ regexTemplate("?mesto", mesto) + ")\n}");
+			query.append("FILTER (" + regexTemplate("?akt", type) + " && ( "
+					+ regexTemplate("?oznaka", oznaka) + " " + operator
+					+ regexTemplate("?naziv", naziv) + " " + operator
+					+ "(?datum >= \"" + datumMin + "\"^^xs:date && ?datum <= \"" + datumMax + "\"^^xs:date)" + " " + operator + brFilter
+					+ regexTemplate("?vrsta", vrsta) + " " + operator
+					+ regexTemplate("?mesto", mesto) + "))\n}");
 		}
 		else
 			query.append("\n}");
@@ -208,8 +221,28 @@ public class MySparqlQuery {
 		this.vrsta = vrsta;
 	}
 
+	public int getBrPozitivnihGlasova() {
+		return brPozitivnihGlasova;
+	}
+
+	public void setBrPozitivnihGlasova(int brPozitivnihGlasova) {
+		this.brPozitivnihGlasova = brPozitivnihGlasova;
+	}
+
+	public int getBrUkupnihGlasova() {
+		return brUkupnihGlasova;
+	}
+
+	public void setBrUkupnihGlasova(int brUkupnihGlasova) {
+		this.brUkupnihGlasova = brUkupnihGlasova;
+	}
+
 	public String getType() {
 		return type;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
 	public static void main(String[] args) {

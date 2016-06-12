@@ -2,6 +2,7 @@ package rest;
 
 import java.io.IOException;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -40,15 +41,35 @@ public class ActFilterREST {
 	}
 	
 	private Response helpQuery(String type, String metaData, String category, String text){
-		String oznaka = "Oznaka".equals(category.trim()) ? text : "";
-		String naziv = "Naziv".equals(category.trim()) ? text : "";
-		String mesto = "Mesto".equals(category.trim()) ? text : "";
-		String datumMin = "Datum".equals(category.trim()) ? text : "";
-		String datumMax = "Datum".equals(category.trim()) ? text : "";
-		String vrsta = "Vrsta".equals(category.trim()) ? text : "";
+		String oznaka = "Oznaka".equals(category.trim()) ? text.trim() : "";
+		String naziv = "Naziv".equals(category.trim()) ? text.trim() : "";
+		String mesto = "Mesto".equals(category.trim()) ? text.trim() : "";
+		String datumMin = "Datum".equals(category.trim()) ? text.trim() : "";
+		String datumMax = "Datum".equals(category.trim()) ? text.trim() : "";
+		String vrsta = "Vrsta".equals(category.trim()) ? text.trim() : "";
+		if("Sve kategorije".equals(category.trim())){
+			oznaka = text.trim(); naziv = text.trim(); mesto = text.trim(); datumMin = text.trim(); datumMax = text.trim(); vrsta = text.trim();
+		}
+		int brPozitivnihGlasova = -1;
+		if("Sve kategorije".equals(category.trim()) || "Broj pozitivnih glasova".equals(category.trim())){
+			try{ 
+				brPozitivnihGlasova = Integer.parseInt(text.trim()); 
+			} catch(Exception e){ }
+		}
+		int brUkupnihGlasova = -1;
+		if("Sve kategorije".equals(category.trim()) || "Broj ukupnih glasova".equals(category.trim())){
+			try{
+				brUkupnihGlasova = Integer.parseInt(text.trim());
+			}catch(Exception e){}
+		}
+		
 		String metadataCollection = metaData;
 		MySparqlQuery q = new MySparqlQuery(type, 
 				oznaka, naziv, mesto, datumMin, datumMax, vrsta);
+		if("Sve kategorije".equals(category.trim())) q.setOperator(" || ");
+		q.setBrPozitivnihGlasova(brPozitivnihGlasova);
+		q.setBrUkupnihGlasova(brUkupnihGlasova);
+		
 		ResponseBuilder response = Response.ok();
 		try {
 			boolean filter = "_".equals(text.trim()) ? false : true;
