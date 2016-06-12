@@ -20,7 +20,7 @@
 				initial-page-number="1">
 				<fo:flow flow-name="xsl-region-body">
 					<fo:block font-family="Arial">
-						<fo:block text-align="center" font-size="32px"
+						<fo:block text-align="center" font-size="25px"
 							font-weight="bold" padding="30px">
 							<xsl:value-of select=".//p:Meta_podaci/ns1:Naziv" />
 						</fo:block>
