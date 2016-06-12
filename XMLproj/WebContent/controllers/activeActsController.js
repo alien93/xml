@@ -7,7 +7,7 @@ angular.module('xmlApp')
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/active",
 					}).then(function(value) {
-						$scope.acts = value.data.results.bindings;
+						$scope.$parent.acts = value.data.results.bindings;
 					});
 					
 					
@@ -44,7 +44,7 @@ angular.module('xmlApp')
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/nonActive",
 					}).then(function(value) {
-						$scope.acts = value.data.results.bindings;
+						$scope.$parent.acts = value.data.results.bindings;
 					});
 					
 					

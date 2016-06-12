@@ -1,5 +1,7 @@
 package util;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.ws.rs.core.Response;
@@ -16,6 +18,7 @@ import org.xml.sax.SAXException;
 
 import entities.act.Akt;
 import entities.amendment.Amandman;
+import rest.CitizenREST;
 
 
 public class XMLValidator {
@@ -32,7 +35,7 @@ public class XMLValidator {
 	    return instance;
 	}
 
-	public Response validateAct(Akt akt){
+	public Response validateAct(Akt akt, String path){
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try{
 			InputStream is = getClass().getResourceAsStream("/resources/akt.xsd");
@@ -52,7 +55,11 @@ public class XMLValidator {
 			Marshaller marsh = context.createMarshaller();
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	        marsh.setSchema(schema);
-	        marsh.marshal(akt,System.out);
+	        try {
+				marsh.marshal(akt, new FileOutputStream(path));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}catch(JAXBException | SAXException e){
 			e.printStackTrace();
 			return Response.status(404).build();

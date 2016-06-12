@@ -67,6 +67,7 @@ public class XMLWriter {
 		client.release();
 	}
 	
+	
 	//test
 	public static void main(String[] args) throws IOException {
 		System.out.println("Starting...");
