@@ -13,12 +13,18 @@ angular.module('xmlApp')
 					$scope.acts = value.data.results.bindings;
 				});		
 			
-			// Expand/collapse content for act
-			$scope.contentForActVisible = [false, false];
+			$scope.contentForActVisible=[];
+			
+			var closeAll = function(){
+				for(i=0; i<$scope.contentForActVisible.length; i++){
+					$scope.contentForActVisible[i] = false;
+				}
+			}
 			
 			$scope.expandAct = function(index, value) {
 				
-				$scope.contentForActVisible[index] = !$scope.contentForActVisible[index];
+				closeAll();
+				$scope.contentForActVisible[index] = true;
 				console.log(value);
 				var restUrl = "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + value;
 				console.log(restUrl);
