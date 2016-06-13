@@ -2,11 +2,9 @@
 <div data-ng-controller="actsController">
 	<div class="row">
 			<div class="col-md-offset-2 col-md-4">
-				<form class="formAddAct" ng-submit="addFileAct()">
-					Upload akta: <input type="file" name="fajl">
+				Upload akta: <input id="file" type="file" name="fajl"/>
 				<br/> 
-				<input type="submit">
-				</form>
+				<button  ng-click="addFileAct()" class="btn btn-info">Sačuvaj</button>
 			</div>
 			<div class="col-md-6"> &nbsp; </div>
 	</div> <br/> 

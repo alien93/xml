@@ -10,20 +10,16 @@ angular.module('xmlApp')
 						$scope.insertTextVisible = !$scope.insertTextVisible;
 					};
 					$scope.status = "";
-				
-					$scope.addFileAct = function() {
-						
-					};
-					
-					$scope.addAct = function(){
-						
+
+					//post act
+					var postAct = function(act){
 						$http({
 							method : "POST",
 							url : "http://localhost:8080/XMLproj/rest/act/addAct",
 							headers : {
 								"Content-Type": "application/xml"
 							},
-							data : $scope.newAct
+							data : act
 						}).then(function(resp){
 							if(resp.statusText == "OK"){
 								console.log("It's ok");
@@ -35,6 +31,22 @@ angular.module('xmlApp')
 								$scope.status = "Dokument nije validan."
 							}
 						});
+					}
+					
+					//uploading act
+					$scope.addFileAct = function() {
+						var file = document.getElementById('file').files[0];
+						var reader = new FileReader();
+						reader.onloadend = function(e){
+							var data = e.target.result;
+							postAct(data);
+						}
+						reader.readAsBinaryString(file);
+					};
+					
+					//adding act
+					$scope.addAct = function(){
+						postAct($scope.newAct);						
 					};
 				}
 		]);

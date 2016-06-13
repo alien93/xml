@@ -5,6 +5,7 @@ angular.module('xmlApp')
 				if ($rootScope.user.role == "CITIZEN") {
 					$location.path('/prijava');
 				};
+					//retrieving active acts
 					$http({
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/active",
@@ -27,14 +28,6 @@ angular.module('xmlApp')
 							console.log(JSON.stringify(reason));
 						});
 					}
-					/*
-					$http
-				    .get(generatePdfUrl)
-				    .then(function(data){
-				        //data is link to pdf
-				        $window.open(data);
-				    }); 
-				    */
 	}])
 	
 	
@@ -43,7 +36,7 @@ angular.module('xmlApp')
 				if ($rootScope.user.role == "CITIZEN") {
 					$location.path('/prijava');
 				};	
-		
+					//retrieving non active acts
 					$http({
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/nonActive",
@@ -66,12 +59,4 @@ angular.module('xmlApp')
 							console.log(JSON.stringify(reason));
 						});
 					}
-					/*
-					$http
-				    .get(generatePdfUrl)
-				    .then(function(data){
-				        //data is link to pdf
-				        $window.open(data);
-				    }); 
-				    */
 	}]);
