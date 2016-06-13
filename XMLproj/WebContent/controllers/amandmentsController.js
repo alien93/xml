@@ -10,29 +10,49 @@ angular.module('xmlApp')
 						$scope.insertTextVisible = !$scope.insertTextVisible;
 					};
 					
+					$scope.selectedAct = {};
+					$scope.amendmentsForAct = [];
+					
 					$http({
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/nonActive",
 					}).then(function(value) {
 						$scope.acts = value.data.results.bindings;
+						$scope.selectedAct = $scope.acts[0];
+						$scope.showAmendments();
 					});
-							
-					//$scope.selectedAct = $scope.acts[0];
-					//$scope.amandmentsForAct = $scope.selectedAct.amandments;
+												
+					$scope.showAmendments = function(){
+						var value = $scope.selectedAct.naziv.value;
+						$scope.amendmentsForAct = [];
+						$http({
+							method: "GET", 
+							url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + value,
+						}).then(function(value) {
+							$scope.amendmentsForAct = value.data.results.bindings;
+						});	
+					};
 					
-					$scope.showAmandments = function(){
-						$scope.amandmentsForAct = $scope.selectedAct.amandments;
-					}
-					
-					$scope.saveAmandment = function() {
+					$scope.saveAmendment = function() {
 						
 					};
 					
-					$scope.openAmandment = function() {
-						
+					$scope.openAmendment = function(amName) {
+						console.log(amName);
+						$http({
+							method : "GET",
+							url : "http://localhost:8080/XMLproj/rest/amendment/amendmentId/" + amName,
+							responseType: 'arraybuffer'
+						}).then(function(result){
+							var file = new Blob([result.data], {type: 'application/pdf'});
+						    var fileURL = URL.createObjectURL(file);
+						    window.open(fileURL);
+						}, function(reason){
+							console.log(JSON.stringify(reason));
+						});
 					};
 					
-					$scope.deleteAmandment = function() {
+					$scope.deleteAmendment = function() {
 						
 					};
 				}

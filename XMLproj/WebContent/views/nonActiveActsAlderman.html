@@ -14,7 +14,7 @@
 			<td>{{act.datum.value}}</td>
 			<td>{{act.vrsta.value}}</td>
 			<td> 
-				<a> <b> Povuci akt </b></a>
+				<a ng-click="deleteAct(); $event.stopPropagation();"> <b> Povuci akt </b></a>
 			</td>
 		</tr>
 	</table>
