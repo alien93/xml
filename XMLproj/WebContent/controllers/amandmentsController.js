@@ -1,6 +1,6 @@
 angular.module('xmlApp')
-		.controller('amandmentsController', ['$rootScope', '$scope', '$location',
-			function($rootScope, $scope, $location){
+		.controller('amandmentsController', ['$rootScope', '$scope', '$location', '$http',
+			function($rootScope, $scope, $location, $http){
 					if ($rootScope.user.role == "CITIZEN") {
 						$location.path('/prijava');
 					};	
@@ -10,17 +10,15 @@ angular.module('xmlApp')
 						$scope.insertTextVisible = !$scope.insertTextVisible;
 					};
 					
-					$scope.acts = [ 
-							{ name: "Akt1", date: "", type: "", 
-								amandments: [{ name: "Am1"}] }, 
-							{ name: "Akt2", date: "", type: "",
-								amandments: [{ name: "Am1"}, { name: "Am2"}] 	}, 
-							{ name: "Akt3", date: "", type: "",
-								amandments: [{ name: "Am1"}, { name: "Am2"}, { name: "Am3"}] }, 
-							];
+					$http({
+						method: "GET", 
+						url : "http://localhost:8080/XMLproj/rest/act/nonActive",
+					}).then(function(value) {
+						$scope.acts = value.data.results.bindings;
+					});
 							
-					$scope.selectedAct = $scope.acts[0];
-					$scope.amandmentsForAct = $scope.selectedAct.amandments;
+					//$scope.selectedAct = $scope.acts[0];
+					//$scope.amandmentsForAct = $scope.selectedAct.amandments;
 					
 					$scope.showAmandments = function(){
 						$scope.amandmentsForAct = $scope.selectedAct.amandments;
