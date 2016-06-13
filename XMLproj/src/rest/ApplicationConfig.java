@@ -14,6 +14,7 @@ public class ApplicationConfig extends Application{
 	        											CitizenREST.class, 
 	        											UserLoginREST.class, 
 	        											ActREST.class,
-	        											ActFilterREST.class));
+	        											ActFilterREST.class,
+	        											SearchTextContentREST.class));
 	    }
 }
