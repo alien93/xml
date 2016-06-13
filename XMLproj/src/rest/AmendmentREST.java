@@ -42,6 +42,12 @@ public class AmendmentREST {
 					     "}"+
 					    "FILTER ( str(?akt) = \"http://www.parlament.gov.rs/propisi/akti/u_proceduri/" + actId + "\")"+
 					"}";
+		System.out.println(query);
+		try {
+			result = QueryExecutor.executeFromString(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 	

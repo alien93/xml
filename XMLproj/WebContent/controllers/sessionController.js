@@ -27,6 +27,7 @@ angular.module('xmlApp')
 						method: "GET", 
 						url : restUrl,
 					}).then(function(retVal) {
+						console.log(retVal);
 						$scope.amendments = retVal.data.results.bindings;
 						console.log(retVal.data.results.bindings);
 					});	
