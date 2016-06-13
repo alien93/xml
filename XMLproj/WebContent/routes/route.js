@@ -18,7 +18,7 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/odbornik",
 							{
-									templateUrl : "views/activeActsAlderman.html"
+									templateUrl : "views/activeActs.html"
 							}
 						)
 						.when(
@@ -42,7 +42,7 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/predsednik",
 							{
-									templateUrl: "views/activeActsAlderman.html"
+									templateUrl: "views/activeActs.html"
 							}
 						)
 						.when(
