@@ -1,11 +1,11 @@
 <div data-ng-controller="sessionController">
 	<div class="row">
 			<div class="col-md-offset-1 col-md-10">
-				<table class='table table-bordered' ng-repeat = "act in acts.nonActive">
+				<table class='table table-bordered' ng-repeat = "act in acts">
 				
 				<form class="formSession" ng-submit="sessionSubmit()">   
 					<tr ng-model="act" class="success" ng-click="expandAct($index)"> 
-						<td colspan="3"> <u> {{ act.name }} </u> </td>
+						<td colspan="3" style='cursor: pointer;'> <u> {{ act.naziv.value }} </u> </td>
 					</tr> 
 					
 					<tr ng-if="testIfVisible($index)"> 
