@@ -1,5 +1,5 @@
 angular.module('xmlApp')
-		.controller('amandmentsController', ['$rootScope', '$scope', '$location', '$http',
+		.controller('amendmentsController', ['$rootScope', '$scope', '$location', '$http',
 			function($rootScope, $scope, $location, $http){
 					if ($rootScope.user.role == "CITIZEN") {
 						$location.path('/prijava');
