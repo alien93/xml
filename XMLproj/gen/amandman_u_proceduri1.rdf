@@ -1,0 +1,26 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:belongsTo xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:resource="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-60-2016-01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">am1</pred:oznaka>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amandman u proceduri 40</pred:naziv>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Predlog</pred:vrsta>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2016-03-31</pred:datum>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beograd</pred:mesto>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:brPozitivnihGlasova xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#int"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1">
+    <pred:brUkupnihGlasova xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#int"/>
+  </rdf:Description>
+</rdf:RDF>

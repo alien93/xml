@@ -65,6 +65,33 @@ public class QueryExecutor {
 		return resultsHandle.get().toString();
 	}
 	
+	/**
+	 * Executes query
+	 * @param props - connection properties
+	 * @param metadataCollection - metadata collection
+	 * @param useFilter - true if you want to filter your results
+	 * @return
+	 */
+	public static String executeFromString(ConnectionProperties props, String query) {
+		
+		DatabaseClient client = DatabaseClientFactory.newClient(props.host,
+				props.port, props.database, props.user, props.pass,
+				props.authType);
+		
+		// Create a SPARQL query manager to query RDF datasets
+		SPARQLQueryManager sparqlQueryManager = client.newSPARQLQueryManager();
+		
+		JacksonHandle resultsHandle = new JacksonHandle();
+		resultsHandle.setMimetype(SPARQLMimeTypes.SPARQL_JSON);
+		
+		SPARQLQueryDefinition queryDef = sparqlQueryManager.newQueryDefinition(query);
+		
+		resultsHandle = sparqlQueryManager.executeSelect(queryDef, resultsHandle);
+
+		client.release();
+		return resultsHandle.get().toString();
+	}
+	
 	public static void main(String[] args) {
 		String path = QueryExecutor.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());

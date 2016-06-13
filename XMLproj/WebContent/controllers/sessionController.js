@@ -19,13 +19,16 @@ angular.module('xmlApp')
 			$scope.expandAct = function(index, value) {
 				
 				$scope.contentForActVisible[index] = !$scope.contentForActVisible[index];
+				console.log(value);
+				var restUrl = "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + value;
+				console.log(restUrl);
 				if($scope.contentForActVisible[index]){
 					$http({
 						method: "GET", 
-						url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct" + value,
-					}).then(function(value) {
-						//$scope.acts = value.data.results.bindings;
-						//$scope.amendments = 
+						url : restUrl,
+					}).then(function(retVal) {
+						$scope.amendments = retVal.data.results.bindings;
+						console.log(retVal.data.results.bindings);
 					});	
 				}
 			};
