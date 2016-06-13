@@ -26,8 +26,10 @@ public class SearchTextContentREST {
 	@Path("/active/{text}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response searchActiveActs(@PathParam("text") String text){
-		String collection = "/propisi/akti/u_proceduri";
-		String result = helpQuery(text, collection, MySparqlQuery.AKT_U_PROCEDURI);
+		String collection = "/propisi/akti/doneti";
+		System.out.println("*****" + text + "******");
+		String result = helpQuery(text, collection, MySparqlQuery.AKT_DONET);
+		System.out.println(result);
 		return Response.ok().entity(result).build();
 	}
 	
@@ -35,17 +37,21 @@ public class SearchTextContentREST {
 	@Path("/nonActive/{text}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response searchNonActiveActs(@PathParam("text") String text){
-		String collection = "/propisi/akti/doneti";
-		String result = helpQuery(text, collection, MySparqlQuery.AKT_DONET);
+		String collection = "/propisi/akti/u_proceduri";
+		String result = helpQuery(text, collection, MySparqlQuery.AKT_U_PROCEDURI);
 		return Response.ok().entity(result).build();
 	}
 	
 	private String helpQuery(String text, String collection, String vrsta){
+		String retStr = vrsta.equals(MySparqlQuery.AKT_U_PROCEDURI) ? 
+						"$doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka" :
+						"$doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka";
+		
 		String query = "declare namespace p=\"http://www.parlament.gov.rs/propisi\";" + 
 					   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";" + 
 					   "for $doc in fn:collection(\"" + collection + "\")" + 
 					   "where  $doc//*[text()[contains(.,'" + text + "')]]" + 
-					   "return $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka";
+					   "return " + retStr;
 		try {
 			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 			List<String> oznake = new ArrayList<String>();
@@ -76,6 +82,7 @@ public class SearchTextContentREST {
 			newBindins += "]";
 			object.getAsJsonObject("results").remove("bindings");
 			object.getAsJsonObject("results").add("bindings", new JsonParser().parse(newBindins).getAsJsonArray());
+			//System.out.println(object.toString());
 			return object.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
