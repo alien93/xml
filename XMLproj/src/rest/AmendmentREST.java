@@ -14,12 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import queries.MySparqlQuery;
 import queries.QueryExecutor;
-import util.ActXmlToPdf;
 import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
 import util.XQueryInvoker;
@@ -58,7 +54,7 @@ public class AmendmentREST {
 	public Response getAmandmentById(@PathParam("id") String id){
 		String query = "declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
 					   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
-					   "for $am in fn:collection(\"/propisi/amandmani/u_proceduri/metadata\")\n" +
+					   "for $am in fn:collection(\"/propisi/amandmani/u_proceduri\")\n" +
 					   "where $am/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
 					   "\nreturn ($am)//p:Amandman;";
 		return helpQuery(query, id);

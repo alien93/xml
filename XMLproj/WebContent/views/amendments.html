@@ -53,7 +53,7 @@
 			<div class="col-md-offset-2 col-md-8">		
 			<ul>
 				<li ng-repeat="ams in amendmentsForAct" > {{ams.nazivAmandman.value}} &nbsp; | &nbsp;
-					<a ng-click="openAmendment(ams.oznakaAmandman.value)"> OTVORI </a> &nbsp; | &nbsp;
+					<a style='cursor: pointer;' ng-click="openAmendment(ams.oznakaAmandman.value)"> OTVORI </a> &nbsp; | &nbsp;
 					<a ng-click="deleteAmendment(ams.oznakaAmandman.value)"> <b> OBRISI </b> </a>
 				</li> 
 			</ul>
