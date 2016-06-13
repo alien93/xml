@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import queries.MySparqlQuery;
 import queries.QueryExecutor;
 import util.ActXmlToPdf;
+import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
 import util.XQueryInvoker;
 
@@ -70,7 +71,7 @@ public class AmendmentREST {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 			path = path.substring(1, path.length()); 
-			new ActXmlToPdf(path+"fop.xconf").transform(is, os);
+			new AmandmanXmlToPdf(path+"fop.xconf").transform(is, os);
 			ResponseBuilder builder = Response.ok(os.toByteArray());
 			builder.header("Content-Disposition",
 					"attachment; filename="+id+".pdf");

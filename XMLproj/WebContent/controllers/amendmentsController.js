@@ -23,13 +23,13 @@ angular.module('xmlApp')
 					});
 												
 					$scope.showAmendments = function(){
-						var value = $scope.selectedAct.naziv.value;
+						var val = $scope.selectedAct.oznaka.value;
 						$scope.amendmentsForAct = [];
 						$http({
 							method: "GET", 
-							url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + value,
-						}).then(function(value) {
-							$scope.amendmentsForAct = value.data.results.bindings;
+							url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + val, 
+						}).then(function(retVal) {
+							$scope.amendmentsForAct = retVal.data.results.bindings;
 						});	
 					};
 					
