@@ -1,6 +1,10 @@
 angular.module('xmlApp')
-		.controller('sessionController', ['$scope', '$http',
-			function($scope, $http){
+		.controller('sessionController', ['$rootScope', '$scope', '$location', '$http',
+			function($rootScope, $scope, $location, $http){
+				if ($rootScope.user.role == "CITIZEN") {
+					$location.path('/prijava');
+				};	
+			
 			
 			//-------------------------test data----------------------
 			var act = {
