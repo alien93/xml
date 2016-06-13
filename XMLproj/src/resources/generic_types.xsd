@@ -291,6 +291,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="odbijen"/>
             <xs:enumeration value="prihvacen"/>
+            <xs:enumeration value="u_proceduri"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

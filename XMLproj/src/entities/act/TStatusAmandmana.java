@@ -35,7 +35,9 @@ public enum TStatusAmandmana {
     @XmlEnumValue("odbijen")
     ODBIJEN("odbijen"),
     @XmlEnumValue("prihvacen")
-    PRIHVACEN("prihvacen");
+    PRIHVACEN("prihvacen"),
+    @XmlEnumValue("u_proceduri")
+    U_PROCEDURI("u_proceduri");
     private final String value;
 
     TStatusAmandmana(String v) {
