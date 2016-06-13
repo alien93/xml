@@ -1,8 +1,10 @@
 angular.module('xmlApp')
 
-	.controller('activeActsAldermanController', ['$scope', '$http',
-	         function($scope, $http){
-					
+	.controller('activeActsAldermanController', ['$rootScope', '$scope', '$location', '$http',
+	         function($rootScope, $scope, $location, $http){
+				if ($rootScope.user.role == "CITIZEN") {
+					$location.path('/prijava');
+				};
 					$http({
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/active",
@@ -36,9 +38,12 @@ angular.module('xmlApp')
 	}])
 	
 	
-	.controller('nonActiveActsAldermanController', ['$scope', '$http',
-	         function($scope, $http){
-					
+	.controller('nonActiveActsAldermanController', ['$rootScope', '$scope', '$location','$http',
+	         function($rootScope, $scope, $location, $http){
+				if ($rootScope.user.role == "CITIZEN") {
+					$location.path('/prijava');
+				};	
+		
 					$http({
 						method: "GET", 
 						url : "http://localhost:8080/XMLproj/rest/act/nonActive",
