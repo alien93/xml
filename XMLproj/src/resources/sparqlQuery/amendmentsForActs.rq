@@ -1,0 +1,5 @@
+SELECT * FROM </propisi/amandmani/u_proceduri/metadata>
+WHERE { 
+  ?propis <http://www.parlament.gov.rs/propisi/predicate/belongsTo> ?akt .
+  FILTER ( str(?akt) = "http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-60-2016-01")
+}

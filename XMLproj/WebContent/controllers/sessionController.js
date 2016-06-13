@@ -5,9 +5,7 @@ angular.module('xmlApp')
 					$location.path('/prijava');
 				};	
 			
-			
-			//-------------------------test data----------------------
-				//retrieving non active acts
+			//retrieving non active acts
 				$http({
 					method: "GET", 
 					url : "http://localhost:8080/XMLproj/rest/act/nonActive",
@@ -17,9 +15,19 @@ angular.module('xmlApp')
 			
 			// Expand/collapse content for act
 			$scope.contentForActVisible = [false, false];
-			$scope.expandAct = function(index) {
-				console.log("expand " + index);
+			
+			$scope.expandAct = function(index, value) {
+				
 				$scope.contentForActVisible[index] = !$scope.contentForActVisible[index];
+				if($scope.contentForActVisible[index]){
+					$http({
+						method: "GET", 
+						url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct" + value,
+					}).then(function(value) {
+						//$scope.acts = value.data.results.bindings;
+						//$scope.amendments = 
+					});	
+				}
 			};
 			$scope.testIfVisible = function(index) {
 				return $scope.contentForActVisible[index];

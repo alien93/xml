@@ -4,7 +4,7 @@
 				<table class='table table-bordered' ng-repeat = "act in acts">
 				
 				<form class="formSession" ng-submit="sessionSubmit()">   
-					<tr ng-model="act" class="success" ng-click="expandAct($index)"> 
+					<tr ng-model="act" class="success" ng-click="expandAct($index, act.oznaka.value)"> 
 						<td colspan="3" style='cursor: pointer;'> <u> {{ act.naziv.value }} </u> </td>
 					</tr> 
 					
@@ -23,7 +23,7 @@
 						<td> Za &nbsp; / &nbsp; Ukupno </td>
 					</tr>
 					
-					<tr ng-repeat="ams in act.amandments" ng-if="testIfVisible($parent.$index)">
+					<tr ng-repeat="ams in amendments" ng-if="testIfVisible($parent.$index)">
 						<td> {{ams.name}} </td>
 						<td> &nbsp; </td>
 						<td> 

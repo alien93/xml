@@ -58,5 +58,9 @@ angular.module('xmlApp')
 						}, function(reason){
 							console.log(JSON.stringify(reason));
 						});
-					}
+					};
+					
+					$scope.deleteAct = function(){
+						
+					};
 	}]);

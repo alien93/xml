@@ -1,9 +1,9 @@
 <!--Predlog amandmana na akt-->
 <div>
-    <form class="formAddAmandment" data-ng-controller="amandmentsController" ng-submit="addAmandment()">        
+    <form class="formAddAmandment" data-ng-controller="amendmentsController" ng-submit="addAmendment()">        
 		<div class="row">
 			<div class="col-md-offset-2 col-md-4">
-			<select class="form-control" ng-model="selectedAct" ng-change="showAmandments()"
+			<select class="form-control" ng-model="selectedAct" ng-change="showAmendments()"
 					ng-options="act.naziv.value for act in acts">
 			</select>
 			</div>
@@ -36,7 +36,7 @@
 			
 			<div class="row"> 
 				<div class="col-md-offset-2 col-md-2"> 
-					<button class="btn btn-info btn-block" ng-click="saveAmandment()">Sacuvaj</button>
+					<button class="btn btn-info btn-block" ng-click="saveAmendment()">Sacuvaj</button>
 				</div> 
 				<div class="col-md-8"> &nbsp; </div>
 			</div>
@@ -45,16 +45,16 @@
 		
 		<br/> <br/>
 		<div class="row"> 
-			<div class="col-md-offset-2 col-md-8"> Amandmani na akt <b>{{selectedAct.name}}:</b></div> 
+			<div class="col-md-offset-2 col-md-8"> Amandmani na akt &nbsp; <b>{{selectedAct.naziv.value}}:</b></div> 
 			<div class="col-md-2"> &nbsp; </div>
 		</div> <br/>
 		
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">		
 			<ul>
-				<li ng-repeat="ams in amandmentsForAct" >
-					<a ng-click="openAmandment(amandment)">Otvori {{ams.name}}</a> &nbsp; | &nbsp;
-					<a ng-click="deleteAmandment(amandment)"> <b> Obrisi {{ams.name}} </b> </a>
+				<li ng-repeat="ams in amendmentsForAct" > {{ams.naziv.value}} &nbsp; | &nbsp;
+					<a ng-click="openAmendment(ams.oznaka.value)"> OTVORI </a> &nbsp; | &nbsp;
+					<a ng-click="deleteAmendment(ams.oznaka.value)"> <b> OBRISI </b> </a>
 				</li> 
 			</ul>
 			</div>
