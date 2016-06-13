@@ -36,7 +36,7 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/odbornik/predlogAmandmana",
 							{
-									templateUrl : "views/amandments.html"
+									templateUrl : "views/amendments.html"
 							}
 						)
 						.when(
@@ -60,7 +60,7 @@ xmlApp.config(function($routeProvider){
 						.when(
 							"/predsednik/predlogAmandmana",
 							{
-									templateUrl: "views/amandments.html"
+									templateUrl: "views/amendments.html"
 							}
 						)
 						.when(

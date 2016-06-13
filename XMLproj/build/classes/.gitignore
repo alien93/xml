@@ -1,8 +1,12 @@
+/connection.properties
 /entities/
+/fop.xconf
+/grddl.xsl
 /queries/
+/resources/
 /rest/
 /services/
 /session/
+/users/
 /util/
 /xmldb/
-/resources/

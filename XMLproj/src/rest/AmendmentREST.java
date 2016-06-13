@@ -1,6 +1,10 @@
 package rest;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,7 +19,9 @@ import org.json.simple.JSONObject;
 
 import queries.MySparqlQuery;
 import queries.QueryExecutor;
+import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
+import util.XQueryInvoker;
 
 @Path("/amendment")
 public class AmendmentREST {
@@ -36,14 +42,38 @@ public class AmendmentREST {
 					     "}"+
 					    "FILTER ( str(?akt) = \"http://www.parlament.gov.rs/propisi/akti/u_proceduri/" + actId + "\")"+
 					"}";
-		
-		try {
-			result = QueryExecutor.executeFromString(ConnPropertiesReader.loadProperties(), query);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
 		return result;
+	}
+	
+	@GET
+	@Path("/amendmentId/{id}")
+	@Produces("application/pdf")
+	public Response getAmandmentById(@PathParam("id") String id){
+		String query = "declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
+					   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
+					   "for $am in fn:collection(\"/propisi/amandmani/u_proceduri/metadata\")\n" +
+					   "where $am/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
+					   "\nreturn ($am)//p:Amandman;";
+		return helpQuery(query, id);
+}
+	
+	private Response helpQuery(String query, String id){
+		try {
+			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			InputStream is = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+			path = path.substring(1, path.length()); 
+			new ActXmlToPdf(path+"fop.xconf").transform(is, os);
+			ResponseBuilder builder = Response.ok(os.toByteArray());
+			builder.header("Content-Disposition",
+					"attachment; filename="+id+".pdf");
+			
+			return builder.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(400).build();
+		}
 	}
 	
 }

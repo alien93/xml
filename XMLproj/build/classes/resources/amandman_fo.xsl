@@ -326,7 +326,7 @@
 	</xsl:template>
 
 	<xsl:template match="ns1:Sadrzaj/ns1:ref">
-		<fo:basic-link external-destination="url({concat('http://localhost:8080/REST',./@id_ref)})"
+		<fo:basic-link external-destination="url({concat('http://localhost:8080/XMLproj/rest/pdfReference/ref',./@id_ref)})"
 			color="blue" text-decoration="underline">
 			<xsl:value-of select="." />
 		</fo:basic-link>
@@ -341,7 +341,7 @@
 	</xsl:template>
 
 	<xsl:template match="p:Sadrzaj/ns1:ref">
-		<fo:basic-link external-destination="url({concat('http://localhost:8080/REST',./@id_ref)})"
+		<fo:basic-link external-destination="url({concat('http://localhost:8080/XMLproj/rest/pdfReference/ref',./@id_ref)})"
 			color="blue" text-decoration="underline">
 			<xsl:value-of select="." />
 		</fo:basic-link>
