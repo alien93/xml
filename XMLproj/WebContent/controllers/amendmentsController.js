@@ -58,6 +58,7 @@ angular.module('xmlApp')
 							url : "http://localhost:8080/XMLproj/rest/amendment/removeAmendment/" + idx,
 						}).then(function(result){
 							console.log(result);
+							$scope.showAmendments();
 						}, function(reason){
 							console.log(JSON.stringify(reason));
 						});

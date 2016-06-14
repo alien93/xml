@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,11 +15,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.xml.transform.TransformerException;
 
+import org.xml.sax.SAXException;
 
+import entities.act.Akt;
+import entities.amendment.Amandman;
 import queries.QueryExecutor;
 import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
+import util.RDFtoTriples;
+import util.XMLValidator;
+import util.XMLWriter;
 import util.XQueryInvoker;
 
 @Path("/amendment")
@@ -62,6 +70,38 @@ public class AmendmentREST {
 	}
 	
 	@POST
+	@Path("/addAmendment")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response addAmendment(Amandman amandman){
+		
+		//create temp file
+		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.substring(1, path.length());
+		String xmlPath = path + "temp.xml";
+		
+		//check validity
+		Response r  = XMLValidator.getInstance().validateAmendment(amandman);
+		
+		//write if valid		
+		if(r.getStatus() == 200){
+			try {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/u_proceduri", true);
+			
+				//create metadata
+				String grddlPath = path + "grddl.xsl";
+				String sparqlNamedGraph = "/propisi/amandmani/u_proceduri/metadata";
+				String rdfFilePath = path + "temp.rdf";
+				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
+				
+			} catch (IOException | SAXException | TransformerException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return r;
+	}
+	
+	@POST
 	@Path("/removeAmendment/{amId}")
 	public void removeAct(@PathParam("amId") String amId){
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
@@ -79,6 +119,8 @@ public class AmendmentREST {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	private Response helpQuery(String query, String id){
