@@ -60,11 +60,12 @@ angular.module('xmlApp')
 						});
 					};
 					
-					$scope.deleteAct = function(idx){
+					$scope.deleteAct = function(idx, rowIndex){
 						$http({
 							method : "POST",
 							url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + idx,
 						}).then(function(result){
+							$scope.acts.splice(rowIndex, 1);
 							console.log(result);
 						}, function(reason){
 							console.log(JSON.stringify(reason));

@@ -14,7 +14,7 @@
 			<td  ng-click="getSelected(act.oznaka.value)">{{act.datum.value}}</td>
 			<td  ng-click="getSelected(act.oznaka.value)">{{act.vrsta.value}}</td>
 			<td> 
-				<a ng-click="deleteAct(act.oznaka.value); $event.stopPropagation();"> <b> Povuci akt </b></a>
+				<a ng-click="deleteAct(act.oznaka.value, $index); $event.stopPropagation();"> <b> Povuci akt </b></a>
 			</td>
 		</tr>
 	</table>
