@@ -120,6 +120,18 @@ public class AmendmentREST {
 			e.printStackTrace();
 		}
 		
+		String metadataDocQuery = 	"declare namespace sem=\"http://marklogic.com/semantics\";"+
+									"for $doc in fn:collection(\"/propisi/amandmani/u_proceduri/metadata\")"+
+									"where $doc/sem:triples/sem:triple[1]/sem:object = \""+ amId +"\""+
+									"return base-uri($doc)";
+		try {
+			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
+			result1 = result1.replace("\n", "");
+			String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
+			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 		
 	}
 	
