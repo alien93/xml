@@ -48,7 +48,7 @@ public class AdvancedSearchREST {
 		query.setBrUkupnihGlasovaMax(brUkGlasovaMax);
 		
 		try {
-			String result = query.execute(ConnPropertiesReader.loadProperties(), type, true);
+			String result = query.execute(ConnPropertiesReader.loadProperties(), type + "/metadata", true);
 			return Response.ok().entity(result).build();
 		} catch (IOException e) {
 			e.printStackTrace();

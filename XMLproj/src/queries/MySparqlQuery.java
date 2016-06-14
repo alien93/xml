@@ -95,15 +95,17 @@ public class MySparqlQuery {
 			query.append(selectTemplate("brPozitivnihGlasova"));
 			query.append(selectTemplate("brUkupnihGlasova"));
 			
+			if((brPozitivnihGlasovaMin != Integer.MIN_VALUE) || (brPozitivnihGlasovaMax != Integer.MAX_VALUE))
 			brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
 						+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
 			
+			if((brUkupnihGlasovaMin != Integer.MIN_VALUE) || (brUkupnihGlasovaMax != Integer.MAX_VALUE))
 			brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
 					" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
 		}
 		
 		if(useFilter){
-			query.append("FILTER (" + regexTemplate("?akt", type) + " && ( "
+			query.append("FILTER (" + regexTemplate("?akt", type) + " && ("
 					+ regexTemplate("?oznaka", oznaka) + " " + operator
 					+ regexTemplate("?naziv", naziv) + " " + operator
 					+ "(?datum >= \"" + datumMin + "\"^^xs:date && ?datum <= \"" + datumMax + "\"^^xs:date)" + " " + operator + brFilter
