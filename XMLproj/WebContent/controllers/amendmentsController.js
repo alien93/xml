@@ -52,8 +52,15 @@ angular.module('xmlApp')
 						});
 					};
 					
-					$scope.deleteAmendment = function() {
-						
+					$scope.deleteAmendment = function(idx) {
+						$http({
+							method : "POST",
+							url : "http://localhost:8080/XMLproj/rest/amendment/removeAmendment/" + idx,
+						}).then(function(result){
+							console.log(result);
+						}, function(reason){
+							console.log(JSON.stringify(reason));
+						});
 					};
 				}
 		]);

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -58,7 +59,27 @@ public class AmendmentREST {
 					   "where $am/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"" + id + "\"" +
 					   "\nreturn ($am)//p:Amandman;";
 		return helpQuery(query, id);
-}
+	}
+	
+	@POST
+	@Path("/removeAmendment/{amId}")
+	public void removeAct(@PathParam("amId") String amId){
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+						"for $doc in fn:collection(\"/propisi/amandmani/u_proceduri\")"+
+						"where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \""+ amId +"\""+
+						"return base-uri($doc)";
+		
+		String result = "";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			result = result.replace("\n", "");
+			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
+			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private Response helpQuery(String query, String id){
 		try {
