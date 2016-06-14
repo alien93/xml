@@ -17,5 +17,11 @@ angular.module('xmlApp')
 						console.log(JSON.stringify(reason));
 					});
 				};
+				
+				//advanced search
+				$scope.advancedSearch = function(){
+					console.log("advanced search for non active acts");
+					
+				}
 			}
 		]);
