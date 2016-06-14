@@ -43,9 +43,39 @@ angular.module('xmlApp')
 				return $scope.contentForActVisible[index];
 			};
 			
+			$scope.openAmendment = function(amName) {
+				$http({
+					method : "GET",
+					url : "http://localhost:8080/XMLproj/rest/amendment/amendmentId/" + amName,
+					responseType: 'arraybuffer'
+				}).then(function(result){
+					var file = new Blob([result.data], {type: 'application/pdf'});
+				    var fileURL = URL.createObjectURL(file);
+				    window.open(fileURL);
+				}, function(reason){
+					console.log(JSON.stringify(reason));
+				});
+			};
+			
+			$scope.openAct = function(docName){
+				console.log(docName);
+				$http({
+					method : "GET",
+					url : "http://localhost:8080/XMLproj/rest/act/activeId/" + docName,
+					responseType: 'arraybuffer'
+				}).then(function(result){
+					var file = new Blob([result.data], {type: 'application/pdf'});
+				    var fileURL = URL.createObjectURL(file);
+				    window.open(fileURL);
+				}, function(reason){
+					console.log(JSON.stringify(reason));
+				});
+			}
+			
 			$scope.sessionSubmit = function() {
 				
 			};
+		
 		
 		}
 		]);

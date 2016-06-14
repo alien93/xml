@@ -9,6 +9,13 @@
 					</tr> 
 					
 					<tr ng-if="testIfVisible($index)"> 
+						<td colspan="3"> 
+						<a style='cursor: pointer;' ng-click="openAct(act.oznaka.value)">  
+						  Otvori akt						
+						</td>
+					</tr> 
+					
+					<tr ng-if="testIfVisible($index)"> 
 						<td> &nbsp; </td>
 						<td> Akt se usvaja u nacelu: </td>
 						<td> 
@@ -24,7 +31,10 @@
 					</tr>
 					
 					<tr ng-repeat="ams in amendments" ng-if="testIfVisible($parent.$index)">
-						<td> {{ams.nazivAmandman.value}} </td>
+						<td> 
+							<a style='cursor: pointer;' ng-click="openAmendment(ams.oznakaAmandman.value)"> 
+							{{ams.nazivAmandman.value}} 
+						</td>
 						<td> &nbsp; </td>
 						<td> 
 							<input type="number" min="0" max="1000"> &nbsp; / &nbsp; 
