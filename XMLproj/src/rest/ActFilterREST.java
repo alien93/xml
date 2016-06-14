@@ -67,8 +67,10 @@ public class ActFilterREST {
 		MySparqlQuery q = new MySparqlQuery(type, 
 				oznaka, naziv, mesto, datumMin, datumMax, vrsta);
 		if("Sve kategorije".equals(category.trim())) q.setOperator(" || ");
-		q.setBrPozitivnihGlasova(brPozitivnihGlasova);
-		q.setBrUkupnihGlasova(brUkupnihGlasova);
+		q.setBrPozitivnihGlasovaMin(brPozitivnihGlasova);
+		q.setBrPozitivnihGlasovaMax(brPozitivnihGlasova);
+		q.setBrUkupnihGlasovaMin(brUkupnihGlasova);
+		q.setBrUkupnihGlasovaMax(brUkupnihGlasova);
 		
 		ResponseBuilder response = Response.ok();
 		try {
