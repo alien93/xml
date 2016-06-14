@@ -1,6 +1,8 @@
 package rest;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -40,15 +42,22 @@ public class ActFilterREST {
 	}
 	
 	private Response helpQuery(String type, String metaData, String category, String text){
-		System.out.println("***********" + text + "*************");
 		String oznaka = "Oznaka".equals(category.trim()) ? text.trim() : "";
 		String naziv = "Naziv".equals(category.trim()) ? text.trim() : "";
 		String mesto = "Mesto".equals(category.trim()) ? text.trim() : "";
 		String datumMin = "Datum".equals(category.trim()) ? text.trim() : "";
 		String datumMax = "Datum".equals(category.trim()) ? text.trim() : "";
+		
 		String vrsta = "Vrsta".equals(category.trim()) ? text.trim() : "";
 		if("Sve kategorije".equals(category.trim())){
 			oznaka = text.trim(); naziv = text.trim(); mesto = text.trim(); datumMin = text.trim(); datumMax = text.trim(); vrsta = text.trim();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			if(!datumMin.equals("")){
+				try{ dateFormat.parse(datumMin); }catch(Exception e){ datumMin = "2017-01-01"; }
+			}
+			if(!datumMax.equals("")){
+				try{ dateFormat.parse(datumMax); }catch(Exception e){ datumMax = "2017-01-01"; }
+			}
 		}
 		int brPozitivnihGlasova = -1;
 		if("Sve kategorije".equals(category.trim()) || "Broj pozitivnih glasova".equals(category.trim())){

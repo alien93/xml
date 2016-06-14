@@ -91,17 +91,16 @@ public class MySparqlQuery {
 		
 		String brFilter = "";
 		if(type.equals(AKT_U_PROCEDURI)){
-			
-			query.append(selectTemplate("brPozitivnihGlasova"));
-			query.append(selectTemplate("brUkupnihGlasova"));
-			
-			if((brPozitivnihGlasovaMin != Integer.MIN_VALUE) || (brPozitivnihGlasovaMax != Integer.MAX_VALUE))
-			brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
-						+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
-			
-			if((brUkupnihGlasovaMin != Integer.MIN_VALUE) || (brUkupnihGlasovaMax != Integer.MAX_VALUE))
-			brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
-					" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
+			if((brPozitivnihGlasovaMin != Integer.MIN_VALUE) || (brPozitivnihGlasovaMax != Integer.MAX_VALUE)){
+				query.append(selectTemplate("brPozitivnihGlasova"));
+				brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
+							+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
+			}
+			if((brUkupnihGlasovaMin != Integer.MIN_VALUE) || (brUkupnihGlasovaMax != Integer.MAX_VALUE)){
+				query.append(selectTemplate("brUkupnihGlasova"));
+				brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
+						" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
+			}
 		}
 		
 		if(useFilter){
