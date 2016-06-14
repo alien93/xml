@@ -17,7 +17,8 @@ public class ApplicationConfig extends Application{
 	        											ActFilterREST.class,
 	        											SearchTextContentREST.class,
 	        											PdfReferenceREST.class,
-	        											AmendmentREST.class));
+	        											AmendmentREST.class,
+	        											AdvancedSearchREST.class));
 
 	    }
 }

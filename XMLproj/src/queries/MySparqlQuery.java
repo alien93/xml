@@ -34,8 +34,10 @@ public class MySparqlQuery {
 	private String datumMin;
 	private String datumMax;
 	private String vrsta;
-	private int brPozitivnihGlasova = -1;
-	private int brUkupnihGlasova = -1;
+	private int brPozitivnihGlasovaMin = Integer.MIN_VALUE;
+	private int brPozitivnihGlasovaMax = Integer.MAX_VALUE;
+	private int brUkupnihGlasovaMin = Integer.MIN_VALUE;
+	private int brUkupnihGlasovaMax = Integer.MAX_VALUE;
 	private String operator = " && ";
 	
 	/**
@@ -88,18 +90,22 @@ public class MySparqlQuery {
 		query.append(selectTemplate("mesto"));
 		
 		String brFilter = "";
-		if(brPozitivnihGlasova != -1){
+		if(type.equals(AKT_U_PROCEDURI)){
+			
 			query.append(selectTemplate("brPozitivnihGlasova"));
-			brFilter += " ?brPozitivnihGlasova=" + brPozitivnihGlasova + operator; 
-		}
-		if(brUkupnihGlasova != -1){
 			query.append(selectTemplate("brUkupnihGlasova"));
-			brFilter += " ?brUkupnihGlasova=" + brUkupnihGlasova + operator;
+			
+			if((brPozitivnihGlasovaMin != Integer.MIN_VALUE) || (brPozitivnihGlasovaMax != Integer.MAX_VALUE))
+			brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
+						+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
+			
+			if((brUkupnihGlasovaMin != Integer.MIN_VALUE) || (brUkupnihGlasovaMax != Integer.MAX_VALUE))
+			brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
+					" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
 		}
-		 
 		
 		if(useFilter){
-			query.append("FILTER (" + regexTemplate("?akt", type) + " && ( "
+			query.append("FILTER (" + regexTemplate("?akt", type) + " && ("
 					+ regexTemplate("?oznaka", oznaka) + " " + operator
 					+ regexTemplate("?naziv", naziv) + " " + operator
 					+ "(?datum >= \"" + datumMin + "\"^^xs:date && ?datum <= \"" + datumMax + "\"^^xs:date)" + " " + operator + brFilter
@@ -221,28 +227,28 @@ public class MySparqlQuery {
 		this.vrsta = vrsta;
 	}
 
-	public int getBrPozitivnihGlasova() {
-		return brPozitivnihGlasova;
-	}
-
-	public void setBrPozitivnihGlasova(int brPozitivnihGlasova) {
-		this.brPozitivnihGlasova = brPozitivnihGlasova;
-	}
-
-	public int getBrUkupnihGlasova() {
-		return brUkupnihGlasova;
-	}
-
-	public void setBrUkupnihGlasova(int brUkupnihGlasova) {
-		this.brUkupnihGlasova = brUkupnihGlasova;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public void setBrPozitivnihGlasovaMin(int brPozitivnihGlasovaMin) {
+		if(brPozitivnihGlasovaMin > 0) this.brPozitivnihGlasovaMin = brPozitivnihGlasovaMin;
+	}
+
+	public void setBrPozitivnihGlasovaMax(int brPozitivnihGlasovaMax) {
+		if(brPozitivnihGlasovaMax > 0) this.brPozitivnihGlasovaMax = brPozitivnihGlasovaMax;
+	}
+
+	public void setBrUkupnihGlasovaMin(int brUkupnihGlasovaMin) {
+		if(brUkupnihGlasovaMin > 0) this.brUkupnihGlasovaMin = brUkupnihGlasovaMin;
+	}
+
+	public void setBrUkupnihGlasovaMax(int brUkupnihGlasovaMax) {
+		if(brUkupnihGlasovaMax > 0) this.brUkupnihGlasovaMax = brUkupnihGlasovaMax;
 	}
 
 	public static void main(String[] args) {

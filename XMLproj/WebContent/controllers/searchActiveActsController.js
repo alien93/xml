@@ -5,9 +5,9 @@ angular.module('xmlApp')
 				$scope.selectedCategory = "Sadrzaj";
 				
 				$scope.search = function() {
-					var urlRest = $scope.selectedCategory != "Sadrzaj" ? "http://localhost:8080/XMLproj/rest/filter/activeActs/" + ($scope.searchText.trim() == "" ? 
-							"_" : $scope.searchText.trim()) + "/" + $scope.selectedCategory
-							: "http://localhost:8080/XMLproj/rest/searchText/active/" + $scope.searchText.trim();
+					var text = ($scope.searchText.trim() == "" ? "_" : $scope.searchText.trim())
+					var urlRest = $scope.selectedCategory != "Sadrzaj" ? "http://localhost:8080/XMLproj/rest/filter/activeActs/" + text + "/" + $scope.selectedCategory
+							: "http://localhost:8080/XMLproj/rest/searchText/active/" + text;
 					$http({
 						method: "GET",
 						url : urlRest
