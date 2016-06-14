@@ -89,17 +89,18 @@ public class MySparqlQuery {
 		query.append(selectTemplate("vrsta"));
 		query.append(selectTemplate("mesto"));
 		
-		query.append(selectTemplate("brPozitivnihGlasova"));
-		query.append(selectTemplate("brUkupnihGlasova"));
-		
 		String brFilter = "";
-		
-		brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
-					+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
-		
-		brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
-				" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
-		 
+		if(type.equals(AKT_U_PROCEDURI)){
+			
+			query.append(selectTemplate("brPozitivnihGlasova"));
+			query.append(selectTemplate("brUkupnihGlasova"));
+			
+			brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
+						+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
+			
+			brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
+					" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
+		}
 		
 		if(useFilter){
 			query.append("FILTER (" + regexTemplate("?akt", type) + " && ( "

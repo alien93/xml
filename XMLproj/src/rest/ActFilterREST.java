@@ -2,7 +2,6 @@ package rest;
 
 import java.io.IOException;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,6 +40,7 @@ public class ActFilterREST {
 	}
 	
 	private Response helpQuery(String type, String metaData, String category, String text){
+		System.out.println("***********" + text + "*************");
 		String oznaka = "Oznaka".equals(category.trim()) ? text.trim() : "";
 		String naziv = "Naziv".equals(category.trim()) ? text.trim() : "";
 		String mesto = "Mesto".equals(category.trim()) ? text.trim() : "";
