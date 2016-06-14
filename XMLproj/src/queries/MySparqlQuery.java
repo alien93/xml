@@ -34,10 +34,10 @@ public class MySparqlQuery {
 	private String datumMin;
 	private String datumMax;
 	private String vrsta;
-	private int brPozitivnihGlasovaMin = -1;
-	private int brPozitivnihGlasovaMax = -1;
-	private int brUkupnihGlasovaMin = -1;
-	private int brUkupnihGlasovaMax = -1;
+	private int brPozitivnihGlasovaMin = Integer.MIN_VALUE;
+	private int brPozitivnihGlasovaMax = Integer.MAX_VALUE;
+	private int brUkupnihGlasovaMin = Integer.MIN_VALUE;
+	private int brUkupnihGlasovaMax = Integer.MAX_VALUE;
 	private String operator = " && ";
 	
 	/**
@@ -89,30 +89,16 @@ public class MySparqlQuery {
 		query.append(selectTemplate("vrsta"));
 		query.append(selectTemplate("mesto"));
 		
-		if(brPozitivnihGlasovaMin != -1 || brPozitivnihGlasovaMax != -1) query.append(selectTemplate("brPozitivnihGlasova"));
-		if(brUkupnihGlasovaMax != -1 || brUkupnihGlasovaMin != -1) query.append(selectTemplate("brUkupnihGlasova"));
+		query.append(selectTemplate("brPozitivnihGlasova"));
+		query.append(selectTemplate("brUkupnihGlasova"));
 		
 		String brFilter = "";
-		if(brPozitivnihGlasovaMin != -1){
-			brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int";
-		}
-		if(brPozitivnihGlasovaMax != -1){
-			if(brPozitivnihGlasovaMin != -1) brFilter += " && ";
-			else brFilter += "(";
-			brFilter += " ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
-		}else if(brPozitivnihGlasovaMin != -1){
-			brFilter += ")" + operator;
-		}
-		if(brUkupnihGlasovaMin != -1){
-			brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int";
-		}
-		if(brUkupnihGlasovaMax != -1){
-			if(brUkupnihGlasovaMin != -1) brFilter += " && ";
-			else brFilter += "(";
-			brFilter += " ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
-		}else if(brUkupnihGlasovaMin != -1){
-			brFilter += ")" + operator;
-		}
+		
+		brFilter += " (?brPozitivnihGlasova >= \"" + brPozitivnihGlasovaMin + "\"^^xs:int"
+					+ " && ?brPozitivnihGlasova <= \"" + brPozitivnihGlasovaMax + "\"^^xs:int)" + operator;
+		
+		brFilter += " (?brUkupnihGlasova >= \"" + brUkupnihGlasovaMin + "\"^^xs:int" + 
+				" && ?brUkupnihGlasova <= \"" + brUkupnihGlasovaMax + "\"^^xs:int)" + operator;
 		 
 		
 		if(useFilter){
@@ -247,19 +233,19 @@ public class MySparqlQuery {
 	}
 
 	public void setBrPozitivnihGlasovaMin(int brPozitivnihGlasovaMin) {
-		this.brPozitivnihGlasovaMin = brPozitivnihGlasovaMin;
+		if(brPozitivnihGlasovaMin > 0) this.brPozitivnihGlasovaMin = brPozitivnihGlasovaMin;
 	}
 
 	public void setBrPozitivnihGlasovaMax(int brPozitivnihGlasovaMax) {
-		this.brPozitivnihGlasovaMax = brPozitivnihGlasovaMax;
+		if(brPozitivnihGlasovaMax > 0) this.brPozitivnihGlasovaMax = brPozitivnihGlasovaMax;
 	}
 
 	public void setBrUkupnihGlasovaMin(int brUkupnihGlasovaMin) {
-		this.brUkupnihGlasovaMin = brUkupnihGlasovaMin;
+		if(brUkupnihGlasovaMin > 0) this.brUkupnihGlasovaMin = brUkupnihGlasovaMin;
 	}
 
 	public void setBrUkupnihGlasovaMax(int brUkupnihGlasovaMax) {
-		this.brUkupnihGlasovaMax = brUkupnihGlasovaMax;
+		if(brUkupnihGlasovaMax > 0) this.brUkupnihGlasovaMax = brUkupnihGlasovaMax;
 	}
 
 	public static void main(String[] args) {
