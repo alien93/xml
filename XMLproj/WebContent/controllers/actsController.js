@@ -15,7 +15,7 @@ angular.module('xmlApp')
 					var postAct = function(act){
 						$http({
 							method : "POST",
-							url : "http://localhost:8080/XMLproj/rest/act/addAct",
+							url : "http://localhost:8080/XMLproj/rest/act/addAct/",
 							headers : {
 								"Content-Type": "application/xml"
 							},

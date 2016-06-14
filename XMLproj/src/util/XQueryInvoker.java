@@ -80,7 +80,7 @@ public class XQueryInvoker {
 		String retVal = "";
 		if (response.hasNext()) {
 			for (EvalResult result : response) {
-				retVal += "\n" + result.getString();
+				retVal += result.getString() + "\n";
 			}
 		} else { 		
 			System.out.println("your query returned an empty sequence.");

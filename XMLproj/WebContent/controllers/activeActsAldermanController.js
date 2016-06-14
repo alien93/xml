@@ -62,11 +62,31 @@ angular.module('xmlApp')
 					
 					$scope.deleteAct = function(idx, rowIndex){
 						$http({
-							method : "POST",
-							url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + idx,
+							method : "GET",
+							url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + idx,
 						}).then(function(result){
-							$scope.acts.splice(rowIndex, 1);
-							console.log(result);
+							console.log(result.data);
+							$http({
+								method : "POST",
+								url : "http://localhost:8080/XMLproj/rest/act/changeCollection",
+								headers : {
+									"Content-Type": "application/xml"
+								},
+								data : result.data
+							}).then(function(result){
+								$http({
+									method : "POST",
+									url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + idx,
+								}).then(function(result){
+									$scope.acts.splice(rowIndex, 1);
+									console.log(result);
+								}, function(reason){
+									console.log(JSON.stringify(reason));
+								});
+								console.log(result);
+							}, function(reason){
+								console.log(JSON.stringify(reason));
+							});
 						}, function(reason){
 							console.log(JSON.stringify(reason));
 						});

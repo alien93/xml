@@ -119,6 +119,56 @@ public class ActREST {
 		return r;
 	}
 	
+	@GET
+	@Path("/xmlById/{actId}")
+	@Produces(MediaType.APPLICATION_XML)
+	public String getXmlById(@PathParam("actId") String actId){
+		String result = "";
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
+						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+						"return $doc";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@POST
+	@Path("/changeCollection")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response changeCollection(Akt akt){
+		System.out.println("Changing collection");
+		//create temp file
+		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.substring(1, path.length());
+		String xmlPath = path + "temp.xml";
+		
+		//check validity
+		Response r  = XMLValidator.getInstance().validateAct(akt, xmlPath);
+		
+		//write if valid		
+		if(r.getStatus() == 200){
+			try {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/povuceni", true);
+			
+				//create metadata
+				String grddlPath = path + "grddl.xsl";
+				String sparqlNamedGraph = "/propisi/akti/povuceni/metadata";
+				String rdfFilePath = path + "temp.rdf";
+				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
+				
+			} catch (IOException | SAXException | TransformerException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return r;
+	}
+	
 	@POST
 	@Path("/removeAct/{actId}")
 	public void removeAct(@PathParam("actId") String actId){
