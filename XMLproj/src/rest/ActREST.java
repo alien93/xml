@@ -131,7 +131,7 @@ public class ActREST {
 						"return base-uri($doc)";
 		//remove document
 		try {
-			//result contains name of the xml document in db
+			//result contains the name of the xml document in db
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 			result = result.replace("\n", "");
 			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
@@ -140,7 +140,19 @@ public class ActREST {
 			e.printStackTrace();
 		}
 		//remove metadata
-		
+		//get the name of the document that contains metadata
+		String metadataDocQuery = 	"declare namespace sem=\"http://marklogic.com/semantics\";"+
+										"for $doc in fn:collection(\"/propisi/akti/u_proceduri/metadata\")"+
+										"where $doc/sem:triples/sem:triple[1]/sem:object = \""+ actId +"\""+
+										"return base-uri($doc)";
+		try {
+			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
+			result1 = result1.replace("\n", "");
+			String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
+			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
