@@ -61,7 +61,7 @@ angular.module('xmlApp')
 				console.log(docName);
 				$http({
 					method : "GET",
-					url : "http://localhost:8080/XMLproj/rest/act/activeId/" + docName,
+					url : "http://localhost:8080/XMLproj/rest/act/nonActiveId/" + docName,
 					responseType: 'arraybuffer'
 				}).then(function(result){
 					var file = new Blob([result.data], {type: 'application/pdf'});
@@ -70,7 +70,7 @@ angular.module('xmlApp')
 				}, function(reason){
 					console.log(JSON.stringify(reason));
 				});
-			}
+			};
 			
 			$scope.sessionSubmit = function() {
 				
