@@ -122,19 +122,26 @@ public class ActREST {
 	@POST
 	@Path("/removeAct/{actId}")
 	public void removeAct(@PathParam("actId") String actId){
+		String result = "";
+		//get document's name
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
 						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
 						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
 						"return base-uri($doc)";
-		System.out.println(actId);
-		System.out.println(query);
+		//remove document
 		try {
-			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
-			System.out.println("Result: " + result);
+			//result contains name of the xml document in db
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			result = result.replace("\n", "");
+			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
+			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//remove metadata
+		
+		
 	}
 	
 	private Response helpQuery(String query, String id){
