@@ -80,8 +80,10 @@ public class SearchTextContentREST {
 			}
 			if(newBindins.length() > 1) newBindins = newBindins.substring(0,  newBindins.length() - 1);
 			newBindins += "]";
-			object.getAsJsonObject("results").remove("bindings");
-			object.getAsJsonObject("results").add("bindings", new JsonParser().parse(newBindins).getAsJsonArray());
+			if(!"_".equals(text.trim())){
+				object.getAsJsonObject("results").remove("bindings");
+				object.getAsJsonObject("results").add("bindings", new JsonParser().parse(newBindins).getAsJsonArray());
+			}
 			//System.out.println(object.toString());
 			return object.toString();
 		} catch (IOException e) {
