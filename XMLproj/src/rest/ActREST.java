@@ -129,6 +129,7 @@ public class ActREST {
 						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
 						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
 						"return base-uri($doc)";
+		//copy document to another collection
 		//remove document
 		try {
 			//result contains the name of the xml document in db

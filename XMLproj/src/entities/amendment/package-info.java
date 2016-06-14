@@ -5,5 +5,16 @@
 // Generated on: 2016.06.10 at 06:19:51 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.parlament.gov.rs/generic_types", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(
+		namespace = "http://www.parlament.gov.rs/generic_types", 
+		elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+		xmlns = {
+				@javax.xml.bind.annotation.XmlNs(prefix="ns1", namespaceURI="http://www.parlament.gov.rs/generic_types"),
+				@javax.xml.bind.annotation.XmlNs(prefix="", namespaceURI="http://www.w3.org/ns/rdfa#"),
+				@javax.xml.bind.annotation.XmlNs(prefix="xs", namespaceURI="http://www.w3.org/2001/XMLSchema#"),
+				@javax.xml.bind.annotation.XmlNs(prefix="p", namespaceURI="http://www.parlament.gov.rs/propisi"),
+				@javax.xml.bind.annotation.XmlNs(prefix="xsi", namespaceURI="http://www.w3.org/2001/XMLSchema-instance"),
+				@javax.xml.bind.annotation.XmlNs(prefix="pred", namespaceURI="http://www.parlament.gov.rs/propisi/predicate/"),
+			}
+)
 package entities.amendment;
