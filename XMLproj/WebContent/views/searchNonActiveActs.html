@@ -1,15 +1,12 @@
 <div data-ng-controller="searchNonActiveActsController">
-	<form class="formNonSearchActiveActs" ng-submit="search()">
 	<div class="row">
-		<div class="col-md-2"> &nbsp; </div>
+		<div class="col-md-1"> &nbsp; </div>
 		<div class="col-md-1">
 			<label> Pretraga: </label>
 		</div>
 		<div class="col-md-3">
 			<input type="text" ng-model="searchText" class="form-control" placeholder="Unesite pojam pretrage">
 		</div>
-
-	
 		<div class="col-md-3"> 
 			<select ng-model="selectedCategory" class="form-control"> 
 				<option>Sadrzaj</option>
@@ -24,12 +21,12 @@
 			</select>
 	     </div>
 	    <div class="col-md-1"> 
-	    	<input type="submit" value="Trazi" class="btn btn-primary btn-block">
+	    	<button ng-click="search()" class="btn btn-primary btn-block">Trazi</button>
 	    </div>
-	</div>
-	</form>
-	
-		<div class="col-md-2">
+	    <div class="col-md-2">
 			<button class="btn btn-danger btn-block" ng-click=advancedSearch()>Napredna pretraga</button> 
 		</div>
+	</div>
+	
+		
 </div>
