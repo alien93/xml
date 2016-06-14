@@ -9,12 +9,12 @@
 			<th>Vrsta</th>
 			<th>&nbsp;</th>
 		</tr>
-		<tr ng-repeat="act in acts" style='cursor: pointer;' ng-click="getSelected(act.oznaka.value)">
-			<td>{{act.naziv.value}}</td>
-			<td>{{act.datum.value}}</td>
-			<td>{{act.vrsta.value}}</td>
+		<tr ng-repeat="act in acts" style='cursor: pointer;'>
+			<td  ng-click="getSelected(act.oznaka.value)">{{act.naziv.value}}</td>
+			<td  ng-click="getSelected(act.oznaka.value)">{{act.datum.value}}</td>
+			<td  ng-click="getSelected(act.oznaka.value)">{{act.vrsta.value}}</td>
 			<td> 
-				<a ng-click="deleteAct(); $event.stopPropagation();"> <b> Povuci akt </b></a>
+				<a ng-click="deleteAct(act.oznaka.value); $event.stopPropagation();"> <b> Povuci akt </b></a>
 			</td>
 		</tr>
 	</table>

@@ -119,6 +119,24 @@ public class ActREST {
 		return r;
 	}
 	
+	@POST
+	@Path("/removeAct/{actId}")
+	public void removeAct(@PathParam("actId") String actId){
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
+						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+						"return base-uri($doc)";
+		System.out.println(actId);
+		System.out.println(query);
+		try {
+			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			System.out.println("Result: " + result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private Response helpQuery(String query, String id){
 		try {
 			String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
