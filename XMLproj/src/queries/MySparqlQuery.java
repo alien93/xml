@@ -235,19 +235,19 @@ public class MySparqlQuery {
 	}
 
 	public void setBrPozitivnihGlasovaMin(int brPozitivnihGlasovaMin) {
-		if(brPozitivnihGlasovaMin > 0) this.brPozitivnihGlasovaMin = brPozitivnihGlasovaMin;
+		if(brPozitivnihGlasovaMin >= 0) this.brPozitivnihGlasovaMin = brPozitivnihGlasovaMin;
 	}
 
 	public void setBrPozitivnihGlasovaMax(int brPozitivnihGlasovaMax) {
-		if(brPozitivnihGlasovaMax > 0) this.brPozitivnihGlasovaMax = brPozitivnihGlasovaMax;
+		if(brPozitivnihGlasovaMax >= 0) this.brPozitivnihGlasovaMax = brPozitivnihGlasovaMax;
 	}
 
 	public void setBrUkupnihGlasovaMin(int brUkupnihGlasovaMin) {
-		if(brUkupnihGlasovaMin > 0) this.brUkupnihGlasovaMin = brUkupnihGlasovaMin;
+		if(brUkupnihGlasovaMin >= 0) this.brUkupnihGlasovaMin = brUkupnihGlasovaMin;
 	}
 
 	public void setBrUkupnihGlasovaMax(int brUkupnihGlasovaMax) {
-		if(brUkupnihGlasovaMax > 0) this.brUkupnihGlasovaMax = brUkupnihGlasovaMax;
+		if(brUkupnihGlasovaMax >= 0) this.brUkupnihGlasovaMax = brUkupnihGlasovaMax;
 	}
 
 	public static void main(String[] args) {
