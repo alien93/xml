@@ -53,6 +53,7 @@ angular.module('xmlApp')
 					};
 					
 					$scope.deleteAmendment = function(idx) {
+						console.log(idx);
 						$http({
 							method : "GET",
 							url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + idx,

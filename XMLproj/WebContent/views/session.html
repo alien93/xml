@@ -24,8 +24,8 @@
 					<tr ng-if="testIfVisible($index)">
 						<td> &nbsp; </td>
 						<td> 
-							<input type="number" min="0" max="1000"> &nbsp; / &nbsp; 
-							<input type="number" min="0" max="1000" >
+							<input type="number" min="0" max="1000" ng-model="$parent.$parent.aktGlasMin"> &nbsp; / &nbsp; 
+							<input type="number" min="0" max="1000" ng-model="$parent.$parent.aktGlasMax">
 						</td>
 						<td>&nbsp;</td>
 					</tr>
@@ -42,7 +42,7 @@
 					<tr ng-if="testIfVisible($index)">
 						<td> Glasanje o amandmanima pojedinacno: </td>
 						<td> Za &nbsp; / &nbsp; Ukupno </td>
-						<td> &nbsp; </td>
+						<td> Primeni amandman </td>
 					</tr>
 					
 					<tr ng-repeat="ams in amendments.data" ng-if="testIfVisible($parent.$index)">
@@ -54,7 +54,10 @@
 							<input type="number" min="0" max="1000" ng-model="amendments.glasMin[$index]"> &nbsp; / &nbsp; 
 							<input type="number" min="0" max="1000" ng-model="amendments.glasMax[$index]">
 						</td>
-						<td><button class="btn btn-primary" ng-click="acceptAmendment(ams.oznakaAmandman.value)">Primeni</button></td>
+						<td>	
+							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=true>DA</label>
+							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=false>NE</label>
+						</td>
 					</tr>
 					
 					<tr ng-model="act" ng-if="testIfVisible($index)"> 

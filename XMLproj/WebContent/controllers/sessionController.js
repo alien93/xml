@@ -34,7 +34,7 @@ angular.module('xmlApp')
 						url : restUrl,
 					}).then(function(retVal) {
 						console.log(retVal);
-						$scope.amendments = {"data":retVal.data.results.bindings, "glasMin":[], "glasMax":[]};
+						$scope.amendments = {"data":retVal.data.results.bindings, "glasMin":[], "glasMax":[], "primeni":[]};
 						console.log(retVal.data.results.bindings);
 					});	
 				}
@@ -87,11 +87,14 @@ angular.module('xmlApp')
 				
 				
 				console.log(actId);
+				console.log($scope.aktGlasMin);
+				console.log($scope.aktGlasMax);
 				console.log($scope.uNacelu);
 				for(var i=0; i<$scope.amendments.data.length; i++){
 					console.log($scope.amendments.data[i].oznakaAmandman.value);
 					console.log($scope.amendments.glasMin[i]);
 					console.log($scope.amendments.glasMax[i]);
+					console.log($scope.amendments.primeni[i]);
 				}
 				console.log($scope.uCelini);
 			};
