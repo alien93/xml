@@ -34,7 +34,7 @@ angular.module('xmlApp')
 						url : restUrl,
 					}).then(function(retVal) {
 						console.log(retVal);
-						$scope.amendments = retVal.data.results.bindings;
+						$scope.amendments = {"data":retVal.data.results.bindings, "glasMin":[], "glasMax":[]};
 						console.log(retVal.data.results.bindings);
 					});	
 				}
@@ -72,8 +72,28 @@ angular.module('xmlApp')
 				});
 			};
 			
-			$scope.sessionSubmit = function() {
+			$scope.acceptAmendment = function(amendmentId){
+				console.log(amendmentId);
+			}
+			
+			$scope.sessionSubmit = function(actId) {
+				//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane
+				if($scope.uCelini == true){
+					console.log("Akt se prihvata u celini");
+				}
+				else{
+					//prihvati amandman
+				}
 				
+				
+				console.log(actId);
+				console.log($scope.uNacelu);
+				for(var i=0; i<$scope.amendments.data.length; i++){
+					console.log($scope.amendments.data[i].oznakaAmandman.value);
+					console.log($scope.amendments.glasMin[i]);
+					console.log($scope.amendments.glasMax[i]);
+				}
+				console.log($scope.uCelini);
 			};
 		
 		
