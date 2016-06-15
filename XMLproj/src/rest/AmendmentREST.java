@@ -107,11 +107,11 @@ public class AmendmentREST {
 	public String getXmlById(@PathParam("amId") String amId){
 		System.out.println("XML for amendment: " + amId);
 		String result = "";
-		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
-				   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
-				   "for $am in fn:collection(\"/propisi/amandmani/u_proceduri\")\n" +
-				   "where $am/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"" + amId + "\"" +
-				   "\nreturn ($am)";
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+						"for $doc in fn:collection(\"/propisi/amandmani/u_proceduri\")"+
+						"where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \""+ amId +"\""+
+						"return $doc";
 		try {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 		} catch (IOException e) {
@@ -141,7 +141,7 @@ public class AmendmentREST {
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
 				String sparqlNamedGraph = "/propisi/amandmani/povuceni/metadata";
-				String rdfFilePath = path + "temp.rdf";
+				String rdfFilePath = path + "tmp.rdf";
 				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
 				
 			} catch (IOException | SAXException | TransformerException e) {
@@ -173,7 +173,7 @@ public class AmendmentREST {
 		
 		String metadataDocQuery = 	"declare namespace sem=\"http://marklogic.com/semantics\";"+
 									"for $doc in fn:collection(\"/propisi/amandmani/u_proceduri/metadata\")"+
-									"where $doc/sem:triples/sem:triple[1]/sem:object = \""+ amId +"\""+
+									"where $doc/sem:triples/sem:triple[2]/sem:object = \""+ amId +"\""+
 									"return base-uri($doc)";
 		try {
 			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
