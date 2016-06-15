@@ -101,9 +101,60 @@ public class AmendmentREST {
 		return r;
 	}
 	
+	@GET
+	@Path("/xmlById/{amId}")
+	@Produces(MediaType.APPLICATION_XML)
+	public String getXmlById(@PathParam("amId") String amId){
+		System.out.println("XML for amendment: " + amId);
+		String result = "";
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" + 
+				   "declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";\n" +
+				   "for $am in fn:collection(\"/propisi/amandmani/u_proceduri\")\n" +
+				   "where $am/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"" + amId + "\"" +
+				   "\nreturn ($am)";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@POST
+	@Path("/changeCollection")
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response changeCollection(Amandman amandman){
+		System.out.println("Changing collection");
+		//create temp file
+		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.substring(1, path.length());
+		String xmlPath = path + "temp.xml";
+		
+		//check validity
+		Response r  = XMLValidator.getInstance().validateAmendment(amandman);
+		
+		//write if valid		
+		if(r.getStatus() == 200){
+			try {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/povuceni", true);
+			
+				//create metadata
+				String grddlPath = path + "grddl.xsl";
+				String sparqlNamedGraph = "/propisi/amandmani/povuceni/metadata";
+				String rdfFilePath = path + "temp.rdf";
+				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
+				
+			} catch (IOException | SAXException | TransformerException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return r;
+	}
+	
 	@POST
 	@Path("/removeAmendment/{amId}")
-	public void removeAct(@PathParam("amId") String amId){
+	public void removeAmendment(@PathParam("amId") String amId){
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
 						"for $doc in fn:collection(\"/propisi/amandmani/u_proceduri\")"+

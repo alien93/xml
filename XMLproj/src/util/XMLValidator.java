@@ -82,7 +82,7 @@ public class XMLValidator {
 			
 			Schema schema = sf.newSchema(schemas);
 			
-			JAXBContext context = JAXBContext.newInstance(Akt.class);
+			JAXBContext context = JAXBContext.newInstance(Amandman.class);
 			
 			Marshaller marsh = context.createMarshaller();
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

@@ -54,11 +54,31 @@ angular.module('xmlApp')
 					
 					$scope.deleteAmendment = function(idx) {
 						$http({
-							method : "POST",
-							url : "http://localhost:8080/XMLproj/rest/amendment/removeAmendment/" + idx,
+							method : "GET",
+							url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + idx,
 						}).then(function(result){
-							console.log(result);
-							$scope.showAmendments();
+							console.log(result.data);
+							$http({
+								method : "POST",
+								url : "http://localhost:8080/XMLproj/rest/amendment/changeCollection",
+								headers : {
+									"Content-Type": "application/xml"
+								},
+								data : result.data
+							}).then(function(result){
+								$http({
+									method : "POST",
+									url : "http://localhost:8080/XMLproj/rest/amendment/removeAmendment/" + idx,
+								}).then(function(result){
+									$scope.showAmendments();
+									console.log(result);
+								}, function(reason){
+									console.log(JSON.stringify(reason));
+								});
+								console.log(result);
+							}, function(reason){
+								console.log(JSON.stringify(reason));
+							});
 						}, function(reason){
 							console.log(JSON.stringify(reason));
 						});
