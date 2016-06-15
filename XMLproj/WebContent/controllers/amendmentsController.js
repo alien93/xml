@@ -5,6 +5,9 @@ angular.module('xmlApp')
 						$location.path('/prijava');
 					};	
 					
+					$scope.amForAct = "";
+					$scope.status = "";
+					
 					$scope.insertTextVisible = false;
 					$scope.showTextPart = function() {
 						$scope.insertTextVisible = !$scope.insertTextVisible;
@@ -34,7 +37,24 @@ angular.module('xmlApp')
 					};
 					
 					$scope.saveAmendment = function() {
-						
+						$http({
+							method : "POST",
+							url : "http://localhost:8080/XMLproj/rest/amendment/addAmendment",
+							headers : {
+								"Content-Type": "application/xml"
+							},
+							data : $scope.amForAct
+						}).then(function(resp){
+							if(resp.statusText == "OK"){
+								console.log("It's ok");
+								$scope.status = "Dokument je sačuvan."
+							}
+						}, 
+						function(err){
+							if(err.statusText == "Bad Request"){
+								$scope.status = "Dokument nije validan."
+							}
+						});
 					};
 					
 					$scope.openAmendment = function(amName) {
