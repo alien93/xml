@@ -71,6 +71,9 @@ angular.module('xmlApp')
 						}
 						
 						$scope.getVal = function(val){
+							if(typeof val == 'number'){
+								if(!val) return "_"; else return val;
+							}
 							return (!val || "" == val.trim()) ? "_" : val;
 						}
 						
