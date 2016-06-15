@@ -3,7 +3,7 @@
 			<div class="col-md-offset-1 col-md-10">
 				<table class='table table-bordered' ng-repeat = "act in acts">
 				
-				<form class="formSession" ng-submit="sessionSubmit()">   
+				<form class="formSession">   
 					<tr ng-model="act" class="success" ng-click="expandAct($index, act.oznaka.value)"> 
 						<td colspan="3" style='cursor: pointer;'> <u> {{ act.naziv.value }} </u> </td>
 					</tr> 
@@ -15,39 +15,54 @@
 						</td>
 					</tr> 
 					
+					<tr ng-if="testIfVisible($index)">
+						<td> Glasanje o aktu: </td>
+						<td> Za &nbsp; / &nbsp; Ukupno </td>
+						<td> &nbsp; </td>
+					</tr>
+					
+					<tr ng-if="testIfVisible($index)">
+						<td> &nbsp; </td>
+						<td> 
+							<input type="number" min="0" max="1000"> &nbsp; / &nbsp; 
+							<input type="number" min="0" max="1000" >
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					
 					<tr ng-if="testIfVisible($index)"> 
 						<td> &nbsp; </td>
 						<td> Akt se usvaja u nacelu: </td>
 						<td> 
-							<label class="radio-inline"><input type="radio" name="uNacelu">DA</label>
-							<label class="radio-inline"><input type="radio" name="uNacelu">NE</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=true>DA</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=false>NE</label>
 						</td>
 					</tr> 
 				
 					<tr ng-if="testIfVisible($index)">
 						<td> Glasanje o amandmanima pojedinacno: </td>
-						<td> &nbsp; </td>
 						<td> Za &nbsp; / &nbsp; Ukupno </td>
+						<td> &nbsp; </td>
 					</tr>
 					
-					<tr ng-repeat="ams in amendments" ng-if="testIfVisible($parent.$index)">
+					<tr ng-repeat="ams in amendments.data" ng-if="testIfVisible($parent.$index)">
 						<td> 
 							<a style='cursor: pointer;' ng-click="openAmendment(ams.oznakaAmandman.value)"> 
 							{{ams.nazivAmandman.value}} 
 						</td>
-						<td> &nbsp; </td>
 						<td> 
-							<input type="number" min="0" max="1000"> &nbsp; / &nbsp; 
-							<input type="number" min="0" max="1000">
+							<input type="number" min="0" max="1000" ng-model="amendments.glasMin[$index]"> &nbsp; / &nbsp; 
+							<input type="number" min="0" max="1000" ng-model="amendments.glasMax[$index]">
 						</td>
+						<td><button class="btn btn-primary" ng-click="acceptAmendment(ams.oznakaAmandman.value)">Primeni</button></td>
 					</tr>
 					
 					<tr ng-model="act" ng-if="testIfVisible($index)"> 
 						<td> &nbsp; </td>
 						<td> Akt se usvaja u celini: </td>
 						<td> 
-							<label class="radio-inline"><input type="radio" name="uCelini">DA</label>
-							<label class="radio-inline"><input type="radio" name="uCelini">NE</label>
+							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=true>DA</label>
+							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=false>NE</label>
 						</td>
 					</tr>
 					
@@ -55,7 +70,7 @@
 						<td> &nbsp; </td>
 						<td> &nbsp; </td>
 						<td> 
-							<input type="submit" value="Sacuvaj rezultate glasanja" class="btn btn-info btn-block">
+							<button ng-click="sessionSubmit(act.oznaka.value)" class="btn btn-info btn-block">Usvoji</button>
 						</td>
 					</tr>
 					</div>
