@@ -77,12 +77,62 @@ angular.module('xmlApp')
 			}
 			
 			$scope.sessionSubmit = function(actId) {
-				//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane
+				//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane (promeni kolekcije)
 				if($scope.uCelini == true){
-					console.log("Akt se prihvata u celini");
+					console.log("Akt se prihvata u celini, promeni status u 'donet' i primeni sve amandmane");
+					$http({
+						method : "GET",
+						url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + actId,
+					}).then(function(result){
+						console.log(result.data);
+						$http({
+							method : "POST",
+							url : "http://localhost:8080/XMLproj/rest/act/changeStatus/donet",
+							headers : {
+								"Content-Type": "application/xml"
+							},
+							data : result.data
+						}).then(function(result1){
+							console.log(result1.data);
+							for(var i=0; i<$scope.amendments.data.length; i++){
+								$http({
+									method : "GET",
+									url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + $scope.amendments.data[i].oznakaAmandman.value,
+								}).then(function(result){
+									console.log(result.data);
+									$http({
+										method : "POST",
+										url : "http://localhost:8080/XMLproj/rest/amendment/changeStatus/prihvacen",
+										headers : {
+											"Content-Type" : "application/xml"
+										},
+										data : result.data
+									}).then(function(result){
+										console.log(result.data);
+									})
+								})
+							}
+						}, function(reason){
+							console.log(JSON.stringify(reason));
+						});
+					}, function(reason){
+						console.log(JSON.stringify(reason));
+					});
+					
+					
 				}
 				else{
-					//prihvati amandman
+					if($scope.uNacelu == true){
+						console.log("Akt se prihvata u nacelu, promeni status u 'donet' i primeni amandmane koje treba primeniti")
+					}
+					else{
+						if(acceptingAmendment()){	//postoje amandmani koje treba primeniti
+							console.log("Primeni amandmane koje treba primeniti")
+						}
+						else{ //ne postoje amandmani
+							console.log("Smesti akt u povucene i amandmane")
+						}
+					}
 				}
 				
 				

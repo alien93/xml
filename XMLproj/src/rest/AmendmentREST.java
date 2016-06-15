@@ -20,7 +20,9 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 import entities.act.Akt;
+import entities.act.TStatusAkta;
 import entities.amendment.Amandman;
+import entities.amendment.TStatusAmandmana;
 import queries.QueryExecutor;
 import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
@@ -184,6 +186,25 @@ public class AmendmentREST {
 			e.printStackTrace();
 		}	
 		
+	}
+	
+	@POST
+	@Path("/changeStatus/{status}")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public Amandman changeStatus(Amandman amandman, @PathParam("status")String status){
+		switch(status){
+		case "prihvacen":
+			amandman.setStatus(TStatusAmandmana.PRIHVACEN);;
+			break;
+		case "u_proceduri":
+			amandman.setStatus(TStatusAmandmana.U_PROCEDURI);
+			break;
+		case "odbijen":
+			amandman.setStatus(TStatusAmandmana.ODBIJEN);
+			break;
+		}
+		return amandman;
 	}
 	
 	private Response helpQuery(String query, String id){

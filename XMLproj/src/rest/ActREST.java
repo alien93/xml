@@ -20,6 +20,7 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 import entities.act.Akt;
+import entities.act.TStatusAkta;
 import queries.MySparqlQuery;
 import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
@@ -205,6 +206,21 @@ public class ActREST {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@POST
+	@Path("/changeStatus/{status}")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public Akt changeStatus(Akt akt, @PathParam("status")String status){
+		switch(status){
+		case "donet":
+			akt.setStatus(TStatusAkta.DONET);
+			break;
+		case "u_proceduri":
+			akt.setStatus(TStatusAkta.U_PROCEDURI);
+		}
+		return akt;
 	}
 	
 	private Response helpQuery(String query, String id){
