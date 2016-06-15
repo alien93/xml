@@ -29,7 +29,7 @@
         <renderers>
         <renderer mime="application/pdf">       
           <fonts>                           
-                <font kerning="yes"  embed-url="file:///C:/windows/fonts/arial.ttf">
+                <font kerning="yes"  embed-url="./resources/fonts/arial.ttf">
                       <font-triplet name="Arial" style="normal" weight="normal"/>
                     </font>                     
             </fonts>
