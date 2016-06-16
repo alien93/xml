@@ -255,6 +255,24 @@ public class ActREST {
 
 		return result;
 	}
+	
+	private String getActiveActsUri(String actId){
+		String result = "";
+		//get document's name
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+				"for $doc in fn:collection(\"/propisi/akti/doneti\")"+
+				"where $doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+				"return base-uri($doc)";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		result = result.replace("\n", "");
+
+		return result;
+	}
 
 	@POST
 	@Path("/removeAct/{actId}")
@@ -358,60 +376,58 @@ public class ActREST {
 	@POST
 	@Path("/updateAct/{actId}")
 	@Consumes(MediaType.APPLICATION_XML)
-	@Produces(MediaType.APPLICATION_XML)
-	public Akt updateAct(@PathParam("actId")String actId, Amandman amandman){
+	public void updateAct(@PathParam("actId")String actId, Amandman amandman){
 		System.out.println(actId);
 		InputStream actStream = new ByteArrayInputStream(getXmlById(actId).getBytes(StandardCharsets.UTF_8));
 		Akt akt = actXmlToAct(actStream);
 		for(Deo deo : amandman.getGlavniDeo().getDeo()){
 			if(deo.getStatus()!=null)
-				akt = update(actId,  akt, deo);
+				update(actId,  akt, deo);
 		}
 		for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
 			if(odeljak.getStatus()!=null)
-				akt = update(actId, akt,  odeljak);
+				update(actId, akt,  odeljak);
 		}
 		for(Glava glava : amandman.getGlavniDeo().getGlava()){
 			if(glava.getStatus()!=null)
-				akt = update(actId,  akt, glava);
+				 update(actId,  akt, glava);
 		}
 		for(Clan clan : amandman.getGlavniDeo().getClan()){
 			if(clan.getStatus()!=null)
-				akt = update(actId,  akt, clan);
+				 update(actId,  akt, clan);
 		}
 		for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
 			if(tacka.getStatus()!=null)
-				akt = update(actId,  akt, tacka);
+				 update(actId,  akt, tacka);
 		}
 		for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
 			if(podtacka.getStatus()!=null)
-				akt = update(actId, akt,  podtacka);
+				 update(actId, akt,  podtacka);
 		}
 		for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
 			if(alineja.getStatus()!=null)
-				akt = update(actId, akt,  alineja);
+				update(actId, akt,  alineja);
 		}
 		for(Stav stav : amandman.getGlavniDeo().getStav()){
 			if(stav.getStatus()!=null)
-				akt = update(actId, akt, stav);
+				update(actId, akt, stav);
 		}	
-		return akt;
 	}
 
 
-	private Akt update(String aktId, Akt akt, Object obj) {
-		Akt retVal = null;
+	private void update(String aktId, Akt akt, Object obj) {
 		System.out.println("updating...");
 		EditableNamespaceContext namespaces = new EditableNamespaceContext();
 
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
-		String docId = getActsUri(aktId);
+		String docId = getActiveActsUri(aktId);
 
 
 		if(obj instanceof Deo){
 			String oznaka = ((Deo) obj).getStatus().getRef().getIdRef();
 			String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
+			System.out.println("ContextXPath: " + contextXPath);
 			JAXBContext jc;
 			OutputStream os = null;
 			try {
@@ -426,15 +442,14 @@ public class ActREST {
 			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
 				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
 			}
-			System.out.println("Patch: " + patch);
 			
 			switch(((Deo) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				System.out.println("Brisi");
 				try {
+					System.out.println(docId);
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
-					String xml = getXmlById(aktId);
-					retVal = actXmlToAct(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -598,7 +613,12 @@ public class ActREST {
 				break;
 			}
 		}
-		return retVal;
+		
+		String xml = getXmlById(aktId);
+		System.out.println("***********************************");
+		System.out.println(xml);
+		System.out.println("***********************************");
+
 	}
 
 	private Response helpQuery(String query, String id){

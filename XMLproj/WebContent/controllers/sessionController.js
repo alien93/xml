@@ -165,20 +165,33 @@ angular.module('xmlApp')
 .controller('actDataController', ['$scope', '$rootScope', '$uibModalInstance', '$http', 'actId', 'scenario',  
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario){
 
-
-	var removeActFromPreviousCollection = function(actId){
+	var updateAct = function(amandmanXml, result1, actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
+			headers : {
+				"Content-Type" : "application/xml"
+			},
+			data : amandmanXml.data
+		}).then(function(result){			
+			console.log(result);
+		})
+	}
+	
+	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
 			//$scope.acts.splice(rowIndex, 1);
+			updateAct(amandmanXml, result1, actId);
 			console.log(result);
 		}, function(reason){
 			console.log(JSON.stringify(reason));
 		});
 	}
 	
-	var changeActsCollection = function(result1, actId){
+	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/changeCollection/doneti",
@@ -188,26 +201,10 @@ angular.module('xmlApp')
 			data : result1.data
 		})
 		.success(function(result){
-			removeActFromPreviousCollection(actId);
+			removeActFromPreviousCollection(amandmanXml, result1, actId);
 		});
 	}
 
-	var updateAct = function(result, result1, actId){
-		$http({
-			method : "POST",
-			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
-			headers : {
-				"Content-Type" : "application/xml"
-			},
-			data : result.data
-		}).then(function(result){
-			console.log("Updated");
-			console.log(result.data)
-			
-			//promeni kolekciju akta
-			changeActsCollection(result, actId);
-		})
-	}
 
 	var changeAmendmentsStatus = function(result, result1, actId){
 		$http({
@@ -217,9 +214,9 @@ angular.module('xmlApp')
 				"Content-Type" : "application/xml"
 			},
 			data : result.data
-		}).then(function(result){
+		}).then(function(amandmanXml){
 			//promeni kolekciju amandmana
-			updateAct(result, result1, actId);
+			changeActsCollection(amandmanXml, result1, actId);
 		})
 	}
 
@@ -244,7 +241,6 @@ angular.module('xmlApp')
 			data : result.data
 		}).then(function(result1){
 			//primeni amandmane
-			console.log(result1.data);
 			for(var i=0; i<$rootScope.amendments.data.length; i++){
 				var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
 				//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
