@@ -114,6 +114,10 @@ public class AmendmentREST {
 						"return $doc";
 		try {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-");
+			System.out.println(result);
+			System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

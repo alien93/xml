@@ -34,8 +34,8 @@
 						<td> &nbsp; </td>
 						<td> Akt se usvaja u nacelu: </td>
 						<td> 
-							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=true>DA</label>
-							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=false>NE</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=true ng-change="changed()">DA</label>
+							<label class="radio-inline"><input type="radio" name="uNacelu" ng-model="$parent.$parent.uNacelu" ng-value=false ng-change="changed()">NE</label>
 						</td>
 					</tr> 
 				
@@ -55,8 +55,8 @@
 							<input type="number" min="0" max="1000" ng-model="amendments.glasMax[$index]">
 						</td>
 						<td>	
-							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=true>DA</label>
-							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=false>NE</label>
+							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=true ng-disabled="changed()">DA</label>
+							<label class="radio-inline"><input type="radio" ng-model="amendments.primeni[$index]" ng-value=false ng-disabled="changed()">NE</label>
 						</td>
 					</tr>
 					
@@ -64,8 +64,8 @@
 						<td> &nbsp; </td>
 						<td> Akt se usvaja u celini: </td>
 						<td> 
-							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=true>DA</label>
-							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=false>NE</label>
+							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=true ng-change="changed()">DA</label>
+							<label class="radio-inline"><input type="radio" name="uCelini" ng-model="$parent.$parent.uCelini" ng-value=false ng-change="changed()">NE</label>
 						</td>
 					</tr>
 					

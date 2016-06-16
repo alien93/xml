@@ -25,6 +25,8 @@
                 <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Pravilnik</ns1:Vrsta>
                 <ns1:Datum property="pred:datum" datatype="xs:date">2015-12-31</ns1:Datum>
                 <ns1:Mesto property="pred:mesto" datatype="xs:string">Novi Sad</ns1:Mesto>
+        		<ns1:BrPozitivnihGlasova property="pred:brPozitivnihGlasova" datatype="xs:int"></ns1:BrPozitivnihGlasova>
+				<ns1:BrUkupnihGlasova property="pred:brUkupnihGlasova" datatype="xs:int"></ns1:BrUkupnihGlasova>
             </p:Meta_podaci>
         </p:Donet_akt>
     </p:Sporedni_deo>

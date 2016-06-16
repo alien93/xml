@@ -58,6 +58,8 @@
                                         <xs:element ref="ns1:Vrsta"/>
                                         <xs:element ref="ns1:Datum"/>
                                         <xs:element ref="ns1:Mesto"/>
+                                        <xs:element ref="ns1:BrPozitivnihGlasova"/>
+                                        <xs:element ref="ns1:BrUkupnihGlasova"/>
                                     </xs:all>
                                 </xs:complexType>
                             </xs:element>

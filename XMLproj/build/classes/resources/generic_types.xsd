@@ -121,6 +121,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="donet"/>
             <xs:enumeration value="u_proceduri"/>
+            <xs:enumeration value="odbijen"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:complexType name="TAmandmanStatus">

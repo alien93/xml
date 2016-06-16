@@ -79,6 +79,17 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
+	$scope.changed = function(){
+		if($scope.uNacelu == false && $scope.uCelini == false){
+			for(var i=0; i<$scope.amendments.data.length; i++){
+				$scope.amendments.primeni[i] = false;
+			}
+			return true;
+		}
+		else
+			return false;
+	}
+
 	//proveri da li postoje amandmani koje treba prihvatiti
 	var acceptingAmendment = function(){
 		var retVal = false;
@@ -89,6 +100,96 @@ angular.module('xmlApp')
 			}
 		}
 		return retVal;
+	}
+
+	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
+		}).then(function(result){
+			//$scope.acts.splice(rowIndex, 1);
+			console.log(result);
+		}, function(reason){
+			console.log(JSON.stringify(reason));
+		});
+	}
+
+	var changeActsCollection = function(amandmanXml, result1, actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/changeCollection/povuceni",
+			headers : {
+				"Content-Type": "application/xml"
+			},
+			data : result1.data
+		})
+		.success(function(result){
+			removeActFromPreviousCollection(amandmanXml, result1, actId);
+		});
+	}
+
+
+	var changeAmendmentsStatus = function(result, result1, actId){
+		console.log("bitno");
+		console.log(result.data);
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/amendment/changeStatus/odbijen",
+			headers : {
+				"Content-Type" : "application/xml"
+			},
+			data : result.data
+		}).then(function(amandmanXml){
+			//promeni kolekciju amandmana
+			changeActsCollection(amandmanXml, result1, actId);
+		})
+	}
+
+	var getXmlByAmendmentsId = function(amendmentId, result, result1, actId){
+		$http({
+			method : "GET",
+			url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + amendmentId,
+		}).then(function(result){
+			//prosledi sadrzaj metodi koja vrsi izmenu statusa amandmana
+			console.log('bitno2');
+			console.log(result.data);
+			changeAmendmentsStatus(result, result1, actId);
+
+		})
+	}
+
+	var changeActsStatus = function(result, actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/changeStatus/odbijen",
+			headers : {
+				"Content-Type": "application/xml"
+			},
+			data : result.data
+		}).then(function(result1){
+			//primeni amandmane
+			for(var i=0; i<$rootScope.amendments.data.length; i++){
+				var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
+				//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
+				getXmlByAmendmentsId(amendmentId, result, result1, actId);
+			}
+
+		}, function(reason){
+			console.log(JSON.stringify(reason));
+		});
+	}
+
+	var rejectAll = function(actId){
+		$http({
+			method : "GET",
+			url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + actId,
+		}).then(function(result){
+			console.log(result.data);
+			//prosledi sadrzaj metodi koja vrsi izmenu statusa akta
+			changeActsStatus(result, actId);
+		}, function(reason){
+			console.log(JSON.stringify(reason));
+		});
 	}
 
 	/**
@@ -135,12 +236,8 @@ angular.module('xmlApp')
 				});
 			}
 			else{
-				//postoje amandmani koje treba primeniti
-				if(acceptingAmendment()){	
-					acceptAmendments(actId);
-				}
-				//Smesti akt u povucene i amandmane u odbijene
-				else{
+				//akt se ne prihvata ni u celini ni u nacelu, odbij sve
+				if(!acceptingAmendment()){	
 					rejectAll(actId);
 				}
 			}
@@ -181,7 +278,7 @@ angular.module('xmlApp')
 			console.log(result);
 		})
 	}
-	
+
 	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -195,7 +292,7 @@ angular.module('xmlApp')
 			console.log(JSON.stringify(reason));
 		});
 	}
-	
+
 	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -282,13 +379,6 @@ angular.module('xmlApp')
 		}, function(reason){
 			console.log(JSON.stringify(reason));
 		});
-	}
-	
-	var acceptActAndSomeAmendments = function(actId, odStrane, pravniOsnov){
-		console.log(amendments);
-		console.log(actId);
-		console.log(odStrane);
-		console.log(pravniOsnov);
 	}
 
 	$scope.close = function(){

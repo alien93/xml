@@ -140,24 +140,6 @@ public class ActREST {
 
 		return r;
 	}
-	
-	@GET
-	@Path("/xmlById/{actId}")
-	@Produces(MediaType.APPLICATION_XML)
-	public String getXmlByIdenif(@PathParam("actId") String actId){
-		String result = "";
-		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
-						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
-						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
-						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
-						"return $doc";
-		try {
-			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 
 	@POST
 	@Path("/xmlById/{actId}")
@@ -190,7 +172,10 @@ public class ActREST {
 		return result;
 	}
 	
-	private String getXmlById(String actId){
+	@GET
+	@Path("/xmlById/{actId}")
+	@Produces(MediaType.APPLICATION_XML)
+	public String getXmlById(@PathParam("actId")String actId){
 		String result = "";
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
@@ -314,6 +299,8 @@ public class ActREST {
 			break;
 		case "u_proceduri":
 			akt.setStatus(TStatusAkta.U_PROCEDURI);
+		case "odbijen":
+			akt.setStatus(TStatusAkta.ODBIJEN);
 		}
 		return akt;
 	}
