@@ -44,6 +44,7 @@ public class PdfReferenceREST {
 		HashMap<String, String> collAmMap = new HashMap<String, String>();
 		collAmMap.put("/propisi/amandmani/odbijeni", "where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"");
 		collAmMap.put("/propisi/amandmani/prihvaceni", "where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"");
+		collAmMap.put("/propisi/amandmani/u_proceduri", "where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"");
 		
 		try{
 			for(Entry<String, String> act : collActMap.entrySet()){
