@@ -42,7 +42,7 @@ public class XMLWriter {
 		// Create a document manager to work with XML files.
 		XMLDocumentManager xmlManager = client.newXMLDocumentManager();
 		DocumentUriTemplate template = null;			
-		
+
 		if(generateUri){
 			template = xmlManager.newDocumentUriTemplate("xml");
 			template.setDirectory(docId);

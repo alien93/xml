@@ -18,7 +18,8 @@ public class ApplicationConfig extends Application{
 	        											SearchTextContentREST.class,
 	        											PdfReferenceREST.class,
 	        											AmendmentREST.class,
-	        											AdvancedSearchREST.class));
+	        											AdvancedSearchREST.class,
+	        											ZipREST.class));
 
 	    }
 }
