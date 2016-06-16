@@ -2,17 +2,8 @@
 <div>
     <form class="formAddAmandment" data-ng-controller="amendmentsController" ng-submit="addAmendment()">        
 		<div class="row">
-			<div class="col-md-offset-2 col-md-4">
-			<select class="form-control" ng-model="selectedAct" ng-change="showAmendments()"
-					ng-options="act.naziv.value for act in acts">
-			</select>
-			</div>
-			<div class="col-md-6"> &nbsp; </div>	
-		</div>
-		<br/>
-		<div class="row">
 			<div class="col-md-offset-2 col-md-4">		
-				<input type="button" value="Novi amandman na izabrani akt" class="btn btn-primary btn-block" 
+				<input type="button" value="Novi amandman" class="btn btn-primary btn-block" 
 					ng-click="showTextPart()"> </td>
 			</div>
 			<div class="col-md-6"> &nbsp; </div>	
@@ -21,11 +12,11 @@
 		<div ng-show="insertTextVisible">
 			<br/>
 			<div class="row"> 
-				<div class="col-md-offset-2 col-md-8"> 
+				<div class="col-md-offset-2 col-md-4"> 
 					<label> Status: {{status}}</label><br>
-					<label for="amContent"> Sadrzaj </label>
+					<label for="amContent"> Sadrzaj amandmana </label>
 				</div> 
-				<div class="col-md-2"> &nbsp; </div>
+				<div class="col-md-6"> &nbsp; </div>
 			</div> 
 		
 			<div class="row"> 
@@ -36,12 +27,21 @@
 			</div> 
 			
 			<div class="row"> 
-				<div class="col-md-offset-2 col-md-2"> 
+				<div class="col-md-offset-2 col-md-4"> 
 					<button class="btn btn-info btn-block" ng-click="saveAmendment()">Sacuvaj</button>
 				</div> 
-				<div class="col-md-8"> &nbsp; </div>
+				<div class="col-md-6"> &nbsp; </div>
 			</div>
 			
+		</div> 	<br/> 	<br/>
+		
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+			<select class="form-control" ng-model="selectedAct" ng-change="showAmendments()"
+					ng-options="act.naziv.value for act in acts">
+			</select>
+			</div>
+			<div class="col-md-6"> &nbsp; </div>	
 		</div>
 		
 		<br/> <br/>

@@ -79,8 +79,6 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
-
-
 	//proveri da li postoje amandmani koje treba prihvatiti
 	var acceptingAmendment = function(){
 		var retVal = false;
@@ -109,6 +107,9 @@ angular.module('xmlApp')
 					},
 					scenario : function(){
 						return 1;
+					},
+					amendments: function(){
+						return $scope.amendments;
 					}
 				}
 			});
@@ -126,6 +127,9 @@ angular.module('xmlApp')
 						},
 						scenario : function(){
 							return 2;
+						},
+						amendments: function(){
+							return $scope.amendments;
 						}
 					}
 				});
@@ -162,23 +166,37 @@ angular.module('xmlApp')
 }
 ])
 
-.controller('actDataController', ['$scope', '$rootScope', '$uibModalInstance', '$http', 'actId', 'scenario',  
-                                  function($scope, $rootScope, $uibModalInstance, $http, actId, scenario){
+.controller('actDataController', ['$scope', '$rootScope', '$uibModalInstance', '$http', 'actId', 'scenario', 'amendments', 
+                                  function($scope, $rootScope, $uibModalInstance, $http, actId, scenario, amendments){
 
-
-	var removeActFromPreviousCollection = function(actId){
+	var updateAct = function(amandmanXml, result1, actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
+			headers : {
+				"Content-Type" : "application/xml"
+			},
+			data : amandmanXml.data
+		}).then(function(result){			
+			console.log(result);
+		})
+	}
+	
+	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
 			//$scope.acts.splice(rowIndex, 1);
+			if(amandmanXml != null)
+				updateAct(amandmanXml, result1, actId);
 			console.log(result);
 		}, function(reason){
 			console.log(JSON.stringify(reason));
 		});
 	}
 	
-	var changeActsCollection = function(result1, actId){
+	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/changeCollection/doneti",
@@ -188,23 +206,10 @@ angular.module('xmlApp')
 			data : result1.data
 		})
 		.success(function(result){
-			removeActFromPreviousCollection(actId);
+			removeActFromPreviousCollection(amandmanXml, result1, actId);
 		});
 	}
 
-	var updateAct = function(result, result1, actId){
-		$http({
-			method : "POST",
-			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
-			headers : {
-				"Content-Type" : "application/xml"
-			},
-			data : result.data
-		}).then(function(result){
-			//promeni kolekciju akta
-			changeActsCollection(result1, actId);
-		})
-	}
 
 	var changeAmendmentsStatus = function(result, result1, actId){
 		$http({
@@ -214,9 +219,9 @@ angular.module('xmlApp')
 				"Content-Type" : "application/xml"
 			},
 			data : result.data
-		}).then(function(result){
+		}).then(function(amandmanXml){
 			//promeni kolekciju amandmana
-			updateAct(result, result1, actId);
+			changeActsCollection(amandmanXml, result1, actId);
 		})
 	}
 
@@ -241,11 +246,24 @@ angular.module('xmlApp')
 			data : result.data
 		}).then(function(result1){
 			//primeni amandmane
-			console.log(result1.data);
-			for(var i=0; i<$rootScope.amendments.data.length; i++){
-				var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
-				//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
-				getXmlByAmendmentsId(amendmentId, result, result1, actId);
+			if(scenario == 1){
+				for(var i=0; i<$rootScope.amendments.data.length; i++){
+					var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
+					//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
+					getXmlByAmendmentsId(amendmentId, result, result1, actId);
+				}
+			}
+			else if(scenario == 2){
+				for(var i=0; i<$rootScope.amendments.data.length; i++){
+					if($rootScope.amendments.primeni[i] == true){
+						var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
+						//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
+						getXmlByAmendmentsId(amendmentId, result, result1, actId);
+					}
+					else{
+						changeActsCollection(null, result1, actId);
+					}
+				}
 			}
 		}, function(reason){
 			console.log(JSON.stringify(reason));
@@ -265,6 +283,13 @@ angular.module('xmlApp')
 			console.log(JSON.stringify(reason));
 		});
 	}
+	
+	var acceptActAndSomeAmendments = function(actId, odStrane, pravniOsnov){
+		console.log(amendments);
+		console.log(actId);
+		console.log(odStrane);
+		console.log(pravniOsnov);
+	}
 
 	$scope.close = function(){
 		if(scenario == 1){
@@ -272,7 +297,7 @@ angular.module('xmlApp')
 			$uibModalInstance.close();
 		}
 		else if(scenario == 2){
-			acceptActAndSomeAmendments(actId);
+			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
 		else{

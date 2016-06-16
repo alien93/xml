@@ -19,7 +19,7 @@ import util.ConnPropertiesReader.ConnectionProperties;
  */
 public class XMLUpdate {
 
-	private enum UpdatePositions{
+	public enum UpdatePositions{
 		BEFORE,
 		AFTER,
 		LAST_CHILD

@@ -28,27 +28,27 @@ import com.marklogic.client.util.EditableNamespaceContext;
 
 import entities.act.Akt;
 import entities.act.SporedniDeo;
-import entities.amendment.Odeljak;
-import entities.amendment.Podtacka;
-import entities.amendment.Stav;
-import entities.amendment.Tacka;
-import entities.act.TStatusAkta;
-import entities.act.TStatusIzmene;
 import entities.act.SporedniDeo.DonetAkt;
 import entities.act.SporedniDeo.DonetAkt.MetaPodaci;
+import entities.act.TStatusAkta;
 import entities.amendment.Alineja;
 import entities.amendment.Amandman;
 import entities.amendment.Clan;
 import entities.amendment.Deo;
 import entities.amendment.Glava;
+import entities.amendment.Odeljak;
+import entities.amendment.Podtacka;
+import entities.amendment.Stav;
+import entities.amendment.Tacka;
 import queries.MySparqlQuery;
-import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
 import util.RDFtoTriples;
 import util.XMLUpdate;
 import util.XMLValidator;
 import util.XMLWriter;
 import util.XQueryInvoker;
+import util.XMLUpdate.UpdatePositions;
+import util.transform.ActXmlToPdf;
 
 @Path("/act")
 public class ActREST {
@@ -140,6 +140,24 @@ public class ActREST {
 
 		return r;
 	}
+	
+	@GET
+	@Path("/xmlById/{actId}")
+	@Produces(MediaType.APPLICATION_XML)
+	public String getXmlByIdenif(@PathParam("actId") String actId){
+		String result = "";
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+						"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
+						"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+						"return $doc";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@POST
 	@Path("/xmlById/{actId}")
@@ -190,7 +208,7 @@ public class ActREST {
 	@POST
 	@Path("/changeCollection/{collectionName}")
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response changeCollection(Akt akt, @PathParam("collectionName")String collectionName){
+	public Response changeCollection(Akt akt, @PathParam("collectionName")String collectionName){		
 		System.out.println("Changing collection");
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -227,6 +245,24 @@ public class ActREST {
 				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
 				"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
 				"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+				"return base-uri($doc)";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		result = result.replace("\n", "");
+
+		return result;
+	}
+	
+	private String getActiveActsUri(String actId){
+		String result = "";
+		//get document's name
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+				"for $doc in fn:collection(\"/propisi/akti/doneti\")"+
+				"where $doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
 				"return base-uri($doc)";
 		try {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
@@ -346,36 +382,36 @@ public class ActREST {
 		Akt akt = actXmlToAct(actStream);
 		for(Deo deo : amandman.getGlavniDeo().getDeo()){
 			if(deo.getStatus()!=null)
-				update(actId, akt, deo);
+				update(actId,  akt, deo);
 		}
 		for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
 			if(odeljak.getStatus()!=null)
-				update(actId, akt, odeljak);
+				update(actId, akt,  odeljak);
 		}
 		for(Glava glava : amandman.getGlavniDeo().getGlava()){
 			if(glava.getStatus()!=null)
-				update(actId, akt, glava);
+				 update(actId,  akt, glava);
 		}
 		for(Clan clan : amandman.getGlavniDeo().getClan()){
 			if(clan.getStatus()!=null)
-				update(actId, akt, clan);
+				 update(actId,  akt, clan);
 		}
 		for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
 			if(tacka.getStatus()!=null)
-				update(actId, akt, tacka);
+				 update(actId,  akt, tacka);
 		}
 		for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
 			if(podtacka.getStatus()!=null)
-				update(actId, akt, podtacka);
+				 update(actId, akt,  podtacka);
 		}
 		for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
 			if(alineja.getStatus()!=null)
-				update(actId, akt, alineja);
+				update(actId, akt,  alineja);
 		}
 		for(Stav stav : amandman.getGlavniDeo().getStav()){
 			if(stav.getStatus()!=null)
 				update(actId, akt, stav);
-		}		
+		}	
 	}
 
 
@@ -385,23 +421,52 @@ public class ActREST {
 
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
+		String docId = getActiveActsUri(aktId);
 
 
 		if(obj instanceof Deo){
 			String oznaka = ((Deo) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
+			System.out.println("ContextXPath: " + contextXPath);
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Deo.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Deo)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
 			switch(((Deo) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				System.out.println("Brisi");
-				String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					System.out.println(docId);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -548,6 +613,12 @@ public class ActREST {
 				break;
 			}
 		}
+		
+		String xml = getXmlById(aktId);
+		System.out.println("***********************************");
+		System.out.println(xml);
+		System.out.println("***********************************");
+
 	}
 
 	private Response helpQuery(String query, String id){
