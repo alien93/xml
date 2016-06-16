@@ -47,6 +47,7 @@ import util.XMLUpdate;
 import util.XMLValidator;
 import util.XMLWriter;
 import util.XQueryInvoker;
+import util.XMLUpdate.UpdatePositions;
 import util.transform.ActXmlToPdf;
 
 @Path("/act")
@@ -189,7 +190,7 @@ public class ActREST {
 	@POST
 	@Path("/changeCollection/{collectionName}")
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response changeCollection(Akt akt, @PathParam("collectionName")String collectionName){
+	public Response changeCollection(Akt akt, @PathParam("collectionName")String collectionName){		
 		System.out.println("Changing collection");
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -339,46 +340,49 @@ public class ActREST {
 	@POST
 	@Path("/updateAct/{actId}")
 	@Consumes(MediaType.APPLICATION_XML)
-	public void updateAct(@PathParam("actId")String actId, Amandman amandman){
+	@Produces(MediaType.APPLICATION_XML)
+	public Akt updateAct(@PathParam("actId")String actId, Amandman amandman){
 		System.out.println(actId);
 		InputStream actStream = new ByteArrayInputStream(getXmlById(actId).getBytes(StandardCharsets.UTF_8));
 		Akt akt = actXmlToAct(actStream);
 		for(Deo deo : amandman.getGlavniDeo().getDeo()){
 			if(deo.getStatus()!=null)
-				update(actId, akt, deo);
+				akt = update(actId,  akt, deo);
 		}
 		for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
 			if(odeljak.getStatus()!=null)
-				update(actId, akt, odeljak);
+				akt = update(actId, akt,  odeljak);
 		}
 		for(Glava glava : amandman.getGlavniDeo().getGlava()){
 			if(glava.getStatus()!=null)
-				update(actId, akt, glava);
+				akt = update(actId,  akt, glava);
 		}
 		for(Clan clan : amandman.getGlavniDeo().getClan()){
 			if(clan.getStatus()!=null)
-				update(actId, akt, clan);
+				akt = update(actId,  akt, clan);
 		}
 		for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
 			if(tacka.getStatus()!=null)
-				update(actId, akt, tacka);
+				akt = update(actId,  akt, tacka);
 		}
 		for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
 			if(podtacka.getStatus()!=null)
-				update(actId, akt, podtacka);
+				akt = update(actId, akt,  podtacka);
 		}
 		for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
 			if(alineja.getStatus()!=null)
-				update(actId, akt, alineja);
+				akt = update(actId, akt,  alineja);
 		}
 		for(Stav stav : amandman.getGlavniDeo().getStav()){
 			if(stav.getStatus()!=null)
-				update(actId, akt, stav);
-		}		
+				akt = update(actId, akt, stav);
+		}	
+		return akt;
 	}
 
 
-	private void update(String aktId, Akt akt, Object obj) {
+	private Akt update(String aktId, Akt akt, Object obj) {
+		Akt retVal = null;
 		System.out.println("updating...");
 		EditableNamespaceContext namespaces = new EditableNamespaceContext();
 
@@ -390,28 +394,34 @@ public class ActREST {
 		if(obj instanceof Deo){
 			String oznaka = ((Deo) obj).getStatus().getRef().getIdRef();
 			String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Deo.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Deo)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			System.out.println("Patch: " + patch);
+			
 			switch(((Deo) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				System.out.println("Brisi");
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
+					String xml = getXmlById(aktId);
+					retVal = actXmlToAct(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
 			case "menjaj":
-				JAXBContext jc;
-				OutputStream os = null;
-				try {
-					jc = JAXBContext.newInstance(Deo.class);
-					Marshaller marshaller = jc.createMarshaller();
-					os = new ByteArrayOutputStream();
-					marshaller.marshal((Deo)obj, os);
-				} catch (JAXBException e1) {
-					e1.printStackTrace();
-				}
-				String patch = os.toString();
-				System.out.println("Patch: " + patch);
 				try {
 					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
 				} catch (IOException e) {
@@ -419,6 +429,11 @@ public class ActREST {
 				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -565,6 +580,7 @@ public class ActREST {
 				break;
 			}
 		}
+		return retVal;
 	}
 
 	private Response helpQuery(String query, String id){

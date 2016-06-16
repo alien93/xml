@@ -46,7 +46,7 @@
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/111111/deo1">Glava 1</ns1:ref>
-				<ns1:status_izmene>menjaj</ns1:status_izmene>
+				<ns1:status_izmene>brisi</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Deo>
 	</p:Glavni_deo>

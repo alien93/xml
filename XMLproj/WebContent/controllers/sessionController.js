@@ -201,8 +201,11 @@ angular.module('xmlApp')
 			},
 			data : result.data
 		}).then(function(result){
+			console.log("Updated");
+			console.log(result.data)
+			
 			//promeni kolekciju akta
-			changeActsCollection(result1, actId);
+			changeActsCollection(result, actId);
 		})
 	}
 
