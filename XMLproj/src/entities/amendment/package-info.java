@@ -14,7 +14,7 @@
 				@javax.xml.bind.annotation.XmlNs(prefix="xs", namespaceURI="http://www.w3.org/2001/XMLSchema#"),
 				@javax.xml.bind.annotation.XmlNs(prefix="p", namespaceURI="http://www.parlament.gov.rs/propisi"),
 				@javax.xml.bind.annotation.XmlNs(prefix="xsi", namespaceURI="http://www.w3.org/2001/XMLSchema-instance"),
-				@javax.xml.bind.annotation.XmlNs(prefix="pred", namespaceURI="http://www.parlament.gov.rs/propisi/predicate/"),
+				@javax.xml.bind.annotation.XmlNs(prefix="pred", namespaceURI="http://www.parlament.gov.rs/propisi/predicate/")
 			}
 		)
 package entities.amendment;

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.Consumes;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.TransformerException;
 
@@ -25,12 +27,15 @@ import org.xml.sax.SAXException;
 import com.marklogic.client.util.EditableNamespaceContext;
 
 import entities.act.Akt;
+import entities.act.SporedniDeo;
 import entities.amendment.Odeljak;
 import entities.amendment.Podtacka;
 import entities.amendment.Stav;
 import entities.amendment.Tacka;
 import entities.act.TStatusAkta;
 import entities.act.TStatusIzmene;
+import entities.act.SporedniDeo.DonetAkt;
+import entities.act.SporedniDeo.DonetAkt.MetaPodaci;
 import entities.amendment.Alineja;
 import entities.amendment.Amandman;
 import entities.amendment.Clan;
@@ -136,10 +141,38 @@ public class ActREST {
 		return r;
 	}
 
-	@GET
+	@POST
 	@Path("/xmlById/{actId}")
 	@Produces(MediaType.APPLICATION_XML)
-	public String getXmlById(@PathParam("actId") String actId){
+	public String getXmlById(@PathParam("actId") String actId, String data){
+		System.out.println("DATA: " + data);
+		System.out.println(data.split("\\$\\$\\$\\$").length);
+		String odStrane = data.split("\\$\\$\\$\\$")[0];
+		System.out.println(odStrane);
+		String poPostupku = data.split("\\$\\$\\$\\$")[1];
+		System.out.println(poPostupku);
+		String result = "";
+		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
+				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
+				"for $doc in fn:collection(\"/propisi/akti/u_proceduri\")"+
+				"where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \""+ actId +"\""+
+				"return $doc";
+		try {
+			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
+			InputStream actStream = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+			Akt akt = actXmlToAct(actStream);
+			akt = changeElement(akt, odStrane, poPostupku);
+			result = actToXml(akt);
+			System.out.println("------------------------------------------");
+			System.out.println(result);
+			System.out.println("------------------------------------------");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	private String getXmlById(String actId){
 		String result = "";
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
@@ -248,50 +281,92 @@ public class ActREST {
 		return akt;
 	}
 
+	private Akt changeElement(Akt akt, String odStrane, String poPostupku) {
+		SporedniDeo sd = new SporedniDeo();
+		String oznaka = akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getOznaka().getValue();
+		sd.setAbout("http://www.parlament.gov.rs/propisi/akti/doneti/" + oznaka);
+		DonetAkt da = new DonetAkt();
+		da.setDonetOdStrane(odStrane);
+		da.setPravniOsnovDonosenja(poPostupku);
+		MetaPodaci mp = new MetaPodaci();
+		mp.setOznaka(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getOznaka());
+		mp.setVrsta(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getVrsta());
+		mp.setNaziv(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getNaziv());
+		mp.setMesto(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getMesto());
+		mp.setDatum(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getDatum());
+		da.setMetaPodaci(mp);
+		sd.setDonetAkt(da);
+		akt.setSporedniDeo(sd);
+		return akt;
+	}
+	
+	private Akt actXmlToAct(InputStream actStream){
+		Akt retVal = null;
+		JAXBContext jc;
+		try {
+			jc = JAXBContext.newInstance(Akt.class);
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			retVal = (Akt) unmarshaller.unmarshal(actStream);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
+	private String actToXml(Akt akt){
+		String retVal = "";
+		JAXBContext jc;
+		try {
+			jc = JAXBContext.newInstance(Akt.class);
+			Marshaller marshaller = jc.createMarshaller();
+			OutputStream os = new ByteArrayOutputStream();
+			marshaller.marshal(akt, os);
+			retVal = os.toString();
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+
 	@POST
 	@Path("/updateAct/{actId}")
 	@Consumes(MediaType.APPLICATION_XML)
 	public void updateAct(@PathParam("actId")String actId, Amandman amandman){
 		System.out.println(actId);
-		try {
-			JAXBContext jc = JAXBContext.newInstance(Akt.class);
-			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			InputStream actStream = new ByteArrayInputStream(getXmlById(actId).getBytes(StandardCharsets.UTF_8));
-			Akt akt = (Akt) unmarshaller.unmarshal(actStream);
-			for(Deo deo : amandman.getGlavniDeo().getDeo()){
-				if(deo.getStatus()!=null)
-					update(actId, akt, deo);
-			}
-			for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
-				if(odeljak.getStatus()!=null)
-					update(actId, akt, odeljak);
-			}
-			for(Glava glava : amandman.getGlavniDeo().getGlava()){
-				if(glava.getStatus()!=null)
-					update(actId, akt, glava);
-			}
-			for(Clan clan : amandman.getGlavniDeo().getClan()){
-				if(clan.getStatus()!=null)
-					update(actId, akt, clan);
-			}
-			for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
-				if(tacka.getStatus()!=null)
-					update(actId, akt, tacka);
-			}
-			for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
-				if(podtacka.getStatus()!=null)
-					update(actId, akt, podtacka);
-			}
-			for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
-				if(alineja.getStatus()!=null)
-					update(actId, akt, alineja);
-			}
-			for(Stav stav : amandman.getGlavniDeo().getStav()){
-				if(stav.getStatus()!=null)
-					update(actId, akt, stav);
-			}
-		} catch (JAXBException e) {
-			e.printStackTrace();
+		InputStream actStream = new ByteArrayInputStream(getXmlById(actId).getBytes(StandardCharsets.UTF_8));
+		Akt akt = actXmlToAct(actStream);
+		for(Deo deo : amandman.getGlavniDeo().getDeo()){
+			if(deo.getStatus()!=null)
+				update(actId, akt, deo);
+		}
+		for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
+			if(odeljak.getStatus()!=null)
+				update(actId, akt, odeljak);
+		}
+		for(Glava glava : amandman.getGlavniDeo().getGlava()){
+			if(glava.getStatus()!=null)
+				update(actId, akt, glava);
+		}
+		for(Clan clan : amandman.getGlavniDeo().getClan()){
+			if(clan.getStatus()!=null)
+				update(actId, akt, clan);
+		}
+		for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
+			if(tacka.getStatus()!=null)
+				update(actId, akt, tacka);
+		}
+		for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
+			if(podtacka.getStatus()!=null)
+				update(actId, akt, podtacka);
+		}
+		for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
+			if(alineja.getStatus()!=null)
+				update(actId, akt, alineja);
+		}
+		for(Stav stav : amandman.getGlavniDeo().getStav()){
+			if(stav.getStatus()!=null)
+				update(actId, akt, stav);
 		}		
 	}
 

@@ -65,6 +65,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
+            <xs:attribute name="about" type="xs:string"/>
             <xs:anyAttribute namespace="##any" processContents="lax"/>
         </xs:complexType>
     </xs:element>

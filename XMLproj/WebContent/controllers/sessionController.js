@@ -237,10 +237,11 @@ angular.module('xmlApp')
 		});
 	}
 
-	var acceptActAndAmendments = function(actId){
+	var acceptActAndAmendments = function(actId, odStrane, pravniOsnov){
 		$http({
-			method : "GET",
+			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + actId,
+			data : odStrane + "$$$$" + pravniOsnov
 		}).then(function(result){
 			console.log(result.data);
 			//prosledi sadrzaj metodi koja vrsi izmenu statusa akta
@@ -252,7 +253,7 @@ angular.module('xmlApp')
 
 	$scope.close = function(){
 		if(scenario == 1){
-			acceptActAndAmendments(actId);
+			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
 		else if(scenario == 2){
