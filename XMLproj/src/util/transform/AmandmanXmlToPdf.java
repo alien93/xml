@@ -1,4 +1,4 @@
-package util;
+package util.transform;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,20 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.xml.transform.TransformerFactory;
-
 import org.apache.fop.apps.FopFactory;
 import org.xml.sax.SAXException;
 
 import net.sf.saxon.TransformerFactoryImpl;
 
-public class ActXmlToPdf extends TransformersXMLToPDF {
+public class AmandmanXmlToPdf extends TransformersXMLToPDF {
 
-	public static final String PDF_FILE_TEST = "C:/Users/Nina/Desktop/akt.pdf";
-	public static final String ACT_RESOURCE = "/resources/akt_fo.xsl";
-	public static final String TEST_ACT = "/resources/akt_1.xml";
-
-	public ActXmlToPdf(String pathToConf) throws SAXException, IOException {
+	public static final String PDF_FILE_TEST = "E:/TEST_FILES/amandman.pdf";
+	public static final String AMANDMAN_RESOURCE = "/resources/amandman_fo.xsl";
+	public static final String TEST_AMANDMAN = "/resources/amandman_1.xml";
+	
+	public AmandmanXmlToPdf(String pathToConf) throws SAXException, IOException {
 		// Initialize FOP factory object
 		fopFactory = FopFactory.newInstance(new File(pathToConf));
 
@@ -30,28 +28,8 @@ public class ActXmlToPdf extends TransformersXMLToPDF {
 	}
 
 	@Override
-	public void transform(InputStream input, OutputStream output)
-			throws Exception {
-
-		super.transform(input, output);
-
-	}
-
-	@Override
-	public InputStream loadXSL() throws Exception {
-
-		InputStream is = getClass().getResourceAsStream(ACT_RESOURCE);
-
-		if (is == null)
-			throw new Exception("Nije pronadjen XSL fajl");
-
-		return is;
-
-	}
-
-	@Override
 	public void test() {
-		InputStream is = getClass().getResourceAsStream(TEST_ACT);
+		InputStream is = getClass().getResourceAsStream(TEST_AMANDMAN);
 
 		if (is == null) {
 			System.out.println("NULLCINA");
@@ -79,6 +57,14 @@ public class ActXmlToPdf extends TransformersXMLToPDF {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public InputStream loadXSL() throws Exception {
+		InputStream is = getClass().getResourceAsStream(AMANDMAN_RESOURCE);
+		if(is == null)
+			throw new Exception("Nije pronasao amandman.xsl");
+		return is;
 	}
 
 }

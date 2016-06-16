@@ -19,17 +19,15 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 
-import entities.act.Akt;
-import entities.act.TStatusAkta;
 import entities.amendment.Amandman;
 import entities.amendment.TStatusAmandmana;
 import queries.QueryExecutor;
-import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
 import util.RDFtoTriples;
 import util.XMLValidator;
 import util.XMLWriter;
 import util.XQueryInvoker;
+import util.transform.AmandmanXmlToPdf;
 
 @Path("/amendment")
 public class AmendmentREST {
