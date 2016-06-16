@@ -1,0 +1,20 @@
+<div modal="showModal" close="close()">
+    <div class="modal-header">
+        <h4>Donosenje akta</h4>
+    </div>
+    <div class="modal-body">
+           <table class="table table-striped">
+               <tr>
+                   <th>Donet od strane</th>
+                   <th><input type="textarea" placeholder="Donet od strane" class="form-control" ng-model="odStrane" required></th>
+               </tr>
+				<tr>
+					<td>Pravni osnov donosenja</td>
+					<td><input type="textarea" placeholder="Pravni osnov donosenja" class="form-control" ng-model="pravniOsnov" required></td>
+				</tr>
+           </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="close()">Primeni</button>
+    </div>
+</div>
