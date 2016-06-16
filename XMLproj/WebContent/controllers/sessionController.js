@@ -192,7 +192,7 @@ angular.module('xmlApp')
 		});
 	}
 
-	var changeAmendmentsCollection = function(result, result1, actId){
+	var updateAct = function(result, result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
@@ -216,7 +216,7 @@ angular.module('xmlApp')
 			data : result.data
 		}).then(function(result){
 			//promeni kolekciju amandmana
-			changeAmendmentsCollection(result, result1, actId);
+			updateAct(result, result1, actId);
 		})
 	}
 

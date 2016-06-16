@@ -82,7 +82,7 @@ public class AmendmentREST {
 		String xmlPath = path + "temp.xml";
 		
 		//check validity
-		Response r  = XMLValidator.getInstance().validateAmendment(amandman);
+		Response r  = XMLValidator.getInstance().validateAmendment(amandman, xmlPath);
 		
 		//write if valid		
 		if(r.getStatus() == 200){
@@ -130,20 +130,20 @@ public class AmendmentREST {
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
-		String xmlPath = path + "temp.xml";
+		String xmlPath = path + "temp1.xml";
 		
 		//check validity
-		Response r  = XMLValidator.getInstance().validateAmendment(amandman);
+		Response r  = XMLValidator.getInstance().validateAmendment(amandman, xmlPath);
 		
 		//write if valid		
 		if(r.getStatus() == 200){
 			try {
-				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/povuceni", true);
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/odbijeni", true);
 			
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
-				String sparqlNamedGraph = "/propisi/amandmani/povuceni/metadata";
-				String rdfFilePath = path + "tmp.rdf";
+				String sparqlNamedGraph = "/propisi/amandmani/odbijeni/metadata";
+				String rdfFilePath = path + "temp1.rdf";
 				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
 				
 			} catch (IOException | SAXException | TransformerException e) {
@@ -154,6 +154,31 @@ public class AmendmentREST {
 		return r;
 	}
 	
+	private void changeCollection(Amandman amandman, String collectionName){
+		//create temp file
+		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.substring(1, path.length());
+		String xmlPath = path + "temp1.xml";
+		System.out.println("b:" + xmlPath);
+		//check validity
+		Response r  = XMLValidator.getInstance().validateAmendment(amandman, xmlPath);
+		
+		//write if valid		
+		if(r.getStatus() == 200){
+			try {
+				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/" + collectionName, true);
+			
+				//create metadata
+				String grddlPath = path + "grddl.xsl";
+				String sparqlNamedGraph = "/propisi/amandmani/"+collectionName+"/metadata";
+				String rdfFilePath = path + "temp1.rdf";
+				RDFtoTriples.convert(ConnPropertiesReader.loadProperties(), xmlPath, rdfFilePath, sparqlNamedGraph, grddlPath);
+				removeAmendment(amandman.getSporedniDeo().getMetaPodaci().getOznaka().getValue());
+			} catch (IOException | SAXException | TransformerException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	@POST
 	@Path("/removeAmendment/{amId}")
 	public void removeAmendment(@PathParam("amId") String amId){
@@ -168,6 +193,7 @@ public class AmendmentREST {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 			result = result.replace("\n", "");
 			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
+			System.out.println("RemoveDocQuery: " + removeDocQuery);
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -181,6 +207,7 @@ public class AmendmentREST {
 			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
 			result1 = result1.replace("\n", "");
 			String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
+			System.out.println("removemetadataquery: " + removeMetadataQuery);
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -193,15 +220,21 @@ public class AmendmentREST {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Amandman changeStatus(Amandman amandman, @PathParam("status")String status){
+		System.out.println("changing status");
+		System.out.println(status);
 		switch(status){
 		case "prihvacen":
-			amandman.setStatus(TStatusAmandmana.PRIHVACEN);;
+			amandman.setStatus(TStatusAmandmana.PRIHVACEN);
+			System.out.println("Changing collection to prihvaceni");
+			changeCollection(amandman, "prihvaceni");
 			break;
 		case "u_proceduri":
 			amandman.setStatus(TStatusAmandmana.U_PROCEDURI);
+			changeCollection(amandman, "u_proceduri");
 			break;
 		case "odbijen":
 			amandman.setStatus(TStatusAmandmana.ODBIJEN);
+			changeCollection(amandman, "odbijeni");
 			break;
 		}
 		return amandman;

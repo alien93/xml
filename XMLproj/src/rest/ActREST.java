@@ -196,6 +196,7 @@ public class ActREST {
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
 		String xmlPath = path + "temp.xml";
+		System.out.println("a:"+xmlPath);
 
 		//check validity
 		Response r  = XMLValidator.getInstance().validateAct(akt, xmlPath);

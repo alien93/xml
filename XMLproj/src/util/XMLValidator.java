@@ -67,7 +67,7 @@ public class XMLValidator {
 		return Response.status(200).entity("OK").build();
 	}
 	
-	public Response validateAmendment(Amandman amandman){
+	public Response validateAmendment(Amandman amandman, String path){
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try{
 			InputStream is = getClass().getResourceAsStream("/resources/amandman.xsd");
@@ -76,9 +76,9 @@ public class XMLValidator {
 				return Response.status(404).build();
 			}
 			StreamSource schemaTypes = new StreamSource(getClass().getResourceAsStream("/resources/generic_types.xsd"));
-			StreamSource schemaAkt = new StreamSource(getClass().getResourceAsStream("/resources/amandman.xsd"));
+			StreamSource schemaAmandman = new StreamSource(getClass().getResourceAsStream("/resources/amandman.xsd"));
 			
-			Source[] schemas = {schemaTypes,schemaAkt};
+			Source[] schemas = {schemaTypes,schemaAmandman};
 			
 			Schema schema = sf.newSchema(schemas);
 			
@@ -87,7 +87,11 @@ public class XMLValidator {
 			Marshaller marsh = context.createMarshaller();
 			marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	        marsh.setSchema(schema);
-	        marsh.marshal(amandman, System.out);
+	        try {
+				marsh.marshal(amandman, new FileOutputStream(path));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}catch(JAXBException | SAXException e){
 			e.printStackTrace();
 			return Response.status(404).build();
