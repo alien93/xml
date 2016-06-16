@@ -29,9 +29,9 @@
         </p:Donet_akt>
     </p:Sporedni_deo>
     <p:Glavni_deo>
-        <ns1:Glava oznaka="g1" naziv="Opsta odredba">
+        <ns1:Glava oznaka="/oz2/g1" naziv="Opsta odredba">
             <ns1:Sadrzaj>
-             <ns1:Clan oznaka="cl1">
+             <ns1:Clan oznaka="/oz2/g1/cl1" naziv="Član 1">
                  <ns1:Sadrzaj>
                      Овим правилником ближе се уређују начин и поступак
                      доделе средстава из буџета Града Новог Сада (у даљем
@@ -44,15 +44,15 @@
                      зацијом годишњих и посебних програма.
                  </ns1:Sadrzaj>
              </ns1:Clan>
-             <ns1:Clan oznaka="cl2" asdf="asdfasfd" testest="asdfafsd">
+             <ns1:Clan oznaka="/oz2/g1/cl2" asdf="asdfasfd" testest="asdfafsd" naziv="Član 2">
                  <ns1:Sadrzaj>
                      Спортском удружењу могу да се доделе средства из
                      буџета Града, на основу поднетог предлога годишњег одно-
                      сно посебног програма, под условом да:
-                     <ns1:Tacka>
+                     <ns1:Tacka oznaka="/oz2/g1/cl2/t1" naziv="Tačka 1">
                          - је уписано у регистар код надлежног органа,
                      </ns1:Tacka>
-                     <ns1:Tacka>
+                     <ns1:Tacka oznaka="/oz2/g1/cl2/t2" naziv="Tačka 2">
                          - послује на недобитној основи,
                      </ns1:Tacka>
                  </ns1:Sadrzaj>

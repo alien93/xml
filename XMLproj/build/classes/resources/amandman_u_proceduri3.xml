@@ -28,16 +28,16 @@
 		</p:Meta_podaci>
 	</p:Sporedni_deo>
 	<p:Glavni_deo>
-		<ns1:Deo oznaka="oz1" naziv="DEO 1">
+		<ns1:Deo oznaka="/am3/deo1" naziv="DEO 1">
 			<ns1:Sadrzaj>
 				Sadrzaj dela 1
-				<ns1:Glava oznaka="/111111/d2" naziv="Deo 1 - Glava 1">
+				<ns1:Glava oznaka="/am3/deo1/gl1" naziv="Deo 1 - Glava 1">
 					<ns1:Sadrzaj>
 						Deo 1 glava 1 sadrzi članove:
-						<ns1:Clan oznaka="oz1/gl1/cl1" naziv="Član 1">
+						<ns1:Clan oznaka="/am3/deo1/gl1/cl1" naziv="Član 1">
 							<ns1:Sadrzaj>Neki sadrzaj clana 1</ns1:Sadrzaj>
 						</ns1:Clan>
-						<ns1:Clan oznaka="oz1/gl1/cl2" naziv="Član 2">
+						<ns1:Clan oznaka="/am3/deo1/gl1/cl2" naziv="Član 2">
 							<ns1:Sadrzaj>Neki sadrzaj clana 2</ns1:Sadrzaj>
 						</ns1:Clan>
 					</ns1:Sadrzaj>
@@ -45,7 +45,7 @@
 				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
 			</ns1:Sadrzaj>
 			<ns1:Status>
-				<ns1:ref id_ref="/111111/d1">Glava 1</ns1:ref>
+				<ns1:ref id_ref="/111111/deo1">Glava 1</ns1:ref>
 				<ns1:status_izmene>brisi</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Deo>
