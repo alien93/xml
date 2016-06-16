@@ -385,21 +385,39 @@ public class ActREST {
 
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
+		String docId = getActsUri(aktId);
 
 
 		if(obj instanceof Deo){
 			String oznaka = ((Deo) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
 			switch(((Deo) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				System.out.println("Brisi");
-				String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
 			case "menjaj":
+				JAXBContext jc;
+				OutputStream os = null;
+				try {
+					jc = JAXBContext.newInstance(Deo.class);
+					Marshaller marshaller = jc.createMarshaller();
+					os = new ByteArrayOutputStream();
+					marshaller.marshal((Deo)obj, os);
+				} catch (JAXBException e1) {
+					e1.printStackTrace();
+				}
+				String patch = os.toString();
+				System.out.println("Patch: " + patch);
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
 				break;
