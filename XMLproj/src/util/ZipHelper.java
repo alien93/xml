@@ -25,6 +25,10 @@ import com.marklogic.client.io.InputStreamHandle;
 
 import queries.MySparqlQuery;
 import util.ConnPropertiesReader.ConnectionProperties;
+import util.transform.ActXmlToHtml;
+import util.transform.ActXmlToPdf;
+import util.transform.AmandmanXmlToHtml;
+import util.transform.AmandmanXmlToPdf;
 
 public class ZipHelper {
 	
@@ -79,17 +83,32 @@ public class ZipHelper {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length()) + "fop.xconf"; 
-		/*"D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";*/
+		path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
 		try{
 			if(AMANDMANI_U_PROCEDURI.equals(collection)){
 				new AmandmanXmlToPdf(path).transform(is, os);
 				writeDoc(os.toByteArray(), AMANDMANI_U_PRODECURI_PDF, true);
+				is = new ByteArrayInputStream(getDoc());
+				os = new ByteArrayOutputStream();
+				new AmandmanXmlToHtml().transform(is, os);
+				writeDoc(os.toByteArray(), AMANDMANI_U_PRODECURI_HTML, false);
 			}else{
-				new ActXmlToPdf(path).transform(is, os);
-				if(collection.equals(AKTI_DONETI))
+				if(collection.equals(AKTI_DONETI)){
+					new ActXmlToPdf(path).transform(is, os);
 					writeDoc(os.toByteArray(), AKTI_DONETI_PDF, true);
-				else
+					is = new ByteArrayInputStream(getDoc());
+					os = new ByteArrayOutputStream();
+					new ActXmlToHtml().transform(is, os);
+					writeDoc(os.toByteArray(), AKTI_DONETI_HTML, false);
+				}
+				else{
+					new ActXmlToPdf(path).transform(is, os);
 					writeDoc(os.toByteArray(), AKTI_U_PROCEDURI_PDF, true);
+					is = new ByteArrayInputStream(getDoc());
+					os = new ByteArrayOutputStream();
+					new ActXmlToHtml().transform(is, os);
+					writeDoc(os.toByteArray(), AKTI_U_PROCEDURI_HTML, false);
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -308,15 +327,16 @@ public class ZipHelper {
 	
 	public static void main(String[] args) {
 		
+		
 		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI }){
 			new ZipHelper(col, "").init();
 		}
 		String[] akti_doneti = {"111111", "doc1", "doc2", "doc3" };
 		String[] akti_procedura = {"1111", "2222", "3333", "4444", "6666"};
 		String[] amandmani = {"am1", "am2", "am3", "am4", "am5"};
-		/*
-		new ZipHelper(AMANDMANI_U_PROCEDURI, "am1").transform();
-		new ZipHelper(AMANDMANI_U_PROCEDURI, "am2").transform();
+		
+		//new ZipHelper(AMANDMANI_U_PROCEDURI, "am1").transform();
+		/*new ZipHelper(AMANDMANI_U_PROCEDURI, "am2").transform();
 		new ZipHelper(AMANDMANI_U_PROCEDURI, "am3").transform();
 		new ZipHelper(AMANDMANI_U_PROCEDURI, "am4").transform();*/
 		//new ZipHelper(AKTI_DONETI, "doc2").transform();
