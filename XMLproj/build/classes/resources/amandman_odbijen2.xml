@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
 
 <p:Amandman 
 	xmlns="http://www.w3.org/ns/rdfa#"
@@ -43,7 +42,7 @@
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/oz1/gl1">Glava 1</ns1:ref>
-				<ns1:status_izmene>donet</ns1:status_izmene>
+				<ns1:status_izmene>brisi</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Deo>
 		<ns1:Deo oznaka="oz2" naziv="DEO 2">
@@ -55,7 +54,7 @@
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/oz2/">Deo 2 referenca</ns1:ref>
-				<ns1:status_izmene>u_proceduri</ns1:status_izmene>
+				<ns1:status_izmene>dodaj</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Deo>
 		<ns1:Clan oznaka="cl1sam" naziv="Član van delova">
@@ -64,14 +63,14 @@
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/neka/ref">Referenca</ns1:ref>
-				<ns1:status_izmene>donet</ns1:status_izmene>
+				<ns1:status_izmene>dodaj</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Clan>
 		<ns1:Alineja oznaka="ali1" naziv="Alineja bez dela">
 			<ns1:Sadrzaj>Sadrzaj</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/alineja/">Alineja ref</ns1:ref>
-				<ns1:status_izmene>donet</ns1:status_izmene>
+				<ns1:status_izmene>menjaj</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Alineja>
 	</p:Glavni_deo>

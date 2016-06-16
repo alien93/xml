@@ -1,6 +1,6 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am2">
-    <pred:belongsTo xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:resource="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-60-2016-01"/>
+    <pred:belongsTo xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:resource="http://www.parlament.gov.rs/propisi/akti/u_proceduri/2222"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am2">
     <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">am2</pred:oznaka>

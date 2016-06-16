@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
 
 <p:Akt 
  xmlns="http://www.w3.org/ns/rdfa#"
@@ -10,7 +9,7 @@
  xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/"
  xsi:schemaLocation="http://www.parlament.gov.rs/propisi akt.xsd" 
  status="u_proceduri">
-    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+    <p:Sporedni_deo about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
         <p:Akt_u_proceduri>
             <p:Predlagac>
                 PREDSEDNIK VISOKOG SAVETA SUDSTVA Dragomir Milojevic
@@ -19,7 +18,7 @@
                 VISOKI SAVET SUDSTVA Republika Srbija
             </p:Upucuje_se>
             <p:Meta_podaci>
-                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">119-05-62-2016-01</ns1:Oznaka>
+                <ns1:Oznaka property="pred:oznaka" datatype="xs:string">3333</ns1:Oznaka>
                 <ns1:Naziv property="pred:naziv" datatype="xs:string">Predlog o pokretanju ostavinske rasprave</ns1:Naziv>
                 <ns1:Vrsta property="pred:vrsta" datatype="xs:string">Predlog</ns1:Vrsta>
                 <ns1:Datum property="pred:datum" datatype="xs:date">2016-03-31</ns1:Datum>

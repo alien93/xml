@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
 
 <p:Amandman 
 	xmlns="http://www.w3.org/ns/rdfa#"
@@ -13,7 +12,7 @@
 		vocab="http://www.parlament.gov.rs/propisi/predicate/" 
 		about="http://www.parlament.gov.rs/propisi/amandmani/u_proceduri/am1"
 		rel="pred:belongsTo" 
-        href="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-60-2016-01">
+        href="http://www.parlament.gov.rs/propisi/akti/u_proceduri/2222">
 		<p:Pravni_osnov_donosenja>Pravni osnov</p:Pravni_osnov_donosenja>
 		<p:Donet_od_strane>Moja baba</p:Donet_od_strane>
 		<p:Postupak_donosenja>Postupak</p:Postupak_donosenja>

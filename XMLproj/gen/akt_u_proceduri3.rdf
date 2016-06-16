@@ -1,23 +1,23 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
-    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">119-05-62-2016-01</pred:oznaka>
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
+    <pred:oznaka xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3333</pred:oznaka>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:naziv xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Predlog o pokretanju ostavinske rasprave</pred:naziv>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:vrsta xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Predlog</pred:vrsta>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:datum xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2016-03-31</pred:datum>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:mesto xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nis</pred:mesto>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:brPozitivnihGlasova xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#int"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/119-05-62-2016-01">
+  <rdf:Description rdf:about="http://www.parlament.gov.rs/propisi/akti/u_proceduri/3333">
     <pred:brUkupnihGlasova xmlns:pred="http://www.parlament.gov.rs/propisi/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#int"/>
   </rdf:Description>
 </rdf:RDF>

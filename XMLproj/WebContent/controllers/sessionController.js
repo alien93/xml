@@ -163,6 +163,17 @@ angular.module('xmlApp')
 				});
 			}
 			
+			//proveri da li postoje amandmani koje treba prihvatiti
+			var acceptingAmendment = function(){
+				var retVal = false;
+				for(var i=0; i<$scope.amendments.data.length; i++){
+					if($scope.amendments.primeni[i] == true){
+						retVal = true;
+						break;
+					}
+				}
+				return retVal;
+			}
 			
 			$scope.sessionSubmit = function(actId) {
 				//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane (promeni kolekcije)
@@ -170,15 +181,18 @@ angular.module('xmlApp')
 					acceptActAndAmendments(actId);					
 				}
 				else{
+					//Akt se prihvata u nacelu, promeni status u 'donet' i primeni amandmane koje treba primeniti
 					if($scope.uNacelu == true){
-						console.log("Akt se prihvata u nacelu, promeni status u 'donet' i primeni amandmane koje treba primeniti")
+						acceptActAndSomeAmendments(actId);
 					}
 					else{
-						if(acceptingAmendment()){	//postoje amandmani koje treba primeniti
-							console.log("Primeni amandmane koje treba primeniti")
+						//postoje amandmani koje treba primeniti
+						if(acceptingAmendment()){	
+							acceptAmendments(actId);
 						}
-						else{ //ne postoje amandmani
-							console.log("Smesti akt u povucene i amandmane")
+						//Smesti akt u povucene i amandmane u odbijene
+						else{
+							rejectAll(actId);
 						}
 					}
 				}
