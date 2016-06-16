@@ -10,15 +10,14 @@ import java.util.Map.Entry;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import util.ActXmlToPdf;
-import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
 import util.XQueryInvoker;
-
-import javax.ws.rs.Produces;
+import util.transform.ActXmlToPdf;
+import util.transform.AmandmanXmlToPdf;
 
 @Path("/pdfReference")
 public class PdfReferenceREST {

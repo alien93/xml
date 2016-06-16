@@ -27,11 +27,11 @@ import org.xml.sax.SAXException;
 
 import entities.act.Akt;
 import queries.MySparqlQuery;
-import util.ActXmlToPdf;
-import util.AmandmanXmlToPdf;
 import util.ConnPropertiesReader;
-import util.TransformersAutobot;
 import util.XQueryInvoker;
+import util.transform.ActXmlToPdf;
+import util.transform.AmandmanXmlToPdf;
+import util.transform.TransformersAutobot;
 
 @Path("/test")
 public class CitizenREST {

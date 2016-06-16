@@ -28,27 +28,26 @@ import com.marklogic.client.util.EditableNamespaceContext;
 
 import entities.act.Akt;
 import entities.act.SporedniDeo;
-import entities.amendment.Odeljak;
-import entities.amendment.Podtacka;
-import entities.amendment.Stav;
-import entities.amendment.Tacka;
-import entities.act.TStatusAkta;
-import entities.act.TStatusIzmene;
 import entities.act.SporedniDeo.DonetAkt;
 import entities.act.SporedniDeo.DonetAkt.MetaPodaci;
+import entities.act.TStatusAkta;
 import entities.amendment.Alineja;
 import entities.amendment.Amandman;
 import entities.amendment.Clan;
 import entities.amendment.Deo;
 import entities.amendment.Glava;
+import entities.amendment.Odeljak;
+import entities.amendment.Podtacka;
+import entities.amendment.Stav;
+import entities.amendment.Tacka;
 import queries.MySparqlQuery;
-import util.ActXmlToPdf;
 import util.ConnPropertiesReader;
 import util.RDFtoTriples;
 import util.XMLUpdate;
 import util.XMLValidator;
 import util.XMLWriter;
 import util.XQueryInvoker;
+import util.transform.ActXmlToPdf;
 
 @Path("/act")
 public class ActREST {
