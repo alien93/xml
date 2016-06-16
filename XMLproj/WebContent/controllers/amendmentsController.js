@@ -48,6 +48,7 @@ angular.module('xmlApp')
 							if(resp.statusText == "OK"){
 								console.log("It's ok");
 								$scope.status = "Dokument je sačuvan."
+								$scope.amForAct = "";
 							}
 						}, 
 						function(err){
