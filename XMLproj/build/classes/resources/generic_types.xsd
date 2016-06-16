@@ -129,7 +129,7 @@
             <xs:element ref="p:status_izmene"/>
         </xs:all>
     </xs:complexType>
-    <xs:element name="status_izmene" type="p:TStatusAkta"> </xs:element>
+    <xs:element name="status_izmene" type="p:TStatusIzmene"> </xs:element>
     <xs:element name="Deo">
         <xs:complexType>
             <xs:sequence>
@@ -292,6 +292,13 @@
             <xs:enumeration value="odbijen"/>
             <xs:enumeration value="prihvacen"/>
             <xs:enumeration value="u_proceduri"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TStatusIzmene">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dodaj"/>
+            <xs:enumeration value="brisi"/>
+            <xs:enumeration value="menjaj"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

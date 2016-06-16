@@ -68,7 +68,7 @@ angular.module('xmlApp')
 							console.log(result.data);
 							$http({
 								method : "POST",
-								url : "http://localhost:8080/XMLproj/rest/act/changeCollection",
+								url : "http://localhost:8080/XMLproj/rest/act/changeCollection/povuceni",
 								headers : {
 									"Content-Type": "application/xml"
 								},

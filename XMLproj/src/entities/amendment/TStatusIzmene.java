@@ -14,31 +14,34 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TStatusAkta.
+ * <p>Java class for TStatusIzmene.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="TStatusAkta">
+ * &lt;simpleType name="TStatusIzmene">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="donet"/>
- *     &lt;enumeration value="u_proceduri"/>
+ *     &lt;enumeration value="dodaj"/>
+ *     &lt;enumeration value="brisi"/>
+ *     &lt;enumeration value="menjaj"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "TStatusAkta")
+@XmlType(name = "TStatusIzmene")
 @XmlEnum
-public enum TStatusAkta {
+public enum TStatusIzmene {
 
-    @XmlEnumValue("donet")
-    DONET("donet"),
-    @XmlEnumValue("u_proceduri")
-    U_PROCEDURI("u_proceduri");
+    @XmlEnumValue("dodaj")
+    DODAJ("dodaj"),
+    @XmlEnumValue("brisi")
+    BRISI("brisi"),
+    @XmlEnumValue("menjaj")
+    MENJAJ("menjaj");
     private final String value;
 
-    TStatusAkta(String v) {
+    TStatusIzmene(String v) {
         value = v;
     }
 
@@ -46,8 +49,8 @@ public enum TStatusAkta {
         return value;
     }
 
-    public static TStatusAkta fromValue(String v) {
-        for (TStatusAkta c: TStatusAkta.values()) {
+    public static TStatusIzmene fromValue(String v) {
+        for (TStatusIzmene c: TStatusIzmene.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

@@ -154,12 +154,12 @@ public class XMLUpdate {
 	//test
 	public static void main(String[] args) throws IOException {
 		// Define a URI value for a document.
-		String docId = "/triplestore/748157eb1b3dcf62.xml";
+		String docId = "akt_u_proceduri5.xml";
 		// Defining namespace mappings
 		EditableNamespaceContext namespaces = new EditableNamespaceContext();
 		
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
-		namespaces.put("fn", "http://www.w3.org/2005/xpath-functions");
+		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 
 		// Creating an XML patch
 		String patch = "<p:Clan oznaka=\"cl3\">" + 
@@ -171,8 +171,8 @@ public class XMLUpdate {
 					"</p:Clan>";
 
 		// Defining XPath context
-		String contextXPath = "/sem:triples";
-
+		String contextXPath = "//ns1:Deo[@oznaka=\"/12565/d1\"]";
+		
 		//updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.LAST_CHILD);
 		updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 	}

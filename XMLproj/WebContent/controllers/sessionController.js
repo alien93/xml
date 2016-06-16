@@ -80,11 +80,13 @@ angular.module('xmlApp')
 				//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane (promeni kolekcije)
 				if($scope.uCelini == true){
 					console.log("Akt se prihvata u celini, promeni status u 'donet' i primeni sve amandmane");
+					//dobavi sadrzaj xml fajla na osnovu oznake akta
 					$http({
 						method : "GET",
 						url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + actId,
 					}).then(function(result){
 						console.log(result.data);
+						//prosledi sadrzaj metodi koja vrsi izmenu statusa akta
 						$http({
 							method : "POST",
 							url : "http://localhost:8080/XMLproj/rest/act/changeStatus/donet",
@@ -93,13 +95,17 @@ angular.module('xmlApp')
 							},
 							data : result.data
 						}).then(function(result1){
+							//primeni amandmane
 							console.log(result1.data);
 							for(var i=0; i<$scope.amendments.data.length; i++){
+								var amendmentId = $scope.amendments.data[i].oznakaAmandman.value;
+								//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
 								$http({
 									method : "GET",
-									url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + $scope.amendments.data[i].oznakaAmandman.value,
+									url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + amendmentId,
 								}).then(function(result){
 									console.log(result.data);
+									//prosledi sadrzaj metodi koja vrsi izmenu statusa amandmana
 									$http({
 										method : "POST",
 										url : "http://localhost:8080/XMLproj/rest/amendment/changeStatus/prihvacen",
@@ -108,13 +114,33 @@ angular.module('xmlApp')
 										},
 										data : result.data
 									}).then(function(result){
-										console.log(result.data);
+										//promeni kolekciju amandmana
+										$http({
+											method : "POST",
+											url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
+											headers : {
+												"Content-Type" : "application/xml"
+											},
+											data : result.data
+										}).then(function(result){
+											//promeni kolekciju akta
+											$http({
+												method : "POST",
+												url : "http://localhost:8080/XMLproj/rest/act/changeCollection/doneti",
+												headers : {
+													"Content-Type": "application/xml"
+												},
+												data : result1.data
+											});
+										})
 									})
 								})
 							}
+							
 						}, function(reason){
 							console.log(JSON.stringify(reason));
 						});
+						
 					}, function(reason){
 						console.log(JSON.stringify(reason));
 					});
@@ -136,7 +162,7 @@ angular.module('xmlApp')
 				}
 				
 				
-				console.log(actId);
+			/*	console.log(actId);
 				console.log($scope.aktGlasMin);
 				console.log($scope.aktGlasMax);
 				console.log($scope.uNacelu);
@@ -146,7 +172,7 @@ angular.module('xmlApp')
 					console.log($scope.amendments.glasMax[i]);
 					console.log($scope.amendments.primeni[i]);
 				}
-				console.log($scope.uCelini);
+				console.log($scope.uCelini);*/
 			};
 		
 		
