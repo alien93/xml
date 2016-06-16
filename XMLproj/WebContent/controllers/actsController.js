@@ -7,6 +7,7 @@ angular.module('xmlApp')
 						
 					$scope.insertTextVisible = false;
 					$scope.showTextPart = function() {
+						$scope.status = "";
 						$scope.insertTextVisible = !$scope.insertTextVisible;
 					};
 					$scope.status = "";
@@ -24,6 +25,7 @@ angular.module('xmlApp')
 							if(resp.statusText == "OK"){
 								console.log("It's ok");
 								$scope.status = "Dokument je sačuvan."
+								$scope.newAct = "";
 							}
 						}, 
 						function(err){
@@ -35,6 +37,7 @@ angular.module('xmlApp')
 					
 					//uploading act
 					$scope.addFileAct = function() {
+						$scope.status = "";
 						var file = document.getElementById('file').files[0];
 						var reader = new FileReader();
 						reader.onloadend = function(e){
