@@ -281,6 +281,13 @@ public class ActREST {
 		return akt;
 	}
 
+	/**
+	 * Menja sporedni element iz Akt_u_proceduri u Donet_akt
+	 * @param akt - akt nad kojim se vrsi izmena
+	 * @param odStrane - akt je donet od strane ovog lica
+	 * @param poPostupku - akt je donet po ovom postupku
+	 * @return Izmenjeni akt
+	 */
 	private Akt changeElement(Akt akt, String odStrane, String poPostupku) {
 		SporedniDeo sd = new SporedniDeo();
 		String oznaka = akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getOznaka().getValue();

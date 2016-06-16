@@ -166,7 +166,19 @@ angular.module('xmlApp')
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario){
 
 
-	var changeActsCollection = function(result1){
+	var removeActFromPreviousCollection = function(actId){
+		$http({
+			method : "POST",
+			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
+		}).then(function(result){
+			//$scope.acts.splice(rowIndex, 1);
+			console.log(result);
+		}, function(reason){
+			console.log(JSON.stringify(reason));
+		});
+	}
+	
+	var changeActsCollection = function(result1, actId){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/changeCollection/doneti",
@@ -174,6 +186,9 @@ angular.module('xmlApp')
 				"Content-Type": "application/xml"
 			},
 			data : result1.data
+		})
+		.success(function(result){
+			removeActFromPreviousCollection(actId);
 		});
 	}
 
@@ -187,7 +202,7 @@ angular.module('xmlApp')
 			data : result.data
 		}).then(function(result){
 			//promeni kolekciju akta
-			changeActsCollection(result1);
+			changeActsCollection(result1, actId);
 		})
 	}
 

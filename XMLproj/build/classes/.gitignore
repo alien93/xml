@@ -1,9 +1,6 @@
-/connection.properties
-/fop.xconf
-/grddl.xsl
-/resources/
 /entities/
 /queries/
+/resources/
 /rest/
 /services/
 /session/
