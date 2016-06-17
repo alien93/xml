@@ -68,7 +68,7 @@ public class XQueryInvoker {
 	 * @param query - kao String
 	 * @return - XML dokument kao String
 	 */
-	public static String invoke(ConnectionProperties props, String query){
+	public static synchronized String invoke(ConnectionProperties props, String query){
 		if (props.database.equals("")) {
 			client = DatabaseClientFactory.newClient(props.host, props.port, props.user, props.pass, props.authType);
 		} else {
