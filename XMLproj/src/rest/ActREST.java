@@ -554,7 +554,7 @@ public class ActREST {
 			switch(((Odeljak) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -599,7 +599,7 @@ public class ActREST {
 			switch(((Clan) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -644,7 +644,7 @@ public class ActREST {
 			switch(((Tacka) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -689,7 +689,7 @@ public class ActREST {
 			switch(((Podtacka) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -735,7 +735,7 @@ public class ActREST {
 			switch(((Stav) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -781,7 +781,7 @@ public class ActREST {
 			switch(((Alineja) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -826,7 +826,7 @@ public class ActREST {
 			switch(((Glava) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
 				try {
-					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
+					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

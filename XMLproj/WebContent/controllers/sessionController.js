@@ -277,6 +277,8 @@ angular.module('xmlApp')
 
 .controller('actDataController', ['$scope', '$rootScope', '$uibModalInstance', '$http', 'actId', 'scenario', 'amendments', 
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario, amendments){
+	
+	var actRemoved = false;
 
 	/**
 	 * Dopuni akt odgovarajucim podacima iz amandmana
@@ -315,6 +317,7 @@ angular.module('xmlApp')
 	 * Kopiraj akt iz kolekcije "u_proceduri" u kolekciju "doneti"
 	 */
 	var changeActsCollection = function(amandmanXml, result1, actId){
+		actRemoved = true;
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/changeCollection/doneti",
@@ -341,7 +344,10 @@ angular.module('xmlApp')
 			data : result.data
 		}).then(function(amandmanXml){
 			//promeni kolekciju akta
-			changeActsCollection(amandmanXml, result1, actId);
+			if(!actRemoved)
+				changeActsCollection(amandmanXml, result1, actId);
+			else
+				updateAct(amandmanXml, result1, actId);
 		})
 	}
 
@@ -424,10 +430,12 @@ angular.module('xmlApp')
 	 */
 	$scope.close = function(){
 		if(scenario == 1){		//prihvati sve akte i amandmane
+			actRemoved = false;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
 		else if(scenario == 2){	//prihvati akt i neke amandmane
+			actRemoved = false;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
