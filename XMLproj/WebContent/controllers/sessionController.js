@@ -22,7 +22,7 @@ angular.module('xmlApp')
 
 	$scope.contentForActVisible=[];
 
-	var closeAll = function(){
+	closeAll = function(){
 		for(i=0; i<$scope.contentForActVisible.length; i++){
 			$scope.contentForActVisible[i] = false;
 		}
@@ -289,6 +289,7 @@ angular.module('xmlApp')
 					}
 					if(idx!=-1){
 						$scope.acts.splice(idx, 1);
+						closeAll();
 					}
 					
 					/*
@@ -472,6 +473,7 @@ angular.module('xmlApp')
 			}
 			if(idx!=-1){
 				$rootScope.acts.splice(idx, 1);
+				closeAll();
 			}			
 			$uibModalInstance.close();
 		}
@@ -487,6 +489,7 @@ angular.module('xmlApp')
 			}
 			if(idx!=-1){
 				$rootScope.acts.splice(idx, 1);
+				closeAll();
 			}			
 			$uibModalInstance.close();
 		}

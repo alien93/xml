@@ -36,8 +36,8 @@ public class ZipHelper {
 	public static final String AKTI_U_PROCEDURI = "/propisi/akti/u_proceduri";
 	public static final String AKTI_POVUCENI = "/propisi/akti/povuceni";
 	public static final String AMANDMANI_U_PROCEDURI = "/propisi/amandmani/u_proceduri";
-	public static final String AMANDMANI_ODBIJENI = "/propisi/amandmani/prihvaceni";
-	public static final String AMANDMANI_PRIHVACENI = "/propisi/amandmani/odbijeni";
+	public static final String AMANDMANI_ODBIJENI = "/propisi/amandmani/odbijeni";
+	public static final String AMANDMANI_PRIHVACENI = "/propisi/amandmani/prihvaceni";
 	
 	/*
 	private static final String AKTI_DONETI_PDF = "/propisi/akti/doneti_pdf";

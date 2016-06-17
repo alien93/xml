@@ -503,6 +503,8 @@ public class ActREST {
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
 		String docId = getActiveActsUri(aktId);
+		if(docId == "")
+			docId = getActsUri(aktId);
 		System.out.println("DocId: " + docId);
 
 
