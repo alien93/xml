@@ -44,8 +44,6 @@ public class QueryExecutor {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		//System.out.println(query);
 		
 		DatabaseClient client = DatabaseClientFactory.newClient(props.host,
 				props.port, props.database, props.user, props.pass,

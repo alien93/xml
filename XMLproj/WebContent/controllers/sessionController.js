@@ -79,6 +79,11 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
+	/**
+	 * Vraca true ukoliko akt nece biti prihvacen ni u nacelu ni
+	 * u celini. Setuje prihvatanje amandmana na false i
+	 * disable-uje izmenu dozvole primene amandmana.
+	 */
 	$scope.changed = function(){
 		if($scope.uNacelu == false && $scope.uCelini == false){
 			for(var i=0; i<$scope.amendments.data.length; i++){
@@ -90,7 +95,9 @@ angular.module('xmlApp')
 			return false;
 	}
 
-	//proveri da li postoje amandmani koje treba prihvatiti
+	/**
+	 * Proverava da li postoje amandmani koje treba prihvatiti
+	 */
 	var acceptingAmendment = function(){
 		var retVal = false;
 		for(var i=0; i<$scope.amendments.data.length; i++){
@@ -102,6 +109,9 @@ angular.module('xmlApp')
 		return retVal;
 	}
 
+	/**
+	 * Uklanja akt iz prethodne kolekcije
+	 */
 	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -114,6 +124,9 @@ angular.module('xmlApp')
 		});
 	}
 
+	/**
+	 * Kopira akt iz kolekcije "u_proceduri" u "prihvaceni"
+	 */
 	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -128,7 +141,9 @@ angular.module('xmlApp')
 		});
 	}
 
-
+	/**
+	 * Postavlja status amandmana na "odbijen"
+	 */
 	var changeAmendmentsStatus = function(result, result1, actId){
 		console.log("bitno");
 		console.log(result.data);
@@ -145,6 +160,9 @@ angular.module('xmlApp')
 		})
 	}
 
+	/**
+	 * Dobavlja sadrzaj xml dokumenta amandmana na osnovu oznake amandmana
+	 */
 	var getXmlByAmendmentsId = function(amendmentId, result, result1, actId){
 		$http({
 			method : "GET",
@@ -158,6 +176,9 @@ angular.module('xmlApp')
 		})
 	}
 
+	/**
+	 * Menja status akta na "odbijen"
+	 */
 	var changeActsStatus = function(result, actId){
 		$http({
 			method : "POST",
@@ -179,6 +200,9 @@ angular.module('xmlApp')
 		});
 	}
 
+	/**
+	 * Odbija sve akte i amandmane
+	 */
 	var rejectAll = function(actId){
 		$http({
 			method : "GET",
@@ -193,10 +217,10 @@ angular.module('xmlApp')
 	}
 
 	/**
-	 * Submit session data
+	 * Prosledjuje podatke o odluci o aktu
 	 */
 	$scope.sessionSubmit = function(actId) {
-		//ukoliko se akt prihvata u celini, automatski prihvati i sve amandmane (promeni kolekcije)
+		//Akt se prihvata u celini, automatski prihvati i sve amandmane (promeni kolekcije)
 		if($scope.uCelini == true){
 			var modalInstance = $uibModal.open({
 				animation: false,
@@ -244,28 +268,16 @@ angular.module('xmlApp')
 		}
 
 		//-----------------------------------------/session--------------------------------------------
-
-
-		/*	console.log(actId);
-				console.log($scope.aktGlasMin);
-				console.log($scope.aktGlasMax);
-				console.log($scope.uNacelu);
-				for(var i=0; i<$scope.amendments.data.length; i++){
-					console.log($scope.amendments.data[i].oznakaAmandman.value);
-					console.log($scope.amendments.glasMin[i]);
-					console.log($scope.amendments.glasMax[i]);
-					console.log($scope.amendments.primeni[i]);
-				}
-				console.log($scope.uCelini);*/
 	};
-
-
 }
 ])
 
 .controller('actDataController', ['$scope', '$rootScope', '$uibModalInstance', '$http', 'actId', 'scenario', 'amendments', 
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario, amendments){
 
+	/**
+	 * Dopuni akt odgovarajucim podacima iz amandmana
+	 */
 	var updateAct = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -279,6 +291,9 @@ angular.module('xmlApp')
 		})
 	}
 
+	/**
+	 * Ukloni akt iz prethodne kolekcije ("u_proceduri")
+	 */
 	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -293,6 +308,9 @@ angular.module('xmlApp')
 		});
 	}
 
+	/**
+	 * Kopiraj akt iz kolekcije "u_proceduri" u kolekciju "doneti"
+	 */
 	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
 			method : "POST",
@@ -307,7 +325,9 @@ angular.module('xmlApp')
 		});
 	}
 
-
+	/**
+	 * Promeni status amandmana na "prihvacen"
+	 */
 	var changeAmendmentsStatus = function(result, result1, actId){
 		$http({
 			method : "POST",
@@ -317,11 +337,14 @@ angular.module('xmlApp')
 			},
 			data : result.data
 		}).then(function(amandmanXml){
-			//promeni kolekciju amandmana
+			//promeni kolekciju akta
 			changeActsCollection(amandmanXml, result1, actId);
 		})
 	}
 
+	/**
+	 * Dobavi sadrzaj xml dokumenta amandmana na osnovu oznake amandmana
+	 */
 	var getXmlByAmendmentsId = function(amendmentId, result, result1, actId){
 		$http({
 			method : "GET",
@@ -333,6 +356,9 @@ angular.module('xmlApp')
 		})
 	}
 
+	/**
+	 * Promeni status akta na "donet"
+	 */
 	var changeActsStatus = function(result, actId){
 		$http({
 			method : "POST",
@@ -367,6 +393,9 @@ angular.module('xmlApp')
 		});
 	}
 
+	/**
+	 * Prihvati akte i amandmane
+	 */
 	var acceptActAndAmendments = function(actId, odStrane, pravniOsnov){
 		$http({
 			method : "POST",
@@ -381,12 +410,15 @@ angular.module('xmlApp')
 		});
 	}
 
+	/**
+	 * Zatvaranje dijaloga
+	 */
 	$scope.close = function(){
-		if(scenario == 1){
+		if(scenario == 1){		//prihvati sve akte i amandmane
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
-		else if(scenario == 2){
+		else if(scenario == 2){	//prihvati akt i neke amandmane
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}

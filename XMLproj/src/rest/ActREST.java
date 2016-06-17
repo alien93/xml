@@ -53,6 +53,10 @@ import util.transform.ActXmlToPdf;
 @Path("/act")
 public class ActREST {
 
+	/**
+	 * Dobavlja sve donete akte
+	 * @return Status uspesnosti dobavljanja
+	 */
 	@GET
 	@Path("/active")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -69,6 +73,10 @@ public class ActREST {
 		}
 	}
 
+	/**
+	 * Dobavlja sve akte u proceduri
+	 * @return Status uspesnosti dobavljanja
+	 */
 	@GET
 	@Path("/nonActive")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -85,6 +93,11 @@ public class ActREST {
 		}
 	}
 
+	/**
+	 * Dobavlja donet akt na osnovu oznake
+	 * @param id - oznaka akta
+	 * @return
+	 */
 	@GET
 	@Path("/activeId/{id}")
 	@Produces("application/pdf")
@@ -97,6 +110,11 @@ public class ActREST {
 		return helpQuery(query, id);
 	}
 
+	/**
+	 * Dobavlja akt u proceduri na osnovu oznake
+	 * @param id - oznaka akta
+	 * @return
+	 */
 	@GET
 	@Path("/nonActiveId/{id}")
 	@Produces("application/pdf")
@@ -109,6 +127,11 @@ public class ActREST {
 		return helpQuery(query, id);
 	}
 
+	/**
+	 * Dodaje akt u kolekciju "u_proceduri"
+	 * @param akt koji se dodaje 
+	 * @return Status uspesnosti
+	 */
 	@POST
 	@Path("/addAct")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -141,16 +164,19 @@ public class ActREST {
 		return r;
 	}
 
+	/**
+	 * Dobavlja sadrzaj xml dokumenta na osnovu oznake akta iz kolekcije "u_proceduri".
+	 * Izmeni sadrzaj sporednog dela akta tako da odgovara donetom aktu
+	 * @param actId - oznaka akta
+	 * @param data - podaci kojima ce sporedni deo biti dopunjen
+	 * @return Izmenjen akt - (Akt_u_proceduri -> Donet_akt)
+	 */
 	@POST
 	@Path("/xmlById/{actId}")
 	@Produces(MediaType.APPLICATION_XML)
 	public String getXmlById(@PathParam("actId") String actId, String data){
-		System.out.println("DATA: " + data);
-		System.out.println(data.split("\\$\\$\\$\\$").length);
 		String odStrane = data.split("\\$\\$\\$\\$")[0];
-		System.out.println(odStrane);
 		String poPostupku = data.split("\\$\\$\\$\\$")[1];
-		System.out.println(poPostupku);
 		String result = "";
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 				"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
@@ -163,15 +189,17 @@ public class ActREST {
 			Akt akt = actXmlToAct(actStream);
 			akt = changeElement(akt, odStrane, poPostupku);
 			result = actToXml(akt);
-			System.out.println("------------------------------------------");
-			System.out.println(result);
-			System.out.println("------------------------------------------");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
+	/**
+	 * Dobavlja sadrzaj xml dokumenta akta na osnovu oznake akta iz kolekcije "u_proceduri"
+	 * @param actId - oznaka akta
+	 * @return Sadrzaj xml dokumenta
+	 */
 	@GET
 	@Path("/xmlById/{actId}")
 	@Produces(MediaType.APPLICATION_XML)
@@ -190,16 +218,20 @@ public class ActREST {
 		return result;
 	}
 
+	/**
+	 * Kopira akt iz kolekcije kojoj trenutno pripada u novu kolekciju
+	 * @param akt - akt koji se kopira
+	 * @param collectionName - kolekcija u koju se kopira
+	 * @return Status uspesnosti
+	 */
 	@POST
 	@Path("/changeCollection/{collectionName}")
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response changeCollection(Akt akt, @PathParam("collectionName")String collectionName){		
-		System.out.println("Changing collection");
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
 		String xmlPath = path + "temp.xml";
-		System.out.println("a:"+xmlPath);
 
 		//check validity
 		Response r  = XMLValidator.getInstance().validateAct(akt, xmlPath);
@@ -223,6 +255,11 @@ public class ActREST {
 		return r;
 	}
 
+	/**
+	 * Dobavlja uri akta na osnovu oznake akta iz kolekcije "u_proceduri"
+	 * @param actId - oznaka akta
+	 * @return uri akta
+	 */
 	private String getActsUri(String actId){
 		String result = "";
 		//get document's name
@@ -241,6 +278,11 @@ public class ActREST {
 		return result;
 	}
 	
+	/**
+	 * Dobavlja uri akta na osnovu oznake iz kolekcije "doneti"
+	 * @param actId - oznaka akta
+	 * @return uri akta
+	 */
 	private String getActiveActsUri(String actId){
 		String result = "";
 		//get document's name
@@ -259,6 +301,10 @@ public class ActREST {
 		return result;
 	}
 
+	/**
+	 * Uklanja akt iz baze i metapodatke (kolekcija "u_proceduri/metadata")
+	 * @param actId - oznaka akta
+	 */
 	@POST
 	@Path("/removeAct/{actId}")
 	public void removeAct(@PathParam("actId") String actId){
@@ -274,9 +320,9 @@ public class ActREST {
 		//remove metadata
 		//get the name of the document that contains metadata
 		String metadataDocQuery = 	"declare namespace sem=\"http://marklogic.com/semantics\";"+
-				"for $doc in fn:collection(\"/propisi/akti/u_proceduri/metadata\")"+
-				"where $doc/sem:triples/sem:triple[1]/sem:object = \""+ actId +"\""+
-				"return base-uri($doc)";
+									"for $doc in fn:collection(\"/propisi/akti/u_proceduri/metadata\")"+
+									"where $doc/sem:triples/sem:triple[1]/sem:object = \""+ actId +"\""+
+									"return base-uri($doc)";
 		try {
 			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
 			result1 = result1.replace("\n", "");
@@ -288,6 +334,12 @@ public class ActREST {
 
 	}
 
+	/**
+	 * Menja status akta
+	 * @param akt - akt kome se menja status
+	 * @param status - status izmene (moze biti "donet", "u_proceduri" ili "odbijen")
+	 * @return Akt sa izmenjenim statusom
+	 */
 	@POST
 	@Path("/changeStatus/{status}")
 	@Consumes(MediaType.APPLICATION_XML)
@@ -299,8 +351,10 @@ public class ActREST {
 			break;
 		case "u_proceduri":
 			akt.setStatus(TStatusAkta.U_PROCEDURI);
+			break;
 		case "odbijen":
 			akt.setStatus(TStatusAkta.ODBIJEN);
+			break;
 		}
 		return akt;
 	}
@@ -331,6 +385,11 @@ public class ActREST {
 		return akt;
 	}
 	
+	/**
+	 * Konvertuje xml koji sadrzi akt u objekat Akt.
+	 * @param actStream xml sadrzaj akta
+	 * @return objekat Akt
+	 */
 	private Akt actXmlToAct(InputStream actStream){
 		Akt retVal = null;
 		JAXBContext jc;
@@ -344,6 +403,11 @@ public class ActREST {
 		return retVal;
 	}
 	
+	/**
+	 * Konvertuje akt u xml
+	 * @param akt - akt koji se konvertuje
+	 * @return sadrzaj xml-a
+	 */
 	private String actToXml(Akt akt){
 		String retVal = "";
 		JAXBContext jc;
@@ -360,50 +424,56 @@ public class ActREST {
 		return retVal;
 	}
 
+	/**
+	 * Primenjuje amandman na akt
+	 * @param actId - oznaka akta
+	 * @param amandman - amandman koji se primenjuje na akt
+	 */
 	@POST
 	@Path("/updateAct/{actId}")
 	@Consumes(MediaType.APPLICATION_XML)
 	public void updateAct(@PathParam("actId")String actId, Amandman amandman){
-		System.out.println(actId);
-		InputStream actStream = new ByteArrayInputStream(getXmlById(actId).getBytes(StandardCharsets.UTF_8));
-		Akt akt = actXmlToAct(actStream);
 		for(Deo deo : amandman.getGlavniDeo().getDeo()){
 			if(deo.getStatus()!=null)
-				update(actId,  akt, deo);
+				update(actId,   deo);
 		}
 		for(Odeljak odeljak : amandman.getGlavniDeo().getOdeljak()){
 			if(odeljak.getStatus()!=null)
-				update(actId, akt,  odeljak);
+				update(actId,   odeljak);
 		}
 		for(Glava glava : amandman.getGlavniDeo().getGlava()){
 			if(glava.getStatus()!=null)
-				 update(actId,  akt, glava);
+				 update(actId,   glava);
 		}
 		for(Clan clan : amandman.getGlavniDeo().getClan()){
 			if(clan.getStatus()!=null)
-				 update(actId,  akt, clan);
+				 update(actId,   clan);
 		}
 		for(Tacka tacka : amandman.getGlavniDeo().getTacka()){
 			if(tacka.getStatus()!=null)
-				 update(actId,  akt, tacka);
+				 update(actId,   tacka);
 		}
 		for(Podtacka podtacka : amandman.getGlavniDeo().getPodtacka()){
 			if(podtacka.getStatus()!=null)
-				 update(actId, akt,  podtacka);
+				 update(actId,   podtacka);
 		}
 		for(Alineja alineja : amandman.getGlavniDeo().getAlineja()){
 			if(alineja.getStatus()!=null)
-				update(actId, akt,  alineja);
+				update(actId,   alineja);
 		}
 		for(Stav stav : amandman.getGlavniDeo().getStav()){
 			if(stav.getStatus()!=null)
-				update(actId, akt, stav);
+				update(actId,  stav);
 		}	
 	}
 
 
-	private void update(String aktId, Akt akt, Object obj) {
-		System.out.println("updating...");
+	/**
+	 * Vrsi azuriranje akta
+	 * @param aktId - oznaka akta
+	 * @param obj - objekat koji se azurira (Deo, Clan...)
+	 */
+	private void update(String aktId, Object obj) {
 		EditableNamespaceContext namespaces = new EditableNamespaceContext();
 
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
@@ -414,7 +484,6 @@ public class ActREST {
 		if(obj instanceof Deo){
 			String oznaka = ((Deo) obj).getStatus().getRef().getIdRef();
 			String contextXPath = "//ns1:Deo[@oznaka=\"" + oznaka + "\"]";
-			System.out.println("ContextXPath: " + contextXPath);
 			JAXBContext jc;
 			OutputStream os = null;
 			try {
@@ -432,9 +501,7 @@ public class ActREST {
 			
 			switch(((Deo) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
 				try {
-					System.out.println(docId);
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
 					
 				} catch (IOException e) {
@@ -462,10 +529,24 @@ public class ActREST {
 		}
 		else if(obj instanceof Odeljak){
 			String oznaka = ((Odeljak) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Odeljak[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Odeljak.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Odeljak)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+
 			switch(((Odeljak) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Odeljak[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -473,8 +554,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -482,10 +573,25 @@ public class ActREST {
 		}
 		else if(obj instanceof Clan){
 			String oznaka = ((Clan) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Clan[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Clan.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Clan)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
 			switch(((Clan) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Clan[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -493,8 +599,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -502,10 +618,25 @@ public class ActREST {
 		}
 		else if(obj instanceof Tacka){
 			String oznaka = ((Tacka) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Tacka[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Tacka.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Tacka)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
 			switch(((Tacka) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Tacka[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -513,8 +644,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -522,10 +663,25 @@ public class ActREST {
 		}
 		else if(obj instanceof Podtacka){
 			String oznaka = ((Podtacka) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Podtacka[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Podtacka.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Podtacka)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
 			switch(((Podtacka) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Podtacka[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -533,8 +689,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -542,10 +708,26 @@ public class ActREST {
 		}
 		else if(obj instanceof Stav){
 			String oznaka = ((Stav) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Stav[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Stav.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Stav)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
+			
 			switch(((Stav) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Stav[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -553,8 +735,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -562,10 +754,26 @@ public class ActREST {
 		}
 		else if(obj instanceof Alineja){
 			String oznaka = ((Alineja) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Alineja[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Alineja.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Alineja)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
+			
 			switch(((Alineja) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Alineja[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -573,8 +781,18 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
@@ -582,10 +800,25 @@ public class ActREST {
 		}
 		else if(obj instanceof Glava){
 			String oznaka = ((Glava) obj).getStatus().getRef().getIdRef();
+			String contextXPath = "//ns1:Glava[@oznaka=\"" + oznaka + "\"]";
+			JAXBContext jc;
+			OutputStream os = null;
+			try {
+				jc = JAXBContext.newInstance(Glava.class);
+				Marshaller marshaller = jc.createMarshaller();
+				os = new ByteArrayOutputStream();
+				marshaller.marshal((Glava)obj, os);
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}
+			String patch = os.toString();
+			if(patch.contains("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+				patch = patch.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			}
+			
+			
 			switch(((Glava) obj).getStatus().getStatusIzmene().value()) {
 			case "brisi":
-				System.out.println("Brisi");
-				String contextXPath = "//ns1:Glava[@oznaka=\"" + oznaka + "\"]";
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), getActsUri(aktId), namespaces, contextXPath);
 				} catch (IOException e) {
@@ -593,18 +826,23 @@ public class ActREST {
 				}
 				break;
 			case "menjaj":
+				try {
+					XMLUpdate.updateXMLReplace(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "dodaj":
+				try {
+					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			default:
 				break;
 			}
 		}
-		
-		String xml = getXmlById(aktId);
-		System.out.println("***********************************");
-		System.out.println(xml);
-		System.out.println("***********************************");
 
 	}
 

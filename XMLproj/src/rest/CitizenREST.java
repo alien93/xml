@@ -41,7 +41,6 @@ public class CitizenREST {
 	public String test() {
 		String path = CitizenREST.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
-		System.out.println(path);
 		String document = path + "resources/xquery/getNonActiveActs.xqy";
 		try {
 			XQueryInvoker.invokeQuery(ConnPropertiesReader.loadProperties(), document);
@@ -73,7 +72,6 @@ public class CitizenREST {
 		try {
 			InputStream is = getClass().getResourceAsStream("/resources/akt.xsd");
 			if(is == null){
-				System.out.println("NULL");
 				return Response.status(404).build();
 			}
 			StreamSource schemaTypes = new StreamSource(getClass().getResourceAsStream("/resources/generic_types.xsd"));

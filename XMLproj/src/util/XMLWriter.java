@@ -70,7 +70,6 @@ public class XMLWriter {
 	
 	//test
 	public static void main(String[] args) throws IOException {
-		System.out.println("Starting...");
 		// Define a URI value for a document.
 		String inputFile = "./src/resources/amandman_u_proceduri3.xml";
 		//String inputFile = "data/rdfa/RS26-16-lat_primer_donetog_akta1.xml";

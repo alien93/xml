@@ -37,7 +37,6 @@ public class AmendmentREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAmendmentsForAct(@PathParam("actId") String actId){
 		String result = "";
-		System.out.println("Act id: " + actId);
 		String query = "SELECT * FROM </propisi/amandmani/u_proceduri/metadata>{"+
 					   " ?propis <http://www.parlament.gov.rs/propisi/predicate/belongsTo> ?akt ."+
 					    "{"+
@@ -48,7 +47,6 @@ public class AmendmentREST {
 					     "}"+
 					    "FILTER ( str(?akt) = \"http://www.parlament.gov.rs/propisi/akti/u_proceduri/" + actId + "\")"+
 					"}";
-		System.out.println(query);
 		try {
 			result = QueryExecutor.executeFromString(ConnPropertiesReader.loadProperties(), query);
 		} catch (IOException e) {
@@ -105,7 +103,6 @@ public class AmendmentREST {
 	@Path("/xmlById/{amId}")
 	@Produces(MediaType.APPLICATION_XML)
 	public String getXmlById(@PathParam("amId") String amId){
-		System.out.println("XML for amendment: " + amId);
 		String result = "";
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";"+
 						"declare namespace ns1=\"http://www.parlament.gov.rs/generic_types\";"+
@@ -114,9 +111,6 @@ public class AmendmentREST {
 						"return $doc";
 		try {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
-			System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-");
-			System.out.println(result);
-			System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,7 +122,6 @@ public class AmendmentREST {
 	@Path("/changeCollection")
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response changeCollection(Amandman amandman){
-		System.out.println("Changing collection");
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
@@ -161,7 +154,6 @@ public class AmendmentREST {
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
 		String xmlPath = path + "temp1.xml";
-		System.out.println("b:" + xmlPath);
 		//check validity
 		Response r  = XMLValidator.getInstance().validateAmendment(amandman, xmlPath);
 		
@@ -195,7 +187,6 @@ public class AmendmentREST {
 			result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 			result = result.replace("\n", "");
 			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
-			System.out.println("RemoveDocQuery: " + removeDocQuery);
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -209,7 +200,6 @@ public class AmendmentREST {
 			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
 			result1 = result1.replace("\n", "");
 			String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
-			System.out.println("removemetadataquery: " + removeMetadataQuery);
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -222,12 +212,9 @@ public class AmendmentREST {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Amandman changeStatus(Amandman amandman, @PathParam("status")String status){
-		System.out.println("changing status");
-		System.out.println(status);
 		switch(status){
 		case "prihvacen":
 			amandman.setStatus(TStatusAmandmana.PRIHVACEN);
-			System.out.println("Changing collection to prihvaceni");
 			changeCollection(amandman, "prihvaceni");
 			break;
 		case "u_proceduri":
