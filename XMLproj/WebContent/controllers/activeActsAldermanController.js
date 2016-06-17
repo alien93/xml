@@ -61,6 +61,55 @@ angular.module('xmlApp')
 					};
 					
 					$scope.deleteAct = function(idx, rowIndex){
+						// Get all amendments for act 
+						var amendmentsForAct = [];
+						$http({
+							method: "GET", 
+							url : "http://localhost:8080/XMLproj/rest/amendment/amendmentsForAct/" + idx, 
+						}).then(function(retVal) {
+							amendmentsForAct = retVal.data.results.bindings;
+							
+							//Delete all amendments
+							for(var i = 0; i < amendmentsForAct.length; i++) {
+								var idxAm = amendmentsForAct[i].nazivAmandman.value;
+								console.log(idxAm);
+								
+								// Remove it
+								$http({
+									method : "GET",
+									url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + idxAm,
+								}).then(function(result){
+									console.log(result.data);
+									$http({
+										method : "POST",
+										url : "http://localhost:8080/XMLproj/rest/amendment/changeCollection",
+										headers : {
+											"Content-Type": "application/xml"
+										},
+										data : result.data
+									}).then(function(result){
+										$http({
+											method : "POST",
+											url : "http://localhost:8080/XMLproj/rest/amendment/removeAmendment/" + idxAm,
+										}).then(function(result){
+											$scope.showAmendments();
+											console.log(result);
+										}, function(reason){
+											console.log(JSON.stringify(reason));
+										});
+										console.log(result);
+									}, function(reason){
+										console.log(JSON.stringify(reason));
+									});
+								}, function(reason){
+									console.log(JSON.stringify(reason));
+								});
+							} // end_for
+						}, function(reason){
+							console.log(JSON.stringify(reason));
+						});
+					 
+						
 						$http({
 							method : "GET",
 							url : "http://localhost:8080/XMLproj/rest/act/xmlById/" + idx,
@@ -87,8 +136,6 @@ angular.module('xmlApp')
 							}, function(reason){
 								console.log(JSON.stringify(reason));
 							});
-						}, function(reason){
-							console.log(JSON.stringify(reason));
 						});
-					};
+				};
 	}]);
