@@ -24,6 +24,7 @@ import entities.amendment.TStatusAmandmana;
 import queries.QueryExecutor;
 import util.ConnPropertiesReader;
 import util.RDFtoTriples;
+import util.SaveDocumentHtmlPdf;
 import util.XMLValidator;
 import util.XMLWriter;
 import util.XQueryInvoker;
@@ -84,6 +85,9 @@ public class AmendmentREST {
 		if(r.getStatus() == 200){
 			try {
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/u_proceduri", true);
+				String id = amandman.getSporedniDeo().getMetaPodaci().getOznaka().getValue();
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/u_proceduri", id);
+				sdhp.save();
 			
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
@@ -134,7 +138,11 @@ public class AmendmentREST {
 		if(r.getStatus() == 200){
 			try {
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/odbijeni", true);
-			
+				String id = amandman.getSporedniDeo().getMetaPodaci().getOznaka().getValue();
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/odbijeni", id);
+				sdhp.save();
+				
+				
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
 				String sparqlNamedGraph = "/propisi/amandmani/odbijeni/metadata";
@@ -160,8 +168,13 @@ public class AmendmentREST {
 		//write if valid		
 		if(r.getStatus() == 200){
 			try {
+				String id = amandman.getSporedniDeo().getMetaPodaci().getOznaka().getValue();
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/u_proceduri", id);
+				sdhp.delete();
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/" + collectionName, true);
-			
+				sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/" + collectionName, id);
+				sdhp.save();
+				
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
 				String sparqlNamedGraph = "/propisi/amandmani/"+collectionName+"/metadata";
@@ -188,6 +201,8 @@ public class AmendmentREST {
 			result = result.replace("\n", "");
 			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
+			SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/u_proceduri", amId);
+			sdhp.delete();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -43,6 +43,7 @@ import entities.amendment.Tacka;
 import queries.MySparqlQuery;
 import util.ConnPropertiesReader;
 import util.RDFtoTriples;
+import util.SaveDocumentHtmlPdf;
 import util.XMLUpdate;
 import util.XMLValidator;
 import util.XMLWriter;
@@ -149,6 +150,9 @@ public class ActREST {
 		if(r.getStatus() == 200){
 			try {
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/u_proceduri", true);
+				String oznaka = akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getOznaka().getValue();
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", oznaka);
+				sdhp.save();
 
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
@@ -239,7 +243,12 @@ public class ActREST {
 		//write if valid		
 		if(r.getStatus() == 200){
 			try {
+				String id = akt.getSporedniDeo().getDonetAkt().getMetaPodaci().getOznaka().getValue();
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", id);
+				sdhp.delete();
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/" + collectionName, true);
+				sdhp = new SaveDocumentHtmlPdf("/propisi/akti/" + collectionName, id);
+				sdhp.save();
 
 				//create metadata
 				String grddlPath = path + "grddl.xsl";
@@ -315,6 +324,8 @@ public class ActREST {
 			if(!result.equals("")){
 				String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
 				XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
+				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", actId);
+				sdhp.delete();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -439,6 +450,8 @@ public class ActREST {
 	@Path("/updateAct/{actId}")
 	@Consumes(MediaType.APPLICATION_XML)
 	public void updateAct(@PathParam("actId")String actId, Amandman amandman){
+		SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/doneti", actId);
+		sdhp.delete();
 		for(Deo deo : amandman.getGlavniDeo().getDeo()){
 			if(deo.getStatus()!=null)
 				update(actId,   deo);
@@ -470,7 +483,9 @@ public class ActREST {
 		for(Stav stav : amandman.getGlavniDeo().getStav()){
 			if(stav.getStatus()!=null)
 				update(actId,  stav);
-		}	
+		}
+		sdhp = new SaveDocumentHtmlPdf("/propisi/akti/doneti", actId);
+		sdhp.save();
 	}
 
 
@@ -524,6 +539,7 @@ public class ActREST {
 			case "dodaj":
 				try {
 					XMLUpdate.updateXMLInsert(ConnPropertiesReader.loadProperties(), docId, namespaces, patch, contextXPath, UpdatePositions.AFTER);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
