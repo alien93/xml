@@ -194,6 +194,9 @@ angular.module('xmlApp')
 				//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
 				getXmlByAmendmentsId(amendmentId, result, result1, actId);
 			}
+			if($rootScope.amendments.data.length == 0){
+				changeActsCollection(null, result1, actId);
+			}
 
 		}, function(reason){
 			console.log(JSON.stringify(reason));
@@ -375,6 +378,9 @@ angular.module('xmlApp')
 					//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
 					getXmlByAmendmentsId(amendmentId, result, result1, actId);
 				}
+				if($rootScope.amendments.data.length == 0){
+					changeActsCollection(null, result1, actId);
+				}
 			}
 			else if(scenario == 2){
 				for(var i=0; i<$rootScope.amendments.data.length; i++){
@@ -386,6 +392,9 @@ angular.module('xmlApp')
 					else{
 						changeActsCollection(null, result1, actId);
 					}
+				}
+				if($rootScope.amendments.data.length == 0){
+					changeActsCollection(null, result1, actId);
 				}
 			}
 		}, function(reason){

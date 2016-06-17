@@ -312,8 +312,10 @@ public class ActREST {
 		//copy document to another collection
 		//remove document
 		try {
-			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
-			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
+			if(!result.equals("")){
+				String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
+				XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -326,8 +328,10 @@ public class ActREST {
 		try {
 			String result1 = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), metadataDocQuery);
 			result1 = result1.replace("\n", "");
-			String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
-			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
+			if(!result1.equals("")){
+				String removeMetadataQuery = "xdmp:document-delete(\""+ result1 + "\")";
+				XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeMetadataQuery);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -379,6 +383,8 @@ public class ActREST {
 		mp.setNaziv(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getNaziv());
 		mp.setMesto(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getMesto());
 		mp.setDatum(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getDatum());
+		mp.setBrPozitivnihGlasova(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getBrPozitivnihGlasova());
+		mp.setBrUkupnihGlasova(akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getBrUkupnihGlasova());
 		da.setMetaPodaci(mp);
 		sd.setDonetAkt(da);
 		akt.setSporedniDeo(sd);
