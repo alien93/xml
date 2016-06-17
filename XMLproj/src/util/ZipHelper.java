@@ -35,19 +35,26 @@ public class ZipHelper {
 	public static final String AKTI_DONETI = "/propisi/akti/doneti";
 	public static final String AKTI_U_PROCEDURI = "/propisi/akti/u_proceduri";
 	public static final String AMANDMANI_U_PROCEDURI = "/propisi/amandmani/u_proceduri";
+	public static final String AMANDMANI_ODBIJENI = "/propisi/amandmani/prihvaceni";
+	public static final String AMANDMANI_PRIHVACENI = "/propisi/amandmani/odbijeni";
 	
+	/*
 	private static final String AKTI_DONETI_PDF = "/propisi/akti/doneti_pdf";
 	private static final String AKTI_DONETI_HTML = "/propisi/akti/doneti_html";
 	private static final String AKTI_U_PROCEDURI_PDF = "/propisi/akti/u_proceduri_pdf";
 	private static final String AKTI_U_PROCEDURI_HTML = "/propisi/akti/u_proceduri_html";
 	private static final String AMANDMANI_U_PRODECURI_PDF = "/propisi/akti/amandmani_u_proceduri_pdf";
 	private static final String AMANDMANI_U_PRODECURI_HTML = "/propisi/akti/amandmani_u_proceduri_html";
+	*/
 	
 	private String collection;
 	private String docId;
 	//private DatabaseClient client;
 	private String docIdPDF;
 	private String docIdHTML;
+	
+	private String collectionPdf;
+	private String collectionHtml;
 	
 	public ZipHelper(){}
 	
@@ -62,6 +69,11 @@ public class ZipHelper {
 		}
 	}
 	
+	private boolean isAct(){
+		if(collection.equals(AKTI_DONETI) || collection.equals(AKTI_U_PROCEDURI)) return true;
+		return false;
+	}
+	
 	private DatabaseClient initClient(ConnectionProperties props){
 		if (props.database.equals("")) {
 			DatabaseClient client = DatabaseClientFactory.newClient(props.host, props.port, props.user, props.pass, props.authType);
@@ -74,6 +86,8 @@ public class ZipHelper {
 	private void transformDocId(){
 		docIdPDF = docId + "_pdf";
 		docIdHTML = docId + "_html";
+		collectionPdf = collection + "_pdf";
+		collectionHtml = collection + "_html";
 	}
 	
 	public void transform(){
@@ -83,8 +97,9 @@ public class ZipHelper {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length()) + "fop.xconf"; 
-		path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
+		//path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
 		try{
+			/*
 			if(AMANDMANI_U_PROCEDURI.equals(collection)){
 				new AmandmanXmlToPdf(path).transform(is, os);
 				writeDoc(os.toByteArray(), AMANDMANI_U_PRODECURI_PDF, true);
@@ -108,8 +123,23 @@ public class ZipHelper {
 					os = new ByteArrayOutputStream();
 					new ActXmlToHtml().transform(is, os);
 					writeDoc(os.toByteArray(), AKTI_U_PROCEDURI_HTML, false);
+				}*/
+			
+				if(isAct()){
+					new ActXmlToPdf(path).transform(is, os);
+					writeDoc(os.toByteArray(), collectionPdf, true);
+					is = new ByteArrayInputStream(getDoc());
+					os = new ByteArrayOutputStream();
+					new ActXmlToHtml().transform(is, os);
+					writeDoc(os.toByteArray(), collectionHtml, false);
+				}else{
+					new AmandmanXmlToPdf(path).transform(is, os);
+					writeDoc(os.toByteArray(), collectionPdf, true);
+					is = new ByteArrayInputStream(getDoc());
+					os = new ByteArrayOutputStream();
+					new AmandmanXmlToHtml().transform(is, os);
+					writeDoc(os.toByteArray(), collectionHtml, false);
 				}
-			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -136,7 +166,7 @@ public class ZipHelper {
 		String wherePart = "where $doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka = \"";
 		if(collection.equals(AKTI_U_PROCEDURI)) 
 			wherePart = "where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \"";
-		if(collection.equals(AMANDMANI_U_PROCEDURI)) 
+		if(collection.equals(AMANDMANI_U_PROCEDURI) || collection.equals(AMANDMANI_ODBIJENI) || collection.equals(AMANDMANI_PRIHVACENI)) 
 			wherePart = "where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"";
 		
 		String query = 	"declare namespace p=\"http://www.parlament.gov.rs/propisi\";\n" +
@@ -209,7 +239,7 @@ public class ZipHelper {
 	
 	
 	public byte[] getAllZipFiles(){
-		String[] collections = { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI };
+		String[] collections = { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI };
 		String[] types = { "pdf", "html" };
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ZipOutputStream root = new ZipOutputStream(out);
@@ -247,6 +277,10 @@ public class ZipHelper {
 				return "AKTI_U_PROCEDURI";
 			case AMANDMANI_U_PROCEDURI:
 				return "AMANDMANI_U_PROCEDURI";
+			case AMANDMANI_ODBIJENI:
+				return "AMANDMANI_ODBIJENI";
+			case AMANDMANI_PRIHVACENI:
+				return "AMANDMANI_PRIHVACENI";
 			default:
 				return "_";
 		}
@@ -302,7 +336,7 @@ public class ZipHelper {
 		BinaryDocumentManager docMgr = client.newBinaryDocumentManager();
 		BytesHandle content = new BytesHandle();
 		DocumentMetadataHandle metadata = new DocumentMetadataHandle();
-		metadata.getCollections().add(AKTI_U_PROCEDURI_PDF);
+		metadata.getCollections().add(AKTI_U_PROCEDURI + "_pdf");
 		docMgr.read("am1_pdf", metadata, content);
 
 		byte[] contentBytes = content.get();
@@ -328,7 +362,9 @@ public class ZipHelper {
 	}
 	
 	public void initThread(){
+		System.out.println(">>>>>>>>>>>>>" + collection + "<<<<<<<<<<<<<<<<");
 		for(String o : getId(collection)){
+			System.out.println(o);
 			new SaveDocumentHtmlPdf(collection, o).save();
 		}
 	}
@@ -347,7 +383,7 @@ public class ZipHelper {
 	public static void main(String[] args) {
 		
 		
-		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI }){
+		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI }){
 			new ZipHelper(col, "").initThread();
 		}
 /*
