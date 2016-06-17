@@ -86,6 +86,7 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
+	var actRemoved = false;
 	
 	/**
 	 * Vraca true ukoliko akt nece biti prihvacen ni u nacelu ni
@@ -139,7 +140,7 @@ angular.module('xmlApp')
 	}
 
 	/**
-	 * Kopira akt iz kolekcije "u_proceduri" u "prihvaceni"
+	 * Kopira akt iz kolekcije "u_proceduri" u "povuceni"
 	 */
 	var changeActsCollection = function(amandmanXml, result1, actId){
 		$http({
@@ -151,6 +152,7 @@ angular.module('xmlApp')
 			data : result1.data
 		})
 		.success(function(result){
+			actRemoved = true;
 			removeActFromPreviousCollection(amandmanXml, result1, actId);
 		});
 	}
@@ -169,8 +171,9 @@ angular.module('xmlApp')
 			},
 			data : result.data
 		}).then(function(amandmanXml){
-			//promeni kolekciju amandmana
-			changeActsCollection(amandmanXml, result1, actId);
+			//promeni kolekciju akta
+			if(!actRemoved)
+				changeActsCollection(amandmanXml, result1, actId);
 		})
 	}
 
@@ -279,6 +282,7 @@ angular.module('xmlApp')
 			else{
 				//akt se ne prihvata ni u celini ni u nacelu, odbij sve
 				if(!acceptingAmendment()){
+					actRemoved = false;
 					rejectAll(actId);
 					var idx = -1;
 					for(var i = 0; i<$scope.acts.length; i++){
@@ -291,14 +295,6 @@ angular.module('xmlApp')
 						$scope.acts.splice(idx, 1);
 						closeAll();
 					}
-					
-					/*
-					 * $scope.remove = function(item) { 
-  var index = $scope.bdays.indexOf(item);
-  $scope.bdays.splice(index, 1);     
-}
-					 * 
-					 * */
 				}
 			}
 		}
@@ -332,12 +328,12 @@ angular.module('xmlApp')
 	/**
 	 * Ukloni akt iz prethodne kolekcije ("u_proceduri")
 	 */
-	var removeActFromPreviousCollection = function(amandmanXml, result1, actId){
+	var removeActFromPreviousCollection = function(amandmanXml, result1, actId, status){
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
-			if(amandmanXml != null)
+			if(amandmanXml != null || status == "prihvacen")
 				updateAct(amandmanXml, result1, actId);
 			console.log(result);
 		}, function(reason){
@@ -348,7 +344,7 @@ angular.module('xmlApp')
 	/**
 	 * Kopiraj akt iz kolekcije "u_proceduri" u kolekciju "doneti"
 	 */
-	var changeActsCollection = function(amandmanXml, result1, actId){
+	var changeActsCollection = function(amandmanXml, result1, actId, status){
 		actRemoved = true;
 		$http({
 			method : "POST",
@@ -359,17 +355,18 @@ angular.module('xmlApp')
 			data : result1.data
 		})
 		.success(function(result){
-			removeActFromPreviousCollection(amandmanXml, result1, actId);
+			removeActFromPreviousCollection(amandmanXml, result1, actId, status);
 		});
 	}
 
 	/**
-	 * Promeni status amandmana na "prihvacen"
+	 * Promeni status amandmana
 	 */
-	var changeAmendmentsStatus = function(result, result1, actId){
+	var changeAmendmentsStatus = function(result, result1, actId, status){
+		console.log("changing status to " + status);
 		$http({
 			method : "POST",
-			url : "http://localhost:8080/XMLproj/rest/amendment/changeStatus/prihvacen",
+			url : "http://localhost:8080/XMLproj/rest/amendment/changeStatus/" + status,
 			headers : {
 				"Content-Type" : "application/xml"
 			},
@@ -377,7 +374,7 @@ angular.module('xmlApp')
 		}).then(function(amandmanXml){
 			//promeni kolekciju akta
 			if(!actRemoved)
-				changeActsCollection(amandmanXml, result1, actId);
+				changeActsCollection(amandmanXml, result1, actId, status);
 			else
 				updateAct(amandmanXml, result1, actId);
 		})
@@ -386,13 +383,15 @@ angular.module('xmlApp')
 	/**
 	 * Dobavi sadrzaj xml dokumenta amandmana na osnovu oznake amandmana
 	 */
-	var getXmlByAmendmentsId = function(amendmentId, result, result1, actId){
+	var getXmlByAmendmentsId = function(amendmentId, result, result1, actId, status){
 		$http({
 			method : "GET",
 			url : "http://localhost:8080/XMLproj/rest/amendment/xmlById/" + amendmentId,
 		}).then(function(result){
 			//prosledi sadrzaj metodi koja vrsi izmenu statusa amandmana
-			changeAmendmentsStatus(result, result1, actId);
+			console.log("Amandman");
+			console.log(result.data);
+			changeAmendmentsStatus(result, result1, actId, status);
 
 		})
 	}
@@ -413,8 +412,9 @@ angular.module('xmlApp')
 			if(scenario == 1){
 				for(var i=0; i<$rootScope.amendments.data.length; i++){
 					var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
+					console.log("AmendmentId: " + amendmentId);
 					//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
-					getXmlByAmendmentsId(amendmentId, result, result1, actId);
+					getXmlByAmendmentsId(amendmentId, result, result1, actId, "prihvacen");
 				}
 				if($rootScope.amendments.data.length == 0){
 					changeActsCollection(null, result1, actId);
@@ -425,10 +425,10 @@ angular.module('xmlApp')
 					if($rootScope.amendments.primeni[i] == true){
 						var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
 						//dobavi sadrzaj xml fajla na oznovu oznaka amandmana
-						getXmlByAmendmentsId(amendmentId, result, result1, actId);
+						getXmlByAmendmentsId(amendmentId, result, result1, actId, "prihvacen");
 					}
 					else{
-						changeActsCollection(null, result1, actId);
+						getXmlByAmendmentsId(amendmentId, result, result1, actId, "odbijen");
 					}
 				}
 				if($rootScope.amendments.data.length == 0){

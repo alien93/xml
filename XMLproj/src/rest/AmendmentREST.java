@@ -225,6 +225,7 @@ public class AmendmentREST {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Amandman changeStatus(Amandman amandman, @PathParam("status")String status){
+		System.out.println("Changing status!");
 		switch(status){
 		case "prihvacen":
 			amandman.setStatus(TStatusAmandmana.PRIHVACEN);
@@ -235,6 +236,7 @@ public class AmendmentREST {
 			changeCollection(amandman, "u_proceduri");
 			break;
 		case "odbijen":
+			System.out.println("I am here!!!");
 			amandman.setStatus(TStatusAmandmana.ODBIJEN);
 			changeCollection(amandman, "odbijeni");
 			break;
