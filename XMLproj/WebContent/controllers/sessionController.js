@@ -79,6 +79,8 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
+	var counter = 0;
+	
 	/**
 	 * Vraca true ukoliko akt nece biti prihvacen ni u nacelu ni
 	 * u celini. Setuje prihvatanje amandmana na false i
@@ -118,6 +120,10 @@ angular.module('xmlApp')
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
 			//$scope.acts.splice(rowIndex, 1);
+			if(counter == $rootScope.amendments.data.length){
+				console.log("Done");
+			}
+			counter++;
 			console.log(result);
 		}, function(reason){
 			console.log(JSON.stringify(reason));
@@ -264,7 +270,8 @@ angular.module('xmlApp')
 			}
 			else{
 				//akt se ne prihvata ni u celini ni u nacelu, odbij sve
-				if(!acceptingAmendment()){	
+				if(!acceptingAmendment()){
+					counter = 0;
 					rejectAll(actId);
 				}
 			}
@@ -279,6 +286,7 @@ angular.module('xmlApp')
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario, amendments){
 	
 	var actRemoved = false;
+	var counter = 0;
 
 	/**
 	 * Dopuni akt odgovarajucim podacima iz amandmana
@@ -291,7 +299,11 @@ angular.module('xmlApp')
 				"Content-Type" : "application/xml"
 			},
 			data : amandmanXml.data
-		}).then(function(result){			
+		}).then(function(result){	
+			if(counter == $rootScope.amendments.data.length){
+				console.log("Done");
+			}
+			counter++;
 			console.log(result);
 		})
 	}
@@ -431,11 +443,13 @@ angular.module('xmlApp')
 	$scope.close = function(){
 		if(scenario == 1){		//prihvati sve akte i amandmane
 			actRemoved = false;
+			counter = 0;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
 		else if(scenario == 2){	//prihvati akt i neke amandmane
 			actRemoved = false;
+			counter = 0;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
 			$uibModalInstance.close();
 		}
