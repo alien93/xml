@@ -53,7 +53,7 @@ public class PdfReferenceREST {
 				String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
 				if(!"".equals(result)) return makeResponse(result, true);
 			}
-			for(Entry<String, String> am : collActMap.entrySet()){
+			for(Entry<String, String> am : collAmMap.entrySet()){
 				String query = nameSpacePart + makeForPart(am.getKey(), am.getValue() + id + "\"\nreturn ($doc)//p:Amandman;");
 				System.out.println(query);
 				String result = XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), query);
@@ -81,7 +81,7 @@ public class PdfReferenceREST {
 			if(isAct){
 				new ActXmlToPdf(path+"fop.xconf").transform(is, os);
 			}else{
-				new AmandmanXmlToPdf(path + "fop.xconfig").transform(is, os);
+				new AmandmanXmlToPdf(path + "fop.xconf").transform(is, os);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
