@@ -42,7 +42,7 @@
 						</ns1:Clan>
 					</ns1:Sadrzaj>
 				</ns1:Glava>
-				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
+				<ns1:ref id_ref="/am2/deo1">Neka referenca u Glavi 1</ns1:ref>
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/2222/deo1">Deo 1</ns1:ref>
@@ -67,16 +67,9 @@
 				Napomena, u aktu 2222 nema ovog clana
 			</ns1:Sadrzaj>
 			<ns1:Status>
-				<ns1:ref id_ref="/2222/cl1">Referenca</ns1:ref>
+				<ns1:ref id_ref="/2222/deo2/cl2">Referenca</ns1:ref>
 				<ns1:status_izmene>brisi</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Clan>
-		<ns1:Alineja oznaka="/am1/ali1" naziv="Alineja bez dela">
-			<ns1:Sadrzaj>Sadrzaj, nema ovog clana u aktu 2222</ns1:Sadrzaj>
-			<ns1:Status>
-				<ns1:ref id_ref="/2222/ali1">Alineja ref</ns1:ref>
-				<ns1:status_izmene>dodaj</ns1:status_izmene>
-			</ns1:Status>
-		</ns1:Alineja>
 	</p:Glavni_deo>
 </p:Amandman>

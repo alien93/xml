@@ -42,7 +42,7 @@
 						</ns1:Clan>
 					</ns1:Sadrzaj>
 				</ns1:Glava>
-				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
+				<ns1:ref id_ref="/3333/deo1">Neka referenca u Glavi 1</ns1:ref>
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/111111/d1">Glava 1</ns1:ref>

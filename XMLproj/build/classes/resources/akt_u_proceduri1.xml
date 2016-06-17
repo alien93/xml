@@ -31,9 +31,19 @@
     <p:Glavni_deo>
         <ns1:Deo oznaka="/1111/deo1" naziv="Opšta odredba 1">
             <ns1:Sadrzaj>
-                Na osnovu <ns1:ref id_ref="/zvss/cl13/al3">clana 13. alineja 3. Zakona o Visokom savetu sudstva</ns1:ref>asdfah
+                Na osnovu <ns1:ref id_ref="/2222/deo2/cl1">clana 13. alineja 3. Zakona o Visokom savetu sudstva</ns1:ref>asdfah
                 
                 ....
+                <ns1:Clan oznaka="/1111/deo1/cl1" naziv="Clan 1">
+                	<ns1:Sadrzaj>
+                		Ovo je sadrzaj clana 1
+                	</ns1:Sadrzaj>
+                </ns1:Clan>
+                <ns1:Clan oznaka="/1111/deo1/cl2" naziv="Clan 2">
+                	<ns1:Sadrzaj>
+                		Ovo je sadrzaj clana 2
+                	</ns1:Sadrzaj>
+                </ns1:Clan>
             </ns1:Sadrzaj>
         </ns1:Deo>
         <ns1:Deo oznaka="/1111/deo2" naziv="Opšta odredba 2">
@@ -44,8 +54,8 @@
         <ns1:Deo oznaka="/1111/deo3" naziv="Opšta odredba 3"> 
             <ns1:Sadrzaj>
                 Visoki savet sudstva predlaze da Narodna skupstina Republike Srbije,
-                po hitnom postupku na osnovu <ns1:ref id_ref="/urs/cl147/st1">clana 147.
-                stav 1. Ustava Republike Srbije i </ns1:ref> <ns1:ref id_ref="/zos/cl51/st1">
+                po hitnom postupku na osnovu <ns1:ref id_ref="/2222/deo1/cl2">clana 147.
+                stav 1. Ustava Republike Srbije i </ns1:ref> <ns1:ref id_ref="/3333/deo1/g1/cl1">
                 clana 51. stav 1. Zakona o sudijama
                 </ns1:ref>, izabere osamnaest (18)....
             </ns1:Sadrzaj>

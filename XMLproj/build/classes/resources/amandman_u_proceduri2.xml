@@ -42,23 +42,11 @@
 						</ns1:Clan>
 					</ns1:Sadrzaj>
 				</ns1:Glava>
-				<ns1:ref id_ref="/gl1/ref1/">Neka referenca u Glavi 1</ns1:ref>
+				<ns1:ref id_ref="/am1/deo1">Neka referenca u Glavi 1</ns1:ref>
 			</ns1:Sadrzaj>
 			<ns1:Status>
 				<ns1:ref id_ref="/2222/deo1">Deo 1</ns1:ref>
 				<ns1:status_izmene>dodaj</ns1:status_izmene>
-			</ns1:Status>
-		</ns1:Deo>
-		<ns1:Deo oznaka="/am2/deo2" naziv="DEO 2">
-			<ns1:Sadrzaj>
-				Sadrzaj dela 2 - sadrzi odeljak
-				<ns1:Odeljak oznaka="/am2/deo2/od1" naziv="Deo 2 - Odeljak 1">
-					<ns1:Sadrzaj>Sadrzaj odeljka</ns1:Sadrzaj>
-				</ns1:Odeljak>
-			</ns1:Sadrzaj>
-			<ns1:Status>
-				<ns1:ref id_ref="/2222/deo2">Deo 2 referenca</ns1:ref>
-				<ns1:status_izmene>brisi</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Deo>
 		<ns1:Clan oznaka="/am2/cl1" naziv="Član van delova">
@@ -66,16 +54,9 @@
 				Sadrzaj clana van delova
 			</ns1:Sadrzaj>
 			<ns1:Status>
-				<ns1:ref id_ref="/2222/cl1">Referenca</ns1:ref>
+				<ns1:ref id_ref="/2222/deo2/cl1">Referenca</ns1:ref>
 				<ns1:status_izmene>menjaj</ns1:status_izmene>
 			</ns1:Status>
 		</ns1:Clan>
-		<ns1:Alineja oznaka="/am2/ali1" naziv="Alineja bez dela">
-			<ns1:Sadrzaj>Sadrzaj</ns1:Sadrzaj>
-			<ns1:Status>
-				<ns1:ref id_ref="/2222/ali1">Alineja ref</ns1:ref>
-				<ns1:status_izmene>dodaj</ns1:status_izmene>
-			</ns1:Status>
-		</ns1:Alineja>
 	</p:Glavni_deo>
 </p:Amandman>
