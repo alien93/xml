@@ -243,7 +243,12 @@ public class ActREST {
 		//write if valid		
 		if(r.getStatus() == 200){
 			try {
-				String id = akt.getSporedniDeo().getDonetAkt().getMetaPodaci().getOznaka().getValue();
+				String id = "";
+				if(collectionName.equals("povuceni"))
+					id = akt.getSporedniDeo().getAktUProceduri().getMetaPodaci().getOznaka().getValue();
+				else
+					id = akt.getSporedniDeo().getDonetAkt().getMetaPodaci().getOznaka().getValue();
+				System.out.println("Id: " + id);
 				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", id);
 				sdhp.delete();
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/" + collectionName, true);
@@ -500,6 +505,7 @@ public class ActREST {
 		namespaces.put("ns1", "http://www.parlament.gov.rs/generic_types");
 		namespaces.put("p", "http://www.parlament.gov.rs/propisi");
 		String docId = getActiveActsUri(aktId);
+		System.out.println("DocId: " + docId);
 
 
 		if(obj instanceof Deo){
@@ -524,7 +530,6 @@ public class ActREST {
 			case "brisi":
 				try {
 					XMLUpdate.updateXMLRemove(ConnPropertiesReader.loadProperties(), docId, namespaces, contextXPath);
-					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
