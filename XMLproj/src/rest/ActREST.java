@@ -252,6 +252,9 @@ public class ActREST {
 				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", id);
 				sdhp.delete();
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/akti/" + collectionName, true);
+				if(collectionName.equals("doneti")){
+					sendToArchive(xmlPath);
+				}
 				sdhp = new SaveDocumentHtmlPdf("/propisi/akti/" + collectionName, id);
 				sdhp.save();
 
@@ -267,6 +270,18 @@ public class ActREST {
 		}
 
 		return r;
+	}
+
+	/**
+	 * Salje dokument istorijskom arhivu po donosenju akta
+	 * @param xmlPath
+	 */
+	private void sendToArchive(String xmlPath) {
+		try {
+			XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/istorijskiArhiv", true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
