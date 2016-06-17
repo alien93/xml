@@ -12,7 +12,7 @@ import com.marklogic.client.DatabaseClientFactory.Authentication;
 
 public class ConnPropertiesReader {
 
-	public static ConnectionProperties loadProperties() throws IOException{
+	public static synchronized ConnectionProperties loadProperties() throws IOException{
 		ConnectionProperties cp = null;
 
 		String propsName = "connection.properties";
@@ -27,12 +27,10 @@ public class ConnPropertiesReader {
 		return cp;
 	}
 	
-	public static InputStream openStream(String filename) throws IOException{
+	public static synchronized InputStream openStream(String filename) throws IOException{
 		return ConnPropertiesReader.class.getClassLoader().getResourceAsStream(filename);
 	}
-	
-
-	
+		
 	static public class ConnectionProperties {
 		public String host;
 		public int port = -1;

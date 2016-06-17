@@ -26,7 +26,9 @@ public class SaveDocumentHtmlPdf {
 			public void run() {
 				try{
 					new ZipHelper(collection, docId).transform();
-				}catch(Exception e){}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
@@ -37,7 +39,9 @@ public class SaveDocumentHtmlPdf {
 			public void run() {
 				try{
 					new ZipHelper(collection, docId).delete();
-				}catch(Exception e){}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}

@@ -83,7 +83,7 @@ public class ZipHelper {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length()) + "fop.xconf"; 
-		//path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
+		path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
 		try{
 			if(AMANDMANI_U_PROCEDURI.equals(collection)){
 				new AmandmanXmlToPdf(path).transform(is, os);
@@ -199,6 +199,7 @@ public class ZipHelper {
 		try{
 			docMgr.read(docId, metadata, content);
 			client.release();
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> " + docId);
 			return true;
 		}catch(Exception e){
 			client.release();
@@ -319,6 +320,25 @@ public class ZipHelper {
 		System.out.println(in + "\n<<<<<<<<<<<<<<<<<<<<");;
 	}
 	
+	public void deleteAll(){
+		for(String oznaka : getId(collection)){
+			this.setDocId(oznaka);
+			this.delete();
+		}
+	}
+	
+	public void initThread(){
+		for(String o : getId(collection)){
+			new SaveDocumentHtmlPdf(collection, o).save();
+		}
+	}
+	
+	public void deleteThrad(){
+		for(String o : getId(collection)){
+			new SaveDocumentHtmlPdf(collection, o).delete();
+		}
+	}
+	
 	public void setDocId(String newId){
 		this.docId = newId;
 		transformDocId();
@@ -328,8 +348,9 @@ public class ZipHelper {
 		
 		
 		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI }){
-			new ZipHelper(col, "").init();
+			new ZipHelper(col, "").initThread();
 		}
+/*
 		String[] akti_doneti = {"111111", "doc1", "doc2", "doc3" };
 		String[] akti_procedura = {"1111", "2222", "3333", "4444", "6666"};
 		String[] amandmani = {"am1", "am2", "am3", "am4", "am5"};
