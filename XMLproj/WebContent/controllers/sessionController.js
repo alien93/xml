@@ -6,12 +6,19 @@ angular.module('xmlApp')
 	};	
 
 	//retrieving non active acts
-	$http({
-		method: "GET", 
-		url : "http://localhost:8080/XMLproj/rest/act/nonActive",
-	}).then(function(value) {
-		$scope.acts = value.data.results.bindings;
-	});		
+	retrieveData = function(){
+		$http({
+			method: "GET", 
+			url : "http://localhost:8080/XMLproj/rest/act/nonActive",
+		}).then(function(value) {
+			$rootScope.acts = value.data.results.bindings;
+			console.log($scope.acts);
+		});	
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+	}
+	retrieveData();
 
 	$scope.contentForActVisible=[];
 
@@ -79,7 +86,6 @@ angular.module('xmlApp')
 
 	//---------------------------------------------------session--------------------------------------
 
-	var counter = 0;
 	
 	/**
 	 * Vraca true ukoliko akt nece biti prihvacen ni u nacelu ni
@@ -91,6 +97,13 @@ angular.module('xmlApp')
 			for(var i=0; i<$scope.amendments.data.length; i++){
 				$scope.amendments.primeni[i] = false;
 			}
+			return true;
+		}
+		else if($scope.uCelini == true){
+			for(var i=0; i<$scope.amendments.data.length; i++){
+				$scope.amendments.primeni[i] = true;
+			}
+			$scope.uNacelu = true;
 			return true;
 		}
 		else
@@ -118,12 +131,7 @@ angular.module('xmlApp')
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
-		}).then(function(result){
-			//$scope.acts.splice(rowIndex, 1);
-			if(counter == $rootScope.amendments.data.length){
-				console.log("Done");
-			}
-			counter++;
+		}).then(function(result){			
 			console.log(result);
 		}, function(reason){
 			console.log(JSON.stringify(reason));
@@ -271,8 +279,25 @@ angular.module('xmlApp')
 			else{
 				//akt se ne prihvata ni u celini ni u nacelu, odbij sve
 				if(!acceptingAmendment()){
-					counter = 0;
 					rejectAll(actId);
+					var idx = -1;
+					for(var i = 0; i<$scope.acts.length; i++){
+						if($scope.acts[i].oznaka.value == actId){
+							idx = i;
+							break;
+						}
+					}
+					if(idx!=-1){
+						$scope.acts.splice(idx, 1);
+					}
+					
+					/*
+					 * $scope.remove = function(item) { 
+  var index = $scope.bdays.indexOf(item);
+  $scope.bdays.splice(index, 1);     
+}
+					 * 
+					 * */
 				}
 			}
 		}
@@ -286,7 +311,6 @@ angular.module('xmlApp')
                                   function($scope, $rootScope, $uibModalInstance, $http, actId, scenario, amendments){
 	
 	var actRemoved = false;
-	var counter = 0;
 
 	/**
 	 * Dopuni akt odgovarajucim podacima iz amandmana
@@ -300,10 +324,6 @@ angular.module('xmlApp')
 			},
 			data : amandmanXml.data
 		}).then(function(result){	
-			if(counter == $rootScope.amendments.data.length){
-				console.log("Done");
-			}
-			counter++;
 			console.log(result);
 		})
 	}
@@ -316,7 +336,6 @@ angular.module('xmlApp')
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
-			//$scope.acts.splice(rowIndex, 1);
 			if(amandmanXml != null)
 				updateAct(amandmanXml, result1, actId);
 			console.log(result);
@@ -443,14 +462,32 @@ angular.module('xmlApp')
 	$scope.close = function(){
 		if(scenario == 1){		//prihvati sve akte i amandmane
 			actRemoved = false;
-			counter = 0;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
+			var idx = -1;
+			for(var i = 0; i<$rootScope.acts.length; i++){
+				if($rootScope.acts[i].oznaka.value == actId){
+					idx = i;
+					break;
+				}
+			}
+			if(idx!=-1){
+				$rootScope.acts.splice(idx, 1);
+			}			
 			$uibModalInstance.close();
 		}
 		else if(scenario == 2){	//prihvati akt i neke amandmane
 			actRemoved = false;
-			counter = 0;
 			acceptActAndAmendments(actId, $scope.odStrane, $scope.pravniOsnov);
+			var idx = -1;
+			for(var i = 0; i<$rootScope.acts.length; i++){
+				if($rootScope.acts[i].oznaka.value == actId){
+					idx = i;
+					break;
+				}
+			}
+			if(idx!=-1){
+				$rootScope.acts.splice(idx, 1);
+			}			
 			$uibModalInstance.close();
 		}
 		else{
