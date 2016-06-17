@@ -83,7 +83,7 @@ public class ZipHelper {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length()) + "fop.xconf"; 
-		path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
+		//path = "D:/4. godina/8_Xml i web servisi/Xml/Projekat/xml/XMLproj/src/fop.xconf";
 		try{
 			if(AMANDMANI_U_PROCEDURI.equals(collection)){
 				new AmandmanXmlToPdf(path).transform(is, os);
@@ -296,7 +296,6 @@ public class ZipHelper {
 		try {
 			client = initClient(ConnPropertiesReader.loadProperties());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BinaryDocumentManager docMgr = client.newBinaryDocumentManager();
