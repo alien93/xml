@@ -313,6 +313,8 @@ angular.module('xmlApp')
 	 * Dopuni akt odgovarajucim podacima iz amandmana
 	 */
 	var updateAct = function(amandmanXml, result1, actId){
+		console.log("Update act: ");
+		console.log(amandmanXml.data);
 		$http({
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/updateAct/" + actId,
@@ -333,7 +335,7 @@ angular.module('xmlApp')
 			method : "POST",
 			url : "http://localhost:8080/XMLproj/rest/act/removeAct/" + actId,
 		}).then(function(result){
-			if(amandmanXml != null || status == "prihvacen")
+			if(amandmanXml != null && status == "prihvacen")
 				updateAct(amandmanXml, result1, actId);
 			console.log(result);
 		}, function(reason){

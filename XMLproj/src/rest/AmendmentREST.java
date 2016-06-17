@@ -157,7 +157,7 @@ public class AmendmentREST {
 		return r;
 	}
 	
-	private void changeCollection(Amandman amandman, String collectionName){
+	private synchronized void changeCollection(Amandman amandman, String collectionName){
 		//create temp file
 		String path = XMLValidator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		path = path.substring(1, path.length());
@@ -169,6 +169,7 @@ public class AmendmentREST {
 		if(r.getStatus() == 200){
 			try {
 				String id = amandman.getSporedniDeo().getMetaPodaci().getOznaka().getValue();
+				System.out.println("ID AMANDMANA: " + id);
 				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/u_proceduri", id);
 				sdhp.delete();
 				XMLWriter.writeXML(ConnPropertiesReader.loadProperties(), xmlPath, "", "/propisi/amandmani/" + collectionName, true);
