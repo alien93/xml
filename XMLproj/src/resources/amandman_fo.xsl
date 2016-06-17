@@ -200,7 +200,7 @@
 			<fo:block>
 				Referenca:
 				<fo:basic-link
-					external-destination="url({concat('http://localhost:8080/REST',./ns1:ref/@id_ref)})"
+					external-destination="url({concat('http://localhost:8080/XMLproj/rest/pdfReference/ref',./ns1:ref/@id_ref)})"
 					color="blue" text-decoration="underline">
 					<xsl:value-of select="./ns1:ref" />
 				</fo:basic-link>
