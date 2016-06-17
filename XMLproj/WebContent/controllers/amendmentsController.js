@@ -11,6 +11,7 @@ angular.module('xmlApp')
 					$scope.insertTextVisible = false;
 					$scope.showTextPart = function() {
 						$scope.insertTextVisible = !$scope.insertTextVisible;
+						$scope.status = "";
 					};
 					
 					$scope.selectedAct = {};

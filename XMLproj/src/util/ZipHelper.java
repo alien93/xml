@@ -34,6 +34,7 @@ public class ZipHelper {
 	
 	public static final String AKTI_DONETI = "/propisi/akti/doneti";
 	public static final String AKTI_U_PROCEDURI = "/propisi/akti/u_proceduri";
+	public static final String AKTI_POVUCENI = "/propisi/akti/povuceni";
 	public static final String AMANDMANI_U_PROCEDURI = "/propisi/amandmani/u_proceduri";
 	public static final String AMANDMANI_ODBIJENI = "/propisi/amandmani/prihvaceni";
 	public static final String AMANDMANI_PRIHVACENI = "/propisi/amandmani/odbijeni";
@@ -70,7 +71,7 @@ public class ZipHelper {
 	}
 	
 	private boolean isAct(){
-		if(collection.equals(AKTI_DONETI) || collection.equals(AKTI_U_PROCEDURI)) return true;
+		if(collection.equals(AKTI_DONETI) || collection.equals(AKTI_U_PROCEDURI) || collection.equals(AKTI_POVUCENI)) return true;
 		return false;
 	}
 	
@@ -164,7 +165,9 @@ public class ZipHelper {
 	private String getQuery(){
 		String forPart = "for $doc in fn:collection(\"" + collection + "\")\n";
 		String wherePart = "where $doc/p:Akt/p:Sporedni_deo/p:Donet_akt/p:Meta_podaci/ns1:Oznaka = \"";
-		if(collection.equals(AKTI_U_PROCEDURI)) 
+		if(collection.equals(AKTI_U_PROCEDURI) || collection.equals(AKTI_POVUCENI)) 
+			wherePart = "where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \"";
+		if(collection.equals(AKTI_POVUCENI)) 
 			wherePart = "where $doc/p:Akt/p:Sporedni_deo/p:Akt_u_proceduri/p:Meta_podaci/ns1:Oznaka = \"";
 		if(collection.equals(AMANDMANI_U_PROCEDURI) || collection.equals(AMANDMANI_ODBIJENI) || collection.equals(AMANDMANI_PRIHVACENI)) 
 			wherePart = "where $doc/p:Amandman/p:Sporedni_deo/p:Meta_podaci/ns1:Oznaka = \"";
@@ -239,7 +242,7 @@ public class ZipHelper {
 	
 	
 	public byte[] getAllZipFiles(){
-		String[] collections = { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI };
+		String[] collections = { AKTI_DONETI, AKTI_U_PROCEDURI, AKTI_POVUCENI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI };
 		String[] types = { "pdf", "html" };
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ZipOutputStream root = new ZipOutputStream(out);
@@ -275,6 +278,8 @@ public class ZipHelper {
 				return "AKTI_DONETI";
 			case AKTI_U_PROCEDURI:
 				return "AKTI_U_PROCEDURI";
+			case AKTI_POVUCENI:
+				return "AKTI_POVUCENI";
 			case AMANDMANI_U_PROCEDURI:
 				return "AMANDMANI_U_PROCEDURI";
 			case AMANDMANI_ODBIJENI:
@@ -383,7 +388,7 @@ public class ZipHelper {
 	public static void main(String[] args) {
 		
 		
-		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI }){
+		for(String col : new String[] { AKTI_DONETI, AKTI_U_PROCEDURI, AKTI_POVUCENI, AMANDMANI_U_PROCEDURI, AMANDMANI_ODBIJENI, AMANDMANI_PRIHVACENI }){
 			new ZipHelper(col, "").initThread();
 		}
 /*

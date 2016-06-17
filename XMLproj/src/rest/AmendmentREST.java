@@ -201,8 +201,6 @@ public class AmendmentREST {
 			result = result.replace("\n", "");
 			String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
 			XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
-			SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/amandmani/u_proceduri", amId);
-			sdhp.delete();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

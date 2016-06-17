@@ -329,8 +329,6 @@ public class ActREST {
 			if(!result.equals("")){
 				String removeDocQuery = "xdmp:document-delete(\""+ result + "\")";
 				XQueryInvoker.invoke(ConnPropertiesReader.loadProperties(), removeDocQuery);
-				SaveDocumentHtmlPdf sdhp = new SaveDocumentHtmlPdf("/propisi/akti/u_proceduri", actId);
-				sdhp.delete();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
