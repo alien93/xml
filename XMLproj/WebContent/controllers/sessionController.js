@@ -428,6 +428,7 @@ angular.module('xmlApp')
 						getXmlByAmendmentsId(amendmentId, result, result1, actId, "prihvacen");
 					}
 					else{
+						var amendmentId = $rootScope.amendments.data[i].oznakaAmandman.value;
 						getXmlByAmendmentsId(amendmentId, result, result1, actId, "odbijen");
 					}
 				}
